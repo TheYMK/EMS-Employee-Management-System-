@@ -4,3 +4,5 @@
 4- Push project on github
 5- Create the index route and create required views
 6- Create CSS files
+7- Create registration logic
+8- Create access logic

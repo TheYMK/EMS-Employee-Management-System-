@@ -31,55 +31,35 @@
 <!-- END HEADER -->
 
 
-<!-- START REGISTER FORM -->
+<!-- START LOGIN FORM -->
 
 <div class="container">
     <!-- <div class="row"> -->
-        <h1 style="text-align: center">Registration</h1>
+        <h1 style="text-align: center" class="mt-4">Login</h1>
         <div style="width: 60%; margin: 25px auto;">
-            <form action="/register" method="post">
-                <h4>Personal Infomation:</h4>
-                <!-- Personal Stuffs -->
-                <div class="form-group">
-                    <input class="form-control" type="text" name="username" placeholder="Full Name" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Email Address" required>
-                </div>
-                <div class="form-group">
-                    <label for="role">Role:</label>
-                    <select class="form-control" name="role" id="role" required>
-                      <option>Admin</option>
-                      <option>Basic</option>
-                    </select>
-                  </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password" required>
-                </div>
-                <h4>Company Infomation:</h4>
-
-                <!-- Company Stuffs -->
+            <form action="/login" method="post">
                 <div class="form-group">
                     <input class="form-control" type="text" name="companyName" placeholder="Company Name" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="companyLocation" placeholder="Company Location" required>
+                    <input class="form-control" type="text" name="username" placeholder="Full Name" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="companySize" placeholder="Company Size" required>
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
                 </div>
-
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+                    <button class="btn btn-lg btn-primary btn-block">Login</button>
                 </div>
-                
             </form>
         </div>
     <!-- </div> -->
 </div>
 
-<!-- END REGISTER FORM -->
+
+<!-- END LOGIN FORM -->
+
 
 
 
 <%- include("partials/footer") %>
+

@@ -13,10 +13,14 @@ router.get('/register', function(req, res) {
 	res.render('register');
 });
 
-// // temporary route
-// router.get('/home', function(req, res) {
-// 	res.send('Home Page');
-// });
+//temporary route
+router.get('/homebasic', function(req, res) {
+	res.send('Home Page');
+});
+
+router.get('/homeadmin', function(req, res) {
+	res.render('home/homeadmin');
+});
 
 //handle registration logic
 router.post('/register', function(req, res) {
@@ -36,9 +40,52 @@ router.post('/register', function(req, res) {
 			return res.redirect('/');
 		}
 		passport.authenticate('local')(req, res, function() {
-			res.redirect('/home');
+			if (user.role === 'Admin') {
+				res.redirect('/homeadmin');
+			} else {
+				res.redirect('/homebasic');
+			}
 		});
 	});
+});
+
+//SHOW login form
+router.get('/login', function(req, res) {
+	res.render('login');
+});
+
+//handle login logic
+// router.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/login' }), function(
+// 	req,
+// 	res
+// ) {});
+router.post('/login', function(req, res) {
+	User.findOne({ username: req.body.username }, function(err, user) {
+		if (err) {
+			res.redirect('/login');
+		} else {
+			if (user.companyName === req.body.companyName) {
+				if (user.role === 'Admin') {
+					passport.authenticate('local')(req, res, function() {
+						res.redirect('/homeadmin');
+					});
+				} else {
+					passport.authenticate('local')(req, res, function() {
+						res.redirect('/homebasic');
+					});
+				}
+			} else {
+				res.redirect('login');
+			}
+		}
+	});
+});
+
+//Handle logout logic
+router.get('/logout', function(req, res) {
+	req.logout();
+	req.flash('success', 'Logged you out!');
+	res.redirect('/');
 });
 
 module.exports = router;
