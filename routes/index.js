@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var Company = require('../models/company');
 
 //landing page route
 router.get('/', function(req, res) {
@@ -13,39 +14,55 @@ router.get('/register', function(req, res) {
 	res.render('register');
 });
 
-//temporary route
-router.get('/homebasic', function(req, res) {
-	res.send('Home Page');
-});
-
-router.get('/homeadmin', function(req, res) {
-	res.render('home/homeadmin');
-});
-
 //handle registration logic
 router.post('/register', function(req, res) {
-	var sel = req.body.role;
+	var sel = req.body.user_role;
 
 	var newUser = new User({
 		username: req.body.username,
-		email: req.body.email,
-		role: sel,
-		companyName: req.body.companyName,
-		companyLocation: req.body.companyLocation,
-		companySize: req.body.companySize
+		user_email: req.body.user_email,
+		user_role: sel,
+		company_name: req.body.company_name,
+		company_email: req.body.company_email,
+		company_phone: req.body.company_phone,
+		company_address: req.body.company_address,
+		company_type: req.body.company_type,
+		company_city: req.body.company_city,
+		company_size: req.body.company_size,
+		company_description: req.body.company_description
+	});
+
+	var newCompany = new Company({
+		name: req.body.company_name,
+		city: req.body.company_city,
+		type: req.body.company_type,
+		address: req.body.company_address,
+		email: req.body.company_email,
+		phone: req.body.company_phone,
+		size: req.body.company_size,
+		description: req.body.company_description
 	});
 
 	User.register(newUser, req.body.password, function(err, user) {
 		if (err) {
+			console.log(err);
 			return res.redirect('/');
 		}
 		passport.authenticate('local')(req, res, function() {
-			if (user.role === 'Admin') {
+			if (user.user_role === 'Admin') {
 				res.redirect('/homeadmin');
 			} else {
 				res.redirect('/homebasic');
 			}
 		});
+	});
+
+	Company.create(newCompany, function(err, newlyCreated) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(newlyCreated);
+		}
 	});
 });
 
@@ -64,8 +81,8 @@ router.post('/login', function(req, res) {
 		if (err) {
 			res.redirect('/login');
 		} else {
-			if (user.companyName === req.body.companyName) {
-				if (user.role === 'Admin') {
+			if (user.company_name === req.body.company_name) {
+				if (user.user_role === 'Admin') {
 					passport.authenticate('local')(req, res, function() {
 						res.redirect('/homeadmin');
 					});

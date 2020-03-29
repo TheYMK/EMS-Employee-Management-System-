@@ -19,11 +19,8 @@
     <!-- ====================Start Header Area  ====================-->
     <header class="header_area">
         <div class="main-menu">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #f67878;">
                 <a class="navbar-brand" href="/">E.M.S by Kaym Kassai</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
               </nav>
         </div>
     </header>
@@ -44,11 +41,11 @@
                     <input class="form-control" type="text" name="username" placeholder="Full Name" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Email Address" required>
+                    <input class="form-control" type="email" name="user_email" placeholder="Email Address" required>
                 </div>
                 <div class="form-group">
                     <label for="role">Role:</label>
-                    <select class="form-control" name="role" id="role" required>
+                    <select class="form-control" name="user_role" id="role" required>
                       <option>Admin</option>
                       <option>Basic</option>
                     </select>
@@ -56,21 +53,39 @@
                 <div class="form-group">
                     <input class="form-control" type="password" name="password" placeholder="Password" required>
                 </div>
-                <h4>Company Infomation:</h4>
-
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password2" placeholder="Confirm Password" required>
+                </div>
+                <h4>Company Infomations:</h4>
+                <p>Please fill in all required informations about the company you would like to register</p>
                 <!-- Company Stuffs -->
                 <div class="form-group">
-                    <input class="form-control" type="text" name="companyName" placeholder="Company Name" required>
+                    <input class="form-control" type="text" name="company_name" placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="companyLocation" placeholder="Company Location" required>
+                    <input class="form-control" type="text" name="company_email" placeholder="Email Address" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="companySize" placeholder="Company Size" required>
+                    <input class="form-control" type="text" name="company_phone" placeholder="Phone" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="company_address" placeholder="Address" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="company_type" placeholder="Type" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="company_city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="company_size" placeholder="Size" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="company_description" id="" cols="30" rows="10" placeholder="Company Description"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+                    <button class="button primary fit">Sign Up!</button>
                 </div>
                 
             </form>

@@ -1,11 +1,14 @@
 var mongoose = require('mongoose');
 
-//mongoose/model config
-// dob = date of birth ,  fos = field of study
-var employeeSchema = new mongoose.Schema({
+var companySchema = new mongoose.Schema({
 	name: String,
-	location: String,
-	size: String
+	city: String,
+	type: String,
+	address: String,
+	email: String,
+	phone: String,
+	size: String,
+	description: String
 });
 
-module.exports = mongoose.model('Company', employeeSchema);
+module.exports = mongoose.model('Company', companySchema);

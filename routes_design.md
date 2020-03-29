@@ -7,3 +7,12 @@ SHOW            /register            GET         show register form             
                 /register            POST        handle register logic                  User.register()  
 SHOW            /login               GET         show login form                        N/A
                 /login               POST        handle login logic                     N/A
+
+================================================================================================================
+                                    ****          Home ROUTES          ****
+================================================================================================================
+Name            Path                 Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- ADMIN -->
+INDEX           /homeadmin           GET        render admin home page                  User.find(), Company.find()
+                                                <!-- OTHERS -->

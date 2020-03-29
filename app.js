@@ -11,13 +11,18 @@ var express = require('express'),
 	methodOverride = require('method-override'),
 	expressSanitizer = require('express-sanitizer'),
 	User = require('./models/user'),
+	Company = require('./models/company'),
 	session = require('express-session');
 
 //routes importation
 var indexRoutes = require('./routes/index');
-
+var homeRoutes = require('./routes/home');
 //database connection
-mongoose.connect('mongodb://localhost:27017/ems_db', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/ems_db', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true
+});
 
 //More blah blah
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,7 +59,7 @@ app.use(function(req, res, next) {
 //                ROUTES CONFIGURATIONS
 //===========================================================
 app.use(indexRoutes);
-
+app.use(homeRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

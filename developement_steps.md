@@ -2,7 +2,9 @@
 2- Config app.js file
 3- Create user model, employee model and company model
 4- Push project on github
-5- Create the index route and create required views
+5- Create the index routes and create required views
 6- Create CSS files
 7- Create registration logic
 8- Create access logic
+9- Design home page for administrator
+10- Create home routes and create required views
