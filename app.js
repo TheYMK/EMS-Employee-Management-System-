@@ -16,7 +16,7 @@ var express = require('express'),
 
 //routes importation
 var indexRoutes = require('./routes/index');
-var homeRoutes = require('./routes/home');
+var adminRoutes = require('./routes/admin');
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
 	useNewUrlParser: true,
@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
 //                ROUTES CONFIGURATIONS
 //===========================================================
 app.use(indexRoutes);
-app.use(homeRoutes);
+app.use(adminRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

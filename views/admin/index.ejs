@@ -88,7 +88,20 @@
 										<h2>Departments</h2>
 									</header>
 									<div class="posts">
-										<article>
+										<% departments.forEach(function(dept){ %>
+											<% if(dept.createdBy.username === currentUser.username){ %>
+												<article>
+													<a href="#" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
+													<h3> <%= dept.department_name %></h3>
+													<p><%= dept.department_description.substring(0,100)%> </p>
+													<ul class="actions">
+														<li><a href="/departments/<%= dept._id%>" class="button">More</a></li>
+													</ul>
+												</article>
+											<% } %>
+											
+										<% }) %>
+										<!-- <article>
 											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
 											<h3>Interdum aenean</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
@@ -135,7 +148,7 @@
 											<ul class="actions">
 												<li><a href="#" class="button">More</a></li>
 											</ul>
-										</article>
+										</article> -->
 									</div>
 								</section>
 
@@ -159,14 +172,20 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="generic.html">Company</a></li>
-										<li><a href="elements.html">Departments</a></li>
+										<li><a href="/homeadmin">Home</a></li>
+										<li><a href="#">Company</a></li>
+										<li>
+											<span class="opener">Departments</span>
+											<ul>
+												<a href="/departments/new">Add New</a>
+												<a href="#">View All</a>
+											</ul>
+										</li>
 										<li>
 											<span class="opener">Employees</span>
 											<ul>
 												<li><a href="#">Add New</a></li>
-												<li><a href="#">View List</a></li>
+												<li><a href="#">View All</a></li>
 											</ul>
 										</li>
 										<li><a href="#">News</a></li>

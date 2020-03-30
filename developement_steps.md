@@ -8,3 +8,5 @@
 8- Create access logic
 9- Design home page for administrator
 10- Create home routes and create required views
+11- Create department model
+12- Create departments routes and required views

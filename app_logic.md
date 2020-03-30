@@ -40,4 +40,18 @@
             }
         }
     }
+
+
+    Department: {
+        - Name
+        - Description
+        - Head Of Department
+        - Employees
+        - Projects
+        - Creator
+        - Date of creation
+        - Image
+
+    }
+
 }
