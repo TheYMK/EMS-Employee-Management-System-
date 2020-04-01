@@ -12,11 +12,15 @@ var express = require('express'),
 	expressSanitizer = require('express-sanitizer'),
 	User = require('./models/user'),
 	Company = require('./models/company'),
+	Department = require('./models/department'),
+	Employee = require('./models/employee'),
 	session = require('express-session');
 
 //routes importation
 var indexRoutes = require('./routes/index');
 var adminRoutes = require('./routes/admin');
+var departmentsRoutes = require('./routes/departments');
+var employeesRoutes = require('./routes/employees');
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
 	useNewUrlParser: true,
@@ -60,6 +64,8 @@ app.use(function(req, res, next) {
 //===========================================================
 app.use(indexRoutes);
 app.use(adminRoutes);
+app.use(departmentsRoutes);
+app.use(employeesRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

@@ -1,11 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>E.M.S</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/stylesheets/main.css" />
-	</head>
+<%- include("../partials/header") %>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -46,7 +39,37 @@
 									<hr class="major" />
 
                                     <h2>Employee List</h2>
-                                    <!-- All employees of the department will be displayed here -->
+									<!-- All employees of the department will be displayed here -->
+									
+									<!-- Table -->
+									<div class="table-wrapper" style="margin-top: 30px;">
+										<table>
+											<thead>
+												<tr>
+													<th>Employee ID</th>
+													<th>Type</th>
+													<th>Full Name</th>
+													<th>Department</th>
+													<th>Designation</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<% employees.forEach(function(emp){ %>
+													<% if(emp.company === currentUser.company_name && emp.department === dept.department_name){ %>
+														<tr>
+															<td><a href="/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
+															<td><%= emp.type_of_employee%> </td>
+															<td><%= emp.first_name%> <%= emp.last_name%></td>
+															<td><%= emp.department %></td>
+															<td><%= emp.designation %></td>
+														</tr>
+													<% } %>
+												<% }) %>
+											</tbody>
+										</table>
+									</div>
+
                                     <hr class="major" />
 
                                     <h2>Projects</h2>
@@ -70,40 +93,7 @@
 								</section>
 
 							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="/homeadmin">Home</a></li>
-										<li><a href="generic.html">Company</a></li>
-										<li>
-											<span class="opener">Departments</span>
-											<ul>
-												<a href="/departments/new">Add New</a>
-												<a href="#">View All</a>
-											</ul>
-										</li>
-										<li>
-											<span class="opener">Employees</span>
-											<ul>
-												<li><a href="#">Add New</a></li>
-												<li><a href="#">View All</a></li>
-											</ul>
-										</li>
-										<li><a href="#">News</a></li>
-										<li>
-											<span class="opener">Projects</span>
-											<ul>
-												<li><a href="#">Add New</a></li>
-												<li><a href="#">View Current</a></li>
-												<li><a href="#">View Completed</a></li>
-											</ul>
-										</li>
-										<li><a href="#">About Us</a></li>
-										<li><a href="/logout">Logout</a></li>
-									</ul>
-								</nav>
+							<%- include("../partials/menu") %>
 
 							<!-- Section -->
                             <section>

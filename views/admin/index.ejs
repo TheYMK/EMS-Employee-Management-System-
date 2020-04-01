@@ -1,12 +1,5 @@
-<!DOCTYPE HTML>
+<%- include("../partials/header") %>
 
-<html>
-	<head>
-		<title>E.M.S</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/stylesheets/main.css" />
-	</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -167,40 +160,7 @@
 								</section>
 
 							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="/homeadmin">Home</a></li>
-										<li><a href="#">Company</a></li>
-										<li>
-											<span class="opener">Departments</span>
-											<ul>
-												<a href="/departments/new">Add New</a>
-												<a href="#">View All</a>
-											</ul>
-										</li>
-										<li>
-											<span class="opener">Employees</span>
-											<ul>
-												<li><a href="#">Add New</a></li>
-												<li><a href="#">View All</a></li>
-											</ul>
-										</li>
-										<li><a href="#">News</a></li>
-										<li>
-											<span class="opener">Projects</span>
-											<ul>
-												<li><a href="#">Add New</a></li>
-												<li><a href="#">View Current</a></li>
-												<li><a href="#">View Completed</a></li>
-											</ul>
-										</li>
-										<li><a href="#">About Us</a></li>
-										<li><a href="/logout">Logout</a></li>
-									</ul>
-								</nav>
+							<%- include("../partials/menu") %>
 
 							<!-- Section -->
 								<section>

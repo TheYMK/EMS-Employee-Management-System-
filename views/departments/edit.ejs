@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>E.M.S</title>
-		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!-- Custom CSS -->
-		<link rel="stylesheet" href="/stylesheets/main.css" />
-	</head>
+<%- include("../partials/header") %>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -33,7 +23,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Department Creation</h1>
+										<h1>Edit Department</h1>
 									</header>
 
 									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
@@ -42,16 +32,17 @@
 									<hr class="major" />
 
                                     <!-- Form -->
-                                    <form action="/departments" method="POST">
+                                    <form action="/departments/<%= dept._id %>?_method=PUT" method="POST">
                                         <div class="form-row">
                                           <div class="form-group col-md-6">
                                             <label for="inputName4">Name</label>
-                                            <input type="text" class="form-control" id="inputName4" name="department_name">
+                                            <input type="text" class="form-control" id="inputName4" name="department[department_name]" value="<%=dept.department_name%>">
                                           </div>
                                           <div class="form-group col-md-4">
                                             <label for="inputHod">Head Of Department</label>
-                                            <select id="inputHod" class="form-control" name="department_hod">
-                                              <option selected>Someone 1</option>
+                                            <select id="inputHod" class="form-control" name="department[department_hod]">
+                                              <option selected><%= dept.department_hod%></option>
+                                              <option>Someone 1</option>
                                               <option>Someone 2</option>
                                             </select>
                                           </div>
@@ -59,19 +50,20 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label for="inputCategory">Category</label>
-                                                <select id="inputCategory" class="form-control" name="department_category">
-                                                  <option selected>Cat 1</option>
+                                                <select id="inputCategory" class="form-control" name="department[department_category]">
+                                                  <option selected><%= dept.department_category%></option>
+                                                  <option>Cat 1</option>
                                                   <option>Cat 2</option>
                                                 </select>
 											</div>
 											<div class="form-group col-md-6">
 												<label for="inputImage4">Image Url</label>
-												<input type="text" class="form-control" id="inputImage4" name="department_image">
+												<input type="text" class="form-control" id="inputImage4" name="department[department_image]" value="<%= dept.department_image%>">
 											  </div>
                                         </div>
                                         <div class="form-group">
                                           <label for="inputDescription">Description</label>
-                                          <textarea id="inputDescription" cols="30" rows="10" name="department_description"></textarea>
+                                          <textarea id="inputDescription" cols="30" rows="10" name="department[department_description]"><%= dept.department_description%></textarea>
                                         </div>
                                         <div class="form-group">
                                           <div class="form-check">
@@ -81,7 +73,7 @@
                                             </label>
                                           </div>
                                         </div>
-                                        <button type="submit" class="button primary">Create</button>
+                                        <button type="submit" class="button primary">Update</button>
                                       </form>
 
 								</section>
@@ -101,40 +93,7 @@
 								</section>
 
 							<!-- Menu -->
-                            <nav id="menu">
-                                <header class="major">
-                                    <h2>Menu</h2>
-                                </header>
-                                <ul>
-                                    <li><a href="/homeadmin">Home</a></li>
-                                    <li><a href="generic.html">Company</a></li>
-                                    <li>
-                                        <span class="opener">Departments</span>
-                                        <ul>
-                                            <a href="/departments/new">Add New</a>
-                                            <a href="#">View All</a>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <span class="opener">Employees</span>
-                                        <ul>
-                                            <li><a href="#">Add New</a></li>
-                                            <li><a href="#">View All</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">News</a></li>
-                                    <li>
-                                        <span class="opener">Projects</span>
-                                        <ul>
-                                            <li><a href="#">Add New</a></li>
-                                            <li><a href="#">View Current</a></li>
-                                            <li><a href="#">View Completed</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="/logout">Logout</a></li>
-                                </ul>
-                            </nav>
+                            <%- include("../partials/menu") %>
 
 							<!-- Section -->
 								<section>
