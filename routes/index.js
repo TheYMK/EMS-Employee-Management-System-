@@ -51,8 +51,12 @@ router.post('/register', function(req, res) {
 		passport.authenticate('local')(req, res, function() {
 			if (user.user_role === 'Admin') {
 				res.redirect('/homeadmin');
-			} else {
+			} else if (user.user_role === 'HOD') {
 				res.redirect('/homebasic');
+			} else if (user.user_role === 'HR') {
+				res.redirect('/homebasic');
+			} else {
+				res.redirect('/homeemployee');
 			}
 		});
 	});
@@ -79,20 +83,28 @@ router.get('/login', function(req, res) {
 router.post('/login', function(req, res) {
 	User.findOne({ username: req.body.username }, function(err, user) {
 		if (err) {
-			res.redirect('/login');
+			res.redirect('back');
 		} else {
-			if (user.company_name === req.body.company_name) {
+			if (user != null && user.company_name === req.body.company_name) {
 				if (user.user_role === 'Admin') {
 					passport.authenticate('local')(req, res, function() {
 						res.redirect('/homeadmin');
 					});
-				} else {
+				} else if (user.user_role === 'HOD') {
 					passport.authenticate('local')(req, res, function() {
 						res.redirect('/homebasic');
 					});
+				} else if (user.user_role === 'HR') {
+					passport.authenticate('local')(req, res, function() {
+						res.redirect('/homebasic');
+					});
+				} else {
+					passport.authenticate('local')(req, res, function() {
+						res.redirect('/homeemployee');
+					});
 				}
 			} else {
-				res.redirect('login');
+				res.redirect('back');
 			}
 		}
 	});

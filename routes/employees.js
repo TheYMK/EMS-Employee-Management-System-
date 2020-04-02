@@ -35,7 +35,30 @@ router.post('/employees', function(req, res) {
 			res.redirect('back');
 		} else {
 			console.log(newlyCreated);
-			res.redirect('/employees');
+			var pwd = '2020' + newlyCreated.passport_no;
+			var pwdUpdate = { password: pwd };
+			Employee.findByIdAndUpdate(newlyCreated._id, pwdUpdate, function(err, updated) {
+				if (err) {
+					console.log(err);
+					res.redirect('back');
+				} else {
+					var newUser = new User({
+						username: newlyCreated.employee_id,
+						user_email: newlyCreated.email,
+						user_role: newlyCreated.designation,
+						company_name: newlyCreated.company
+					});
+
+					User.register(newUser, pwd, function(err, user) {
+						if (err) {
+							console.log(err);
+							return res.redirect('back');
+						}
+
+						res.redirect('/employees');
+					});
+				}
+			});
 		}
 	});
 });

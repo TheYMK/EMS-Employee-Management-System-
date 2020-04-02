@@ -5,6 +5,18 @@ var Company = require('../models/company');
 var Department = require('../models/department');
 var Employee = require('../models/employee');
 
+// INDEX - list all departments
+router.get('/departments', function(req, res) {
+	Department.find({}, function(err, allDepartments) {
+		if (err) {
+			console.log(err);
+			res.redirect('back');
+		} else {
+			res.render('departments/index', { departments: allDepartments });
+		}
+	});
+});
+
 // NEW - show a new department form
 router.get('/departments/new', function(req, res) {
 	res.render('departments/new');
