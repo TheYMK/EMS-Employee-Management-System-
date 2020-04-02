@@ -1,29 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
-var Company = require('../models/company');
-var Department = require('../models/department');
-var Employee = require('../models/employee');
+var User = require('../../models/user');
+var Company = require('../../models/company');
+var Department = require('../../models/department');
+var Employee = require('../../models/employee');
 
 // INDEX - list all departments
-router.get('/departments', function(req, res) {
+router.get('/homeadmin/departments', function(req, res) {
 	Department.find({}, function(err, allDepartments) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.render('departments/index', { departments: allDepartments });
+			res.render('admin/departments/index', { departments: allDepartments });
 		}
 	});
 });
 
 // NEW - show a new department form
-router.get('/departments/new', function(req, res) {
-	res.render('departments/new');
+router.get('/homeadmin/departments/new', function(req, res) {
+	res.render('admin/departments/new');
 });
 
 // CREATE - create a new department
-router.post('/departments', function(req, res) {
+router.post('/homeadmin/departments', function(req, res) {
 	var name = req.body.department_name;
 	var hod = req.body.department_hod;
 	var category = req.body.department_category;
@@ -55,7 +55,7 @@ router.post('/departments', function(req, res) {
 });
 
 // SHOW - show info about one specific dept
-router.get('/departments/:id', function(req, res) {
+router.get('/homeadmin/departments/:id', function(req, res) {
 	Department.findById(req.params.id, function(err, foundDepartment) {
 		if (err || !foundDepartment) {
 			console.log(err);
@@ -66,7 +66,7 @@ router.get('/departments/:id', function(req, res) {
 					console.log(err);
 					res.redirect('back');
 				} else {
-					res.render('departments/show', { dept: foundDepartment, employees: allEmployees });
+					res.render('admin/departments/show', { dept: foundDepartment, employees: allEmployees });
 				}
 			});
 		}
@@ -74,32 +74,32 @@ router.get('/departments/:id', function(req, res) {
 });
 
 // EDIT - show edit form of one department
-router.get('/departments/:id/edit', function(req, res) {
+router.get('/homeadmin/departments/:id/edit', function(req, res) {
 	Department.findById(req.params.id, function(err, foundDepartment) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.render('departments/edit', { dept: foundDepartment });
+			res.render('admin/departments/edit', { dept: foundDepartment });
 		}
 	});
 });
 
 // Update - update a particular departments
-router.put('/departments/:id', function(req, res) {
+router.put('/homeadmin/departments/:id', function(req, res) {
 	Department.findByIdAndUpdate(req.params.id, req.body.department, function(err, updatedDepartment) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
 			console.log(updatedDepartment);
-			res.redirect('/departments/' + req.params.id);
+			res.redirect('/homeadmin/departments/' + req.params.id);
 		}
 	});
 });
 
 // DELETE - delete a particular departments
-router.delete('/departments/:id', function(req, res) {
+router.delete('/homeadmin/departments/:id', function(req, res) {
 	Department.findByIdAndRemove(req.params.id, function(err, deletedDept) {
 		if (err) {
 			console.log(err);

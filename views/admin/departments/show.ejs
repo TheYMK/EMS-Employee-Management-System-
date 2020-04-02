@@ -1,4 +1,4 @@
-<%- include("../partials/header") %>
+<%- include("../../partials/header") %>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -23,25 +23,58 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Department List</h1>
+										<h1><%= dept.department_name%> Department</h1>
 									</header>
 
-									<div class="posts">
-										<% departments.forEach(function(dept){ %>
-											<% if(dept.createdBy.username === currentUser.username){ %>
-												<article>
-													<a href="#" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
-													<h3> <%= dept.department_name %></h3>
-													<p><%= dept.department_description.substring(0,100)%> </p>
-													<ul class="actions">
-														<li><a href="/departments/<%= dept._id%>" class="button">View More</a></li>
-													</ul>
-												</article>
-											<% } %>
-											
-										<% }) %>
-										
+									<span class="image main"><img src="<%= dept.department_image %>" alt="" /></span>
+                                    <div>
+                                        <a href="/homeadmin/departments/<%=dept._id%>/edit" class="button secondary">Edit</a>
+                                        <form class="delete-form" action="/homeadmin/departments/<%= dept._id%>?_method=DELETE" method="POST">
+                                            <button class="button primary">Delete</button>
+                                        </form>
+                                    </div>
+
+									<p style="margin-top: 10px;"><%= dept.department_description%></p>
+									
+									<hr class="major" />
+
+                                    <h2>Employee List</h2>
+									<!-- All employees of the department will be displayed here -->
+									
+									<!-- Table -->
+									<div class="table-wrapper" style="margin-top: 30px;">
+										<table>
+											<thead>
+												<tr>
+													<th>Employee ID</th>
+													<th>Type</th>
+													<th>Full Name</th>
+													<th>Department</th>
+													<th>Designation</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<% employees.forEach(function(emp){ %>
+													<% if(emp.company === currentUser.company_name && emp.department === dept.department_name){ %>
+														<tr>
+															<td><a href="/homeadmin/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
+															<td><%= emp.type_of_employee%> </td>
+															<td><%= emp.first_name%> <%= emp.last_name%></td>
+															<td><%= emp.department %></td>
+															<td><%= emp.designation %></td>
+														</tr>
+													<% } %>
+												<% }) %>
+											</tbody>
+										</table>
 									</div>
+
+                                    <hr class="major" />
+
+                                    <h2>Projects</h2>
+                                    <!-- All assigned project will be displayed here -->
+
                                     
 								</section>
 
@@ -60,7 +93,7 @@
 								</section>
 
 							<!-- Menu -->
-							<%- include("../partials/menu") %>
+							<%- include("../../partials/menu") %>
 
 							<!-- Section -->
                             <section>

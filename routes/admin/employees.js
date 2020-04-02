@@ -1,34 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
-var Company = require('../models/company');
-var Department = require('../models/department');
-var Employee = require('../models/employee');
+var User = require('../../models/user');
+var Company = require('../../models/company');
+var Department = require('../../models/department');
+var Employee = require('../../models/employee');
 
 // INDEX - list all employees
-router.get('/employees', function(req, res) {
+router.get('/homeadmin/employees', function(req, res) {
 	Employee.find({}, function(err, allEmployees) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('employees/index', { employees: allEmployees });
+			res.render('admin/employees/index', { employees: allEmployees });
 		}
 	});
 });
 
 // NEW - show a new employees form
-router.get('/employees/new', function(req, res) {
+router.get('/homeadmin/employees/new', function(req, res) {
 	Department.find({}, function(err, allDepartment) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('employees/new', { departments: allDepartment });
+			res.render('admin/employees/new', { departments: allDepartment });
 		}
 	});
 });
 
 // CREATE - create a new employee
-router.post('/employees', function(req, res) {
+router.post('/homeadmin/employees', function(req, res) {
 	Employee.create(req.body.employee, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
@@ -55,7 +55,7 @@ router.post('/employees', function(req, res) {
 							return res.redirect('back');
 						}
 
-						res.redirect('/employees');
+						res.redirect('/homeadmin/employees');
 					});
 				}
 			});
@@ -64,19 +64,19 @@ router.post('/employees', function(req, res) {
 });
 
 // SHOW - show info about one specific employee
-router.get('/employees/:id', function(req, res) {
+router.get('/homeadmin/employees/:id', function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.render('employees/show', { emp: foundEmployee });
+			res.render('admin/employees/show', { emp: foundEmployee });
 		}
 	});
 });
 
 // EDIT - show edit form of one employee
-router.get('/employees/:id/edit', function(req, res) {
+router.get('/homeadmin/employees/:id/edit', function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err || !foundEmployee) {
 			console.log(err);
@@ -87,7 +87,7 @@ router.get('/employees/:id/edit', function(req, res) {
 					console.log(err);
 					res.redirect('back');
 				} else {
-					res.render('employees/edit', { emp: foundEmployee, departments: allDepartments });
+					res.render('admin/employees/edit', { emp: foundEmployee, departments: allDepartments });
 				}
 			});
 		}
@@ -95,25 +95,25 @@ router.get('/employees/:id/edit', function(req, res) {
 });
 
 // UPDATE - update a particular employee
-router.put('/employees/:id', function(req, res) {
+router.put('/homeadmin/employees/:id', function(req, res) {
 	Employee.findByIdAndUpdate(req.params.id, req.body.employee, function(err, updatedEmployee) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.redirect('/employees/' + req.params.id);
+			res.redirect('/homeadmin/employees/' + req.params.id);
 		}
 	});
 });
 
 // DELETE - delete a particular employee
-router.delete('/employees/:id', function(req, res) {
+router.delete('/homeadmin/employees/:id', function(req, res) {
 	Employee.findByIdAndRemove(req.params.id, function(err, deletedEmployee) {
 		if (err) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.redirect('/employees');
+			res.redirect('/homeadmin/employees');
 		}
 	});
 });

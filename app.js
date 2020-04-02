@@ -18,10 +18,10 @@ var express = require('express'),
 
 //routes importation
 var indexRoutes = require('./routes/index');
-var adminRoutes = require('./routes/admin');
+var adminRoutes = require('./routes/admin/admin');
 var empRoutes = require('./routes/emp');
-var departmentsRoutes = require('./routes/departments');
-var employeesRoutes = require('./routes/employees');
+var departmentsRoutes = require('./routes/admin/departments');
+var employeesRoutes = require('./routes/admin/employees');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
