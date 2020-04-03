@@ -1,9 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../models/user');
+var Blog = require('../../models/blog');
+var Comment = require('../../models/comment');
 var Company = require('../../models/company');
 var Department = require('../../models/department');
 var Employee = require('../../models/employee');
+
+var allBlogs;
+
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
 
 // INDEX - list all employees
 router.get('/homeadmin/employees', function(req, res) {
@@ -11,7 +23,7 @@ router.get('/homeadmin/employees', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('admin/employees/index', { employees: allEmployees });
+			res.render('admin/employees/index', { employees: allEmployees, blogs: allBlogs });
 		}
 	});
 });
@@ -22,7 +34,7 @@ router.get('/homeadmin/employees/new', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('admin/employees/new', { departments: allDepartment });
+			res.render('admin/employees/new', { departments: allDepartment, blogs: allBlogs });
 		}
 	});
 });
@@ -70,7 +82,7 @@ router.get('/homeadmin/employees/:id', function(req, res) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.render('admin/employees/show', { emp: foundEmployee });
+			res.render('admin/employees/show', { emp: foundEmployee, blogs: allBlogs });
 		}
 	});
 });
@@ -87,7 +99,11 @@ router.get('/homeadmin/employees/:id/edit', function(req, res) {
 					console.log(err);
 					res.redirect('back');
 				} else {
-					res.render('admin/employees/edit', { emp: foundEmployee, departments: allDepartments });
+					res.render('admin/employees/edit', {
+						emp: foundEmployee,
+						departments: allDepartments,
+						blogs: allBlogs
+					});
 				}
 			});
 		}
@@ -113,7 +129,13 @@ router.delete('/homeadmin/employees/:id', function(req, res) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.redirect('/homeadmin/employees');
+			User.findOneAndRemove({ username: deletedEmployee.employee_id }, function(err, removed) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.redirect('/homeadmin/employees');
+				}
+			});
 		}
 	});
 });

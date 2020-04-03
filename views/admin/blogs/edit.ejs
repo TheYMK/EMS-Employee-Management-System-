@@ -1,0 +1,75 @@
+<%- include("../../partials/header") %>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Edit Article</h1>
+									</header>
+
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+
+									<hr class="major" />
+
+                                    <!-- Form -->
+                                    <form action="/homeadmin/blogs/<%= blog._id %>?_method=PUT" method="POST">
+                                        <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                            <label for="inputTitle">Title</label>
+                                            <input type="text" class="form-control" id="inputTitle" name="blog[title]" value="<%=blog.title%>">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label for="inputImage">Image Url</label>
+                                            <input type="text" class="form-control" id="inputImage" name="blog[image]" value="<%=blog.image%>">
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="inputDescription">Description</label>
+                                          <textarea id="inputDescription" cols="30" rows="10" name="blog[content]"><%=blog.content%></textarea>
+                                        </div>
+                                       
+                                        <button type="submit" class="button primary">Update</button>
+                                      </form>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+                <%- include("../../partials/sidebar") %>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/browser.min.js"></script>
+			<script src="/js/breakpoints.min.js"></script>
+			<script src="/js/util.js"></script>
+            <script src="/js/main.js"></script>
+            <!-- Bootstrap -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+            <section id="search" class="alt">
+                <form method="post" action="#">
+                    <input type="text" name="query" id="query" placeholder="Search" />
+                </form>
+            </section>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <header class="major">
+                <h2>Menu</h2>
+            </header>
+            <ul>
+                <li><a href="/homeadmin">Home</a></li>
+                <li><a href="#">Company</a></li>
+                <li>
+                    <span class="opener">Departments</span>
+                    <ul>
+                        <a href="/homeadmin/departments/new">Add New</a>
+                        <a href="/homeadmin/departments">View All</a>
+                    </ul>
+                </li>
+                <li>
+                    <span class="opener">Employees</span>
+                    <ul>
+                        <li><a href="/homeadmin/employees/new">Add New</a></li>
+                        <li><a href="/homeadmin/employees">View All</a></li>
+                    </ul>
+                </li>
+                <li><a href="/homeadmin/blogs">News</a></li>
+                <li>
+                    <span class="opener">Projects</span>
+                    <ul>
+                        <li><a href="#">Add New</a></li>
+                        <li><a href="#">View Current</a></li>
+                        <li><a href="#">View Completed</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>Latest News</h2>
+                </header>
+                <div class="mini-posts">
+                    <% blogs.slice(-3).forEach(function(blog){ %>
+                        <article>
+                            <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
+                            <p><%=blog.content.substring(0,100)%>...</p>
+                        </article>
+                    <% }) %>
+                </div>
+                <ul class="actions">
+                    <li><a href="/homeadmin/blogs" class="button">View All</a></li>
+                </ul>
+            </section>
+
+        <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>Get in touch</h2>
+                </header>
+                <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                <ul class="contact">
+                    <li class="icon solid fa-envelope"><a href="#"><%=currentUser.company_email%></a></li>
+                    <li class="icon solid fa-phone"><%=currentUser.company_phone%></li>
+                    <li class="icon solid fa-home"><%=currentUser.company_address%></li>
+                </ul>
+            </section>
+
+        <!-- Footer -->
+            <footer id="footer">
+                <p class="copyright">&copy; Kaym Kassai. All rights reserved</p>
+            </footer>
+
+    </div>
+</div>

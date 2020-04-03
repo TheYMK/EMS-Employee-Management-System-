@@ -23,55 +23,31 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Department Creation</h1>
+										<h1>New Article</h1>
 									</header>
 
 									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
 
 									<hr class="major" />
 
                                     <!-- Form -->
-                                    <form action="/homeadmin/departments" method="POST">
+                                    <form action="/homeadmin/blogs" method="POST">
                                         <div class="form-row">
                                           <div class="form-group col-md-6">
-                                            <label for="inputName4">Name</label>
-                                            <input type="text" class="form-control" id="inputName4" name="department_name">
+                                            <label for="inputTitle">Title</label>
+                                            <input type="text" class="form-control" id="inputTitle" name="blogTitle">
                                           </div>
-                                          <div class="form-group col-md-4">
-                                            <label for="inputHod">Head Of Department</label>
-                                            <select id="inputHod" class="form-control" name="department_hod">
-                                              <option selected>Someone 1</option>
-                                              <option>Someone 2</option>
-                                            </select>
+                                          <div class="form-group col-md-6">
+                                            <label for="inputImage">Image Url</label>
+                                            <input type="text" class="form-control" id="inputImage" name="blogImage">
                                           </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <label for="inputCategory">Category</label>
-                                                <select id="inputCategory" class="form-control" name="department_category">
-                                                  <option selected>Cat 1</option>
-                                                  <option>Cat 2</option>
-                                                </select>
-											</div>
-											<div class="form-group col-md-6">
-												<label for="inputImage4">Image Url</label>
-												<input type="text" class="form-control" id="inputImage4" name="department_image">
-											  </div>
                                         </div>
                                         <div class="form-group">
                                           <label for="inputDescription">Description</label>
-                                          <textarea id="inputDescription" cols="30" rows="10" name="department_description"></textarea>
+                                          <textarea id="inputDescription" cols="30" rows="10" name="blogContent"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">
-                                              Check me out
-                                            </label>
-                                          </div>
-                                        </div>
-                                        <button type="submit" class="button primary">Create</button>
+                                       
+                                        <button type="submit" class="button primary">Post</button>
                                       </form>
 
 								</section>

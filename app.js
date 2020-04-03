@@ -19,9 +19,10 @@ var express = require('express'),
 //routes importation
 var indexRoutes = require('./routes/index');
 var adminRoutes = require('./routes/admin/admin');
-var empRoutes = require('./routes/emp');
+var empRoutes = require('./routes/employee/emp');
 var departmentsRoutes = require('./routes/admin/departments');
 var employeesRoutes = require('./routes/admin/employees');
+var blogsRoutes = require('./routes/admin/blogs');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
@@ -69,6 +70,7 @@ app.use(adminRoutes);
 app.use(empRoutes);
 app.use(departmentsRoutes);
 app.use(employeesRoutes);
+app.use(blogsRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

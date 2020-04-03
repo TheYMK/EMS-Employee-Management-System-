@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../models/user');
+var Blog = require('../../models/blog');
+var Comment = require('../../models/comment');
 var Company = require('../../models/company');
 var Department = require('../../models/department');
 
@@ -11,7 +13,14 @@ router.get('/homeadmin', function(req, res) {
 			console.log(err);
 			return res.redirect('back');
 		}
-		res.render('admin/index', { departments: allDepartments });
+		Blog.find({}, function(err, allBlogs) {
+			if (err) {
+				console.log(err);
+				return res.redirect('back');
+			}
+
+			res.render('admin/index', { departments: allDepartments, blogs: allBlogs });
+		});
 	});
 });
 
