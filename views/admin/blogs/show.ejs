@@ -1,7 +1,5 @@
 <%- include("../../partials/header") %>
-	<body class="is-preload">
-
-		<!-- Wrapper -->
+	<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Main -->
@@ -45,24 +43,41 @@
                                 <!-- Comment -->
                                 
                                 <section>
-                                    <a href="#" class="button primary">Comment</a>
                                     <div class="container">
-                                        <div class="row">
-                                            <% blog.comments.forEach(function(comment){ %>
-                                                <div class="media comment-box">
-                                                    <div class="media-left">
+                                        <form action="/homeadmin/blogs/<%=blog._id%>/comments" method="POST">
+                                            <div class="form-row">
+                                              <div class="form-group col-md-8">
+                                                <input type="text" class="form-control"  name="comment[text]" placeholder="Write a comment...">
+                                              </div>
+                                             </div> 
+                                            <button type="submit" class="button primary">Post</button>
+                                          </form>
+                                    </div>
+                                    
+                                    <div class="container">
+                                        <% blog.comments.forEach(function(comment){ %>
+                                            <div class="row">
+                                                <div class="media comment-box col-md-8">
+                                                    <div class="media">
                                                         <a href="#">
                                                             <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
                                                         </a>
                                                     </div>
                                                     <div class="media-body">
-                                                        <h4 class="media-heading"><%=comment.author.username%></h4>
+                                                        <% if(comment.author.username === currentUser.username){ %>
+                                                            <h4 class="media-heading"><%=comment.author.username%> - <em>author</em></h4>
+                                                        <% }else { %>
+                                                            <h4 class="media-heading"><%=comment.author.username%></h4>
+                                                        <% } %>
+                                                        
                                                         <p><%= comment.text%></p>
-                                                    </div>
+                                                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                                            <form action="/homeadmin/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST"" class="delete-form"> <button class="button small">Delete</button></form>
+                                                        <% } %>
+                                                        </div>
                                                 </div>
-                                            <% }) %>
-                                             
-                                        </div>
+                                            </div>
+                                        <% }) %>
                                     </div>
                                 </section>
 

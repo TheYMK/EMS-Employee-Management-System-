@@ -7,6 +7,19 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
     </head>
     <body>
+        <!-- FLASH MESSAGE -->
+        <div class="container">
+            <% if(error && error.length > 0) {%>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <% if(success && success.length > 0) {%>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>   
+        </div>
     
     <div id="landing-header">
         <h1>Welcome to E.M.S!</h1> 

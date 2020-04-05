@@ -7,9 +7,9 @@ var Company = require('../../models/company');
 var Department = require('../../models/department');
 var expressSanitizer = require('express-sanitizer');
 var Employee = require('../../models/employee');
+var middleware = require('../../middleware');
 
 var allBlogs;
-
 Blog.find({}, function(err, blogs) {
 	if (err) {
 		console.log(err);
@@ -19,10 +19,11 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all blogs
-router.get('/homeadmin/blogs', function(req, res) {
-	Blog.find({}, function(err, allBlogs) {
+router.get('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
+	Blog.find({ ownedBy: req.user.company_name }, function(err, allBlogs) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 		} else {
 			res.render('admin/blogs/index', { blogs: allBlogs });
 		}
@@ -30,24 +31,26 @@ router.get('/homeadmin/blogs', function(req, res) {
 });
 
 // NEW - Show a new blog form
-router.get('/homeadmin/blogs/new', function(req, res) {
+router.get('/homeadmin/blogs/new', middleware.isLoggedIn, function(req, res) {
 	res.render('admin/blogs/new', { blogs: allBlogs });
 });
 
 // CREATE - Create a new blog
-router.post('/homeadmin/blogs', function(req, res) {
+router.post('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
 	var blogTitle = req.body.blogTitle;
 	var blogImage = req.body.blogImage;
 	var blogContent = req.sanitize(req.body.blogContent);
+	var owner = req.user.company_name;
 	var author = {
 		id: req.user.id,
 		username: req.user.username
 	};
-	var newBlog = { title: blogTitle, image: blogImage, content: blogContent, author };
+	var newBlog = { title: blogTitle, image: blogImage, content: blogContent, ownedBy: owner, author };
 
 	Blog.create(newBlog, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 		} else {
 			console.log(newlyCreated);
 			res.redirect('/homeadmin/blogs');
@@ -56,9 +59,10 @@ router.post('/homeadmin/blogs', function(req, res) {
 });
 
 // SHOW - Show info about one specific blog
-router.get('/homeadmin/blogs/:id', function(req, res) {
+router.get('/homeadmin/blogs/:id', middleware.isLoggedIn, function(req, res) {
 	Blog.findById(req.params.id).populate('comments').exec(function(err, foundBlog) {
 		if (err || !foundBlog) {
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			res.render('admin/blogs/show', { blog: foundBlog, blogs: allBlogs });
@@ -67,7 +71,7 @@ router.get('/homeadmin/blogs/:id', function(req, res) {
 });
 
 // EDIT - Show edit form of one blog
-router.get('/homeadmin/blogs/:id/edit', function(req, res) {
+router.get('/homeadmin/blogs/:id/edit', middleware.checkBlogOwnership, function(req, res) {
 	Blog.findById(req.params.id, function(err, foundBlog) {
 		if (err || !foundBlog) {
 			req.flash('error', 'Blog not found');
@@ -79,10 +83,11 @@ router.get('/homeadmin/blogs/:id/edit', function(req, res) {
 });
 
 // UPDATE - Update a particular blog
-router.put('/homeadmin/blogs/:id', function(req, res) {
+router.put('/homeadmin/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
 	req.body.blog.content = req.sanitize(req.body.blog.content);
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
 		if (err) {
+			req.flash('error', err.message);
 			res.redirect('/homeadmin/blogs');
 		} else {
 			res.redirect('/homeadmin/blogs/' + req.params.id);
@@ -91,7 +96,7 @@ router.put('/homeadmin/blogs/:id', function(req, res) {
 });
 
 // DESTROY - Delete a particular blog
-router.delete('/homeadmin/blogs/:id', function(req, res) {
+router.delete('/homeadmin/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
 	Blog.findByIdAndRemove(req.params.id, function(err, blog) {
 		if (err) {
 			res.redirect('/homeadmin/blogs');

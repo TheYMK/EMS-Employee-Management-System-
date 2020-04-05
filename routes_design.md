@@ -18,7 +18,7 @@ INDEX           /homeadmin           GET        render admin home page          
 
 
 ================================================================================================================
-                                    ****          DEPARTMENT ROUTES          ****
+                                    ****          DEPARTMENTS ROUTES          ****
 ================================================================================================================
 Name            Path                            Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
@@ -32,12 +32,12 @@ DELETE          /homeadmin/departments/:id      DELETE      delete a particular 
 
 
 ================================================================================================================
-                                    ****          EMPLOYEE ROUTES          ****
+                                    ****          EMPLOYEES ROUTES          ****
 ================================================================================================================
 Name            Path                            Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
 INDEX           /homeadmin/employees            GET         list all employees                       Employee.find()
-NEW             /homeadmin/employees/new        GET         show a new employees form                Department.find()
+NEW             /homeadmin/employees/new        GET         show a new employees form                N/A
 CREATE          /homeadmin/employees            POST        create a new employee                    Employee.create()
 SHOW            /homeadmin/employees/:id        GET         show info about one specific employee    Employee.findById()
 EDIT            /homeadmin/employees/:id/edit   GET         show edit form of one employee           Employee.findById()
@@ -57,3 +57,13 @@ SHOW            /blogs/:id           GET        Show info about one specific blo
 EDIT            /blogs/:id/edit      GET        Show edit form of one blog              Blog.findById()
 UPDATE          /blogs/:id           PUT        Update a particular blog                Blog.findByIdAndUpdate()
 DESTROY         /blogs/:id           DELETE     Delete a particular blog                Blog.findByIdAndRemove()
+
+
+
+================================================================================================================
+                                    ****          COMMENTS ROUTES          ****
+================================================================================================================
+Name            Path                                            Verb        Purpose                      Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+CREATE          /homeadmin/blogs/:id/comments                   POST       Create a new comment          Comment.create() 
+DESTROY         /homeadmin/blogs/:id/comments/:comment_id       DELETE     Delete a particular comment   Comment.findByIdAndRemove()

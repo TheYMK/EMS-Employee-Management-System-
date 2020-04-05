@@ -51,10 +51,13 @@
                 </header>
                 <div class="mini-posts">
                     <% blogs.slice(-3).forEach(function(blog){ %>
-                        <article>
-                            <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
-                            <p><%=blog.content.substring(0,100)%>...</p>
-                        </article>
+                        <% if(blog.ownedBy === currentUser.company_name) { %>
+                            <article>
+                                <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
+                                <p><%=blog.content.substring(0,100)%>...</p>
+                            </article>
+                        <% } %>
+                        
                     <% }) %>
                 </div>
                 <ul class="actions">
@@ -67,11 +70,11 @@
                 <header class="major">
                     <h2>Get in touch</h2>
                 </header>
-                <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                <p>E.M.S was built to make diffucult tasks look easy to handle for everyone. If you need the developer help with anything, feel free to contact me</p>
                 <ul class="contact">
-                    <li class="icon solid fa-envelope"><a href="#"><%=currentUser.company_email%></a></li>
-                    <li class="icon solid fa-phone"><%=currentUser.company_phone%></li>
-                    <li class="icon solid fa-home"><%=currentUser.company_address%></li>
+                    <li class="icon solid fa-envelope"><a href="#">kaymkassai269@gmail.com</a></li>
+                    <li class="icon solid fa-phone">+86 17126619126</li>
+                    <li class="icon solid fa-home">Fengxian, Shanghai, China</li>
                 </ul>
             </section>
 

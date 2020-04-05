@@ -42,16 +42,27 @@
     }
 
 
-    Department: {
-        - Name
-        - Description
-        - Head Of Department
-        - Employees
-        - Projects
-        - Creator
-        - Date of creation
-        - Image
+    
 
-    }
+}
+
+Project: {
+    
+    name:
+    start:
+    end:
+    description:
+    projectManager:
+    department:
+    state:
+    company:
+    rating:
+    employee: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Employee'
+		}
+	]
+
 
 }

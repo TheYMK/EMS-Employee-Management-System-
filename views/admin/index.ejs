@@ -1,8 +1,6 @@
 <%- include("../partials/header") %>
 
-	<body class="is-preload">
-
-		<!-- Wrapper -->
+	<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Main -->
@@ -11,7 +9,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%> - <%= currentUser.user_role%></a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -47,29 +45,29 @@
 										<article>
 											<span class="icon fa-gem"></span>
 											<div class="content">
-												<h3>Portitor ullamcorper</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+												<h3>Improve Workforce Management Efficiencies</h3>
+												<p>E.M.S platform works for you, not against you, you’ll never need to import multiple files and re-key data across different platforms.</p>
 											</div>
 										</article>
 										<article>
-											<span class="icon solid fa-paper-plane"></span>
+											<span class="icon solid fa-handshake"></span>
 											<div class="content">
-												<h3>Sapien veroeros</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+												<h3>Employee Engagement</h3>
+												<p>Tools such as Performance Management provides a modern way to track and evaluate employee development. You’re able to work with employees to establish goals, make them feel valuable and develop a path for their success.</p>
 											</div>
 										</article>
 										<article>
-											<span class="icon solid fa-rocket"></span>
+											<span class="icon solid fa-lock"></span>
 											<div class="content">
-												<h3>Quam lorem ipsum</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+												<h3>Securing Employee Information</h3>
+												<p>E.M.S system provide you with specific security measures, multi-factor authentication and data encryption just to name a few, to keep your employees’ information safe.</p>
 											</div>
 										</article>
 										<article>
-											<span class="icon solid fa-signal"></span>
+											<span class="icon solid fa-chart-line"></span>
 											<div class="content">
-												<h3>Sed magna finibus</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+												<h3>HR Data Analytics & Metrics</h3>
+												<p>With data analytics, solutions are developed and results are measured to not only impact your bottom line but help you gain more exposure to your C-Suite.</p>
 											</div>
 										</article>
 									</div>
@@ -84,7 +82,7 @@
 										<% departments.forEach(function(dept){ %>
 											<% if(dept.createdBy.username === currentUser.username){ %>
 												<article>
-													<a href="#" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
+													<a href="/homeadmin/departments/<%= dept._id%>" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
 													<h3> <%= dept.department_name %></h3>
 													<p><%= dept.department_description.substring(0,100)%> </p>
 													<ul class="actions">

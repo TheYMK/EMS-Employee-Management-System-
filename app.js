@@ -14,15 +14,18 @@ var express = require('express'),
 	Company = require('./models/company'),
 	Department = require('./models/department'),
 	Employee = require('./models/employee'),
+	Blog = require('./models/blog'),
+	Comment = require('./models/comment'),
 	session = require('express-session');
 
-//routes importation
+//routes importations
 var indexRoutes = require('./routes/index');
 var adminRoutes = require('./routes/admin/admin');
 var empRoutes = require('./routes/employee/emp');
 var departmentsRoutes = require('./routes/admin/departments');
 var employeesRoutes = require('./routes/admin/employees');
 var blogsRoutes = require('./routes/admin/blogs');
+var commentsRoutes = require('./routes/admin/comments');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
@@ -71,6 +74,7 @@ app.use(empRoutes);
 app.use(departmentsRoutes);
 app.use(employeesRoutes);
 app.use(blogsRoutes);
+app.use(commentsRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

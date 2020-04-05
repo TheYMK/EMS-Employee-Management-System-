@@ -5,6 +5,7 @@ var blogSchema = new mongoose.Schema({
 	title: String,
 	image: String,
 	content: String,
+	ownedBy: String,
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,

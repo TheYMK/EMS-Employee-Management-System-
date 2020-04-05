@@ -27,6 +27,19 @@
 
 <!-- END HEADER -->
 
+<!-- FLASH MESSAGE -->
+<div class="container">
+    <% if(error && error.length > 0) {%>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <% if(success && success.length > 0) {%>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <%= success %>
+        </div>
+    <% } %>   
+</div>
 
 <!-- START LOGIN FORM -->
 

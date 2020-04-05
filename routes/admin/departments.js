@@ -6,9 +6,9 @@ var Comment = require('../../models/comment');
 var Company = require('../../models/company');
 var Department = require('../../models/department');
 var Employee = require('../../models/employee');
+var middleware = require('../../middleware');
 
 var allBlogs;
-
 Blog.find({}, function(err, blogs) {
 	if (err) {
 		console.log(err);
@@ -18,10 +18,10 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all departments
-router.get('/homeadmin/departments', function(req, res) {
+router.get('/homeadmin/departments', middleware.isLoggedIn, function(req, res) {
 	Department.find({}, function(err, allDepartments) {
 		if (err) {
-			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			res.render('admin/departments/index', { departments: allDepartments, blogs: allBlogs });
@@ -30,12 +30,12 @@ router.get('/homeadmin/departments', function(req, res) {
 });
 
 // NEW - show a new department form
-router.get('/homeadmin/departments/new', function(req, res) {
+router.get('/homeadmin/departments/new', middleware.isLoggedIn, function(req, res) {
 	res.render('admin/departments/new', { blogs: allBlogs });
 });
 
 // CREATE - create a new department
-router.post('/homeadmin/departments', function(req, res) {
+router.post('/homeadmin/departments', middleware.isLoggedIn, function(req, res) {
 	var name = req.body.department_name;
 	var hod = req.body.department_hod;
 	var category = req.body.department_category;
@@ -57,25 +57,26 @@ router.post('/homeadmin/departments', function(req, res) {
 
 	Department.create(newDepartment, function(err, newlyCreated) {
 		if (err) {
-			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			console.log(newlyCreated);
+			req.flash('success', 'Department created successfully');
 			res.redirect('/homeadmin');
 		}
 	});
 });
 
 // SHOW - show info about one specific dept
-router.get('/homeadmin/departments/:id', function(req, res) {
+router.get('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
 	Department.findById(req.params.id, function(err, foundDepartment) {
 		if (err || !foundDepartment) {
-			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			Employee.find({}, function(err, allEmployees) {
 				if (err) {
-					console.log(err);
+					req.flash('error', err.message);
 					res.redirect('back');
 				} else {
 					res.render('admin/departments/show', {
@@ -90,10 +91,10 @@ router.get('/homeadmin/departments/:id', function(req, res) {
 });
 
 // EDIT - show edit form of one department
-router.get('/homeadmin/departments/:id/edit', function(req, res) {
+router.get('/homeadmin/departments/:id/edit', middleware.isLoggedIn, function(req, res) {
 	Department.findById(req.params.id, function(err, foundDepartment) {
-		if (err) {
-			console.log(err);
+		if (err || !foundDepartment) {
+			req.flash('error', 'Department not found');
 			res.redirect('back');
 		} else {
 			res.render('admin/departments/edit', { dept: foundDepartment, blogs: allBlogs });
@@ -102,25 +103,27 @@ router.get('/homeadmin/departments/:id/edit', function(req, res) {
 });
 
 // Update - update a particular departments
-router.put('/homeadmin/departments/:id', function(req, res) {
+router.put('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
 	Department.findByIdAndUpdate(req.params.id, req.body.department, function(err, updatedDepartment) {
 		if (err) {
-			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			console.log(updatedDepartment);
+			req.flash('success', 'Department updated successfully');
 			res.redirect('/homeadmin/departments/' + req.params.id);
 		}
 	});
 });
 
 // DELETE - delete a particular departments
-router.delete('/homeadmin/departments/:id', function(req, res) {
+router.delete('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
 	Department.findByIdAndRemove(req.params.id, function(err, deletedDept) {
 		if (err) {
-			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
+			req.flash('success', 'Department deleted successfully');
 			res.redirect('/homeadmin');
 		}
 	});

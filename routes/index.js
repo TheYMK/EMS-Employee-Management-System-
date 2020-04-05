@@ -46,16 +46,21 @@ router.post('/register', function(req, res) {
 	User.register(newUser, req.body.password, function(err, user) {
 		if (err) {
 			console.log(err);
-			return res.redirect('/');
+			req.flash('error', err.message);
+			return res.redirect('/register');
 		}
 		passport.authenticate('local')(req, res, function() {
 			if (user.user_role === 'Admin') {
+				req.flash('success', 'Welcome to E.M.S' + user.username);
 				res.redirect('/homeadmin');
 			} else if (user.user_role === 'HOD') {
+				req.flash('success', 'Welcome to E.M.S' + user.username);
 				res.redirect('/homebasic');
 			} else if (user.user_role === 'HR') {
+				req.flash('success', 'Welcome to E.M.S' + user.username);
 				res.redirect('/homebasic');
 			} else {
+				req.flash('success', 'Welcome to E.M.S' + user.username);
 				res.redirect('/homeemployee');
 			}
 		});

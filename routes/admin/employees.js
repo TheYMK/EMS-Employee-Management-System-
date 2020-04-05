@@ -6,9 +6,9 @@ var Comment = require('../../models/comment');
 var Company = require('../../models/company');
 var Department = require('../../models/department');
 var Employee = require('../../models/employee');
+var middleware = require('../../middleware');
 
 var allBlogs;
-
 Blog.find({}, function(err, blogs) {
 	if (err) {
 		console.log(err);
@@ -18,10 +18,11 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all employees
-router.get('/homeadmin/employees', function(req, res) {
+router.get('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 	Employee.find({}, function(err, allEmployees) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 		} else {
 			res.render('admin/employees/index', { employees: allEmployees, blogs: allBlogs });
 		}
@@ -29,10 +30,11 @@ router.get('/homeadmin/employees', function(req, res) {
 });
 
 // NEW - show a new employees form
-router.get('/homeadmin/employees/new', function(req, res) {
+router.get('/homeadmin/employees/new', middleware.isLoggedIn, function(req, res) {
 	Department.find({}, function(err, allDepartment) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 		} else {
 			res.render('admin/employees/new', { departments: allDepartment, blogs: allBlogs });
 		}
@@ -40,10 +42,11 @@ router.get('/homeadmin/employees/new', function(req, res) {
 });
 
 // CREATE - create a new employee
-router.post('/homeadmin/employees', function(req, res) {
+router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 	Employee.create(req.body.employee, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			console.log(newlyCreated);
@@ -76,10 +79,11 @@ router.post('/homeadmin/employees', function(req, res) {
 });
 
 // SHOW - show info about one specific employee
-router.get('/homeadmin/employees/:id', function(req, res) {
+router.get('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			res.render('admin/employees/show', { emp: foundEmployee, blogs: allBlogs });
@@ -88,15 +92,17 @@ router.get('/homeadmin/employees/:id', function(req, res) {
 });
 
 // EDIT - show edit form of one employee
-router.get('/homeadmin/employees/:id/edit', function(req, res) {
+router.get('/homeadmin/employees/:id/edit', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err || !foundEmployee) {
 			console.log(err);
+			req.flash('error', 'Employee not found');
 			res.redirect('back');
 		} else {
 			Department.find({}, function(err, allDepartments) {
 				if (err) {
 					console.log(err);
+					req.flash('error', err.message);
 					res.redirect('back');
 				} else {
 					res.render('admin/employees/edit', {
@@ -111,10 +117,11 @@ router.get('/homeadmin/employees/:id/edit', function(req, res) {
 });
 
 // UPDATE - update a particular employee
-router.put('/homeadmin/employees/:id', function(req, res) {
+router.put('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
 	Employee.findByIdAndUpdate(req.params.id, req.body.employee, function(err, updatedEmployee) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			res.redirect('/homeadmin/employees/' + req.params.id);
@@ -123,10 +130,11 @@ router.put('/homeadmin/employees/:id', function(req, res) {
 });
 
 // DELETE - delete a particular employee
-router.delete('/homeadmin/employees/:id', function(req, res) {
+router.delete('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
 	Employee.findByIdAndRemove(req.params.id, function(err, deletedEmployee) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
 			User.findOneAndRemove({ username: deletedEmployee.employee_id }, function(err, removed) {

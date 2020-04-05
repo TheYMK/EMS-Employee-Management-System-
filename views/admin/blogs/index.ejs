@@ -1,7 +1,5 @@
 <%- include("../../partials/header") %>
-	<body class="is-preload">
-
-		<!-- Wrapper -->
+	<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Main -->
@@ -32,22 +30,22 @@
 
                                     <div class="row text-center" style="display: flex; flex-wrap: wrap;">
                                         <% blogs.forEach(function(blog){ %>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 mt-3">
-                                                <div class="card-deck">
-                                                    <div class="card">
-                                                      <img src="<%=blog.image%>" class="card-img-top">
-                                                      <div class="card-body">
-                                                        <h5 class="card-title"><%=blog.title%></h5>
-                                                        <p class="card-text"><%=blog.content.substring(0,100)%>...</p>
-                                                        <a href="/homeadmin/blogs/<%=blog._id%>" class="button">Read More</a>
-                                                      </div>
-                                                      <div class="card-footer">
-                                                        <small class="text-muted">Posted on <%=blog.createdAt.toDateString()%></small>
-                                                      </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-6 mt-3">
+                                                    <div class="card-deck">
+                                                        <div class="card">
+                                                          <img src="<%=blog.image%>" class="card-img-top">
+                                                          <div class="card-body">
+                                                            <h5 class="card-title"><%=blog.title%></h5>
+                                                            <p class="card-text"><%=blog.content.substring(0,100)%>...</p>
+                                                            <a href="/homeadmin/blogs/<%=blog._id%>" class="button">Read More</a>
+                                                          </div>
+                                                          <div class="card-footer">
+                                                            <small class="text-muted">Posted on <%=blog.createdAt.toDateString()%></small>
+                                                          </div>
+                                                        </div>
                                                     </div>
+    
                                                 </div>
-
-                                            </div>
                                         <% }) %>        
                                     </div>
 
