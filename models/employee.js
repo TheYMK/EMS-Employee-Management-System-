@@ -30,6 +30,7 @@ var employeeSchema = new mongoose.Schema({
 	salary: String,
 	company: String,
 	type_of_employee: String,
+	qualification: String,
 	attendance: String,
 	password: String
 });

@@ -1,4 +1,5 @@
 <%- include("../../partials/header") %>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -20,25 +21,47 @@
 
 			<!-- Content -->
 			<section>
-				<header class="main">
-					<h1><%= dept.department_name%> Department</h1>
+
+				<header class="major">
+					<h2><%= project.name%></h2>
 				</header>
 
-				<span class="image main"><img src="<%= dept.department_image %>" alt="" /></span>
-				<div>
-					<a href="/homeadmin/departments/<%=dept._id%>/edit" class="button secondary">Edit</a>
-					<form class="delete-form" action="/homeadmin/departments/<%= dept._id%>?_method=DELETE"
-						method="POST">
-						<button class="button primary">Delete</button>
-					</form>
+				<div class="card text-center">
+					<div class="card-header">
+						<ul class="nav nav-pills card-header-pills">
+							<li class="nav-item">
+								<a class="button" href="/homeadmin/projects/<%=project._id%>/edit">Edit</a>
+							</li>
+							<li class="nav-item">
+								<form action="/homeadmin/projects/<%=project._id%>?_method=DELETE" method="POST">
+									<button class="button">Delete</a>
+								</form>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-12 mt-3">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">Project Details</h5>
+										<hr />
+										<p class="card-text"><strong>Start Date:</strong> <%=project.start%> |
+											<strong>Deadline:</strong> <%=project.end%> <br>
+											<strong>State:</strong> <%=project.state%> <br>
+											<strong>Company:</strong> <%=project.company%><br>
+											<strong>Department:</strong> <%=project.department%> <br>
+											<strong>Description:</strong> <%= project.description%>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 
-				<p style="margin-top: 10px;"><%= dept.department_description%></p>
-
-				<hr class="major" />
-
-				<h2>Employee List</h2>
-				<!-- All employees of the department will be displayed here -->
+				<h3 class="text-center mt-4">Assigned Team</h3>
 
 				<!-- Table -->
 				<div class="table-wrapper" style="margin-top: 30px;">
@@ -48,20 +71,21 @@
 								<th>Employee ID</th>
 								<th>Type</th>
 								<th>Full Name</th>
-								<th>Department</th>
 								<th>Designation</th>
 
 							</tr>
 						</thead>
 						<tbody>
 							<% employees.forEach(function(emp){ %>
-							<% if(emp.company === currentUser.company_name && emp.department === dept.department_name){ %>
+							<% if(emp.company === currentUser.company_name && emp.department === project.department){ %>
 							<tr>
+
 								<td><a href="/homeadmin/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
 								<td><%= emp.type_of_employee%> </td>
 								<td><%= emp.first_name%> <%= emp.last_name%></td>
-								<td><%= emp.department %></td>
 								<td><%= emp.designation %></td>
+								<!-- Write down the logic to check if a user is on the list or not -->
+
 							</tr>
 							<% } %>
 							<% }) %>
@@ -69,40 +93,7 @@
 					</table>
 				</div>
 
-				<hr class="major" />
 
-				<h2>Projects</h2>
-				<!-- All assigned project will be displayed here -->
-
-				<!-- Table -->
-				<div class="table-wrapper" style="margin-top: 30px;">
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Start</th>
-								<th>End</th>
-								<th>Assigned Dept</th>
-								<th>State</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<% projects.forEach(function(project){ %>
-							<% if(project.company === currentUser.company_name && project.department === dept.department_name){ %>
-							<tr>
-								<td><a href="/homeadmin/projects/<%=project._id%>"><%= project.name %></a></td>
-								<td><%= project.start%> </td>
-								<td><%= project.end%></td>
-								<td><%= project.department %></td>
-								<td><%= project.state %></td>
-							</tr>
-							<% } %>
-
-							<% }) %>
-						</tbody>
-					</table>
-				</div>
 
 			</section>
 

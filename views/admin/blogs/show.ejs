@@ -1,104 +1,115 @@
 <%- include("../../partials/header") %>
-	<!-- Wrapper -->
-			<div id="wrapper">
+<!-- Wrapper -->
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+            <!-- Header -->
+            <header id="header">
+                <a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+                </ul>
+            </header>
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1><%=blog.title%></h1>
-									</header>
+            <!-- Content -->
+            <section>
+                <header class="main">
+                    <h1><%=blog.title%></h1>
+                </header>
 
-                                    <span class="image main"><img src="<%= blog.image %>" alt="" /></span>
-                                    
-                                    <hr class="major" />
-                                    
-                                    <p><%-blog.content%></p>
+                <span class="image main"><img src="<%= blog.image %>" alt="" /></span>
 
-                                    <p style="color: #f56a6a;"><em>Submitted By <%= blog.author.username %></em></p>
+                <hr class="major" />
 
-                                    <% if(currentUser && blog.author.id.equals(currentUser._id)){ %>
-                                        <a class="button small" href="/homeadmin/blogs/<%= blog._id%>/edit">Edit</a>
-                                        <form class="delete-form" action="/homeadmin/blogs/<%= blog._id%>?_method=DELETE" method="POST">
-                                            <button class="button small">Delete</button>
-                                        </form>
-                                     <% } %>
-                                </section>
-                                
-                                <!-- Comment -->
-                                
-                                <section>
-                                    <div class="container">
-                                        <form action="/homeadmin/blogs/<%=blog._id%>/comments" method="POST">
-                                            <div class="form-row">
-                                              <div class="form-group col-md-8">
-                                                <input type="text" class="form-control"  name="comment[text]" placeholder="Write a comment...">
-                                              </div>
-                                             </div> 
-                                            <button type="submit" class="button primary">Post</button>
-                                          </form>
-                                    </div>
-                                    
-                                    <div class="container">
-                                        <% blog.comments.forEach(function(comment){ %>
-                                            <div class="row">
-                                                <div class="media comment-box col-md-8">
-                                                    <div class="media">
-                                                        <a href="#">
-                                                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <% if(comment.author.username === currentUser.username){ %>
-                                                            <h4 class="media-heading"><%=comment.author.username%> - <em>author</em></h4>
-                                                        <% }else { %>
-                                                            <h4 class="media-heading"><%=comment.author.username%></h4>
-                                                        <% } %>
-                                                        
-                                                        <p><%= comment.text%></p>
-                                                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                                            <form action="/homeadmin/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST"" class="delete-form"> <button class="button small">Delete</button></form>
-                                                        <% } %>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        <% }) %>
-                                    </div>
-                                </section>
+                <p><%-blog.content%></p>
 
-						</div>
-					</div>
+                <p style="color: #f56a6a;"><em>Submitted By <%= blog.author.username %></em></p>
 
-				<!-- Sidebar -->
-                <%- include("../../partials/sidebar") %>
+                <% if(currentUser && blog.author.id.equals(currentUser._id)){ %>
+                <a class="button small" href="/homeadmin/blogs/<%= blog._id%>/edit">Edit</a>
+                <form class="delete-form" action="/homeadmin/blogs/<%= blog._id%>?_method=DELETE" method="POST">
+                    <button class="button small">Delete</button>
+                </form>
+                <% } %>
+            </section>
 
-			</div>
+            <!-- Comment -->
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-            <script src="/js/main.js"></script>
-            <!-- Bootstrap -->
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <section>
+                <div class="container">
+                    <form action="/homeadmin/blogs/<%=blog._id%>/comments" method="POST">
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <input type="text" class="form-control" name="comment[text]"
+                                    placeholder="Write a comment...">
+                            </div>
+                        </div>
+                        <button type="submit" class="button primary">Post</button>
+                    </form>
+                </div>
 
-	</body>
+                <div class="container">
+                    <% blog.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="media comment-box col-md-8">
+                            <div class="media">
+                                <a href="#">
+                                    <img class="img-responsive user-photo"
+                                        src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <% if(comment.author.username === currentUser.username){ %>
+                                <h4 class="media-heading"><%=comment.author.username%> - <em>author</em></h4>
+                                <% }else { %>
+                                <h4 class="media-heading"><%=comment.author.username%></h4>
+                                <% } %>
+
+                                <p><%= comment.text%></p>
+                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <form action="/homeadmin/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE"
+                                    method="POST"" class=" delete-form"> <button class="button small">Delete</button>
+                                </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <%- include("../../partials/sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>

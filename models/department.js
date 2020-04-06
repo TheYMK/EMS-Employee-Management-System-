@@ -7,6 +7,12 @@ var departmentSchema = new mongoose.Schema({
 	department_hod: String,
 	department_description: String,
 	department_employees: String,
+	projects: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Project'
+		}
+	],
 	createdBy: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +23,18 @@ var departmentSchema = new mongoose.Schema({
 	createdAt: {
 		type: Date,
 		default: Date.now
+	}
+});
+
+departmentSchema.pre('remove', async function(next) {
+	try {
+		await Project.remove({
+			_id: {
+				$in: this.projects
+			}
+		});
+	} catch (err) {
+		next(err);
 	}
 });
 

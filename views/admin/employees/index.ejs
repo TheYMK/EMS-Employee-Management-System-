@@ -1,75 +1,76 @@
 <%- include("../../partials/header") %>
 
 <!-- Wrapper -->
-			<div id="wrapper">
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
 
-							<!-- Content -->
-								<section>
+			<!-- Content -->
+			<section>
 
-									<header class="major">
-										<h2>Employee List</h2>
-									</header>
+				<header class="major">
+					<h2>Employee List</h2>
+				</header>
 
-									<!-- Table -->
-									<div class="table-wrapper" style="margin-top: 30px;">
-										<table>
-											<thead>
-												<tr>
-													<th>Employee ID</th>
-													<th>Type</th>
-													<th>Full Name</th>
-													<th>Department</th>
-													<th>Designation</th>
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Employee ID</th>
+								<th>Type</th>
+								<th>Full Name</th>
+								<th>Department</th>
+								<th>Designation</th>
 
-												</tr>
-											</thead>
-											<tbody>
-												<% employees.forEach(function(emp){ %>
-													<% if(emp.company === currentUser.company_name){ %>
-														<tr>
-															<td><a href="/homeadmin/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
-															<td><%= emp.type_of_employee%> </td>
-															<td><%= emp.first_name%> <%= emp.last_name%></td>
-															<td><%= emp.department %></td>
-															<td><%= emp.designation %></td>
-														</tr>
-													<% } %>
-												<% }) %>
-											</tbody>
-										</table>
-									</div>
-								</section>
+							</tr>
+						</thead>
+						<tbody>
+							<% employees.forEach(function(emp){ %>
+							<% if(emp.company === currentUser.company_name){ %>
+							<tr>
+								<td><a href="/homeadmin/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
+								<td><%= emp.type_of_employee%> </td>
+								<td><%= emp.first_name%> <%= emp.last_name%></td>
+								<td><%= emp.department %></td>
+								<td><%= emp.designation %></td>
+							</tr>
+							<% } %>
+							<% }) %>
+						</tbody>
+					</table>
+				</div>
+			</section>
 
-						</div>
-					</div>
+		</div>
+	</div>
 
-				<!-- Sidebar -->
-				<%- include("../../partials/sidebar") %>
+	<!-- Sidebar -->
+	<%- include("../../partials/sidebar") %>
 
-			</div>
+</div>
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-			<script src="/js/main.js"></script>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
+
 </html>

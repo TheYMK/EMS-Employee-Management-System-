@@ -60,7 +60,7 @@ router.post('/register', function(req, res) {
 				req.flash('success', 'Welcome to E.M.S' + user.username);
 				res.redirect('/homebasic');
 			} else {
-				req.flash('success', 'Welcome to E.M.S' + user.username);
+				req.flash('success', 'Welcome to E.M.S ' + user.username);
 				res.redirect('/homeemployee');
 			}
 		});

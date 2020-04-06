@@ -1,62 +1,64 @@
 <%- include("../../partials/header") %>
-	<!-- Wrapper -->
-			<div id="wrapper">
+<!-- Wrapper -->
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>Department List</h1>
-									</header>
+			<!-- Content -->
+			<section>
+				<header class="main">
+					<h1>Department List</h1>
+				</header>
 
-									<div class="posts">
-										<% departments.forEach(function(dept){ %>
-											<% if(dept.createdBy.username === currentUser.username){ %>
-												<article>
-													<a href="#" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
-													<h3> <%= dept.department_name %></h3>
-													<p><%= dept.department_description.substring(0,100)%> </p>
-													<ul class="actions">
-														<li><a href="/homeadmin/departments/<%= dept._id%>" class="button">View More</a></li>
-													</ul>
-												</article>
-											<% } %>
-											
-										<% }) %>
-										
-									</div>
-                                    
-								</section>
+				<div class="posts">
+					<% departments.forEach(function(dept){ %>
+					<% if(dept.createdBy.username === currentUser.username){ %>
+					<article>
+						<a href="/homeadmin/departments/<%= dept._id%>" class="image"><img
+								src="<%= dept.department_image%>" alt="" /></a>
+						<h3> <%= dept.department_name %></h3>
+						<p><%= dept.department_description.substring(0,100)%> </p>
+						<ul class="actions">
+							<li><a href="/homeadmin/departments/<%= dept._id%>" class="button">View More</a></li>
+						</ul>
+					</article>
+					<% } %>
 
-						</div>
-					</div>
+					<% }) %>
 
-				<!-- Sidebar -->
-				<%- include("../../partials/sidebar") %>
+				</div>
 
-			</div>
+			</section>
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-			<script src="/js/main.js"></script>
+		</div>
+	</div>
 
-	</body>
+	<!-- Sidebar -->
+	<%- include("../../partials/sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
 </html>

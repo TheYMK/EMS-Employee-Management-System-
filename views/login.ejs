@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E.M.S</title>
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/df19b88d34.js" crossorigin="anonymous"></script>
     <!-- google font -->
@@ -14,6 +16,7 @@
     <!-- custom css file -->
     <link rel="stylesheet" href="stylesheets/main.css">
 </head>
+
 <body>
 
     <!-- ====================Start Header Area  ====================-->
@@ -21,30 +24,30 @@
         <div class="main-menu">
             <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #f67878;">
                 <a class="navbar-brand" href="/">E.M.S by Kaym Kassai</a>
-              </nav>
+            </nav>
         </div>
     </header>
 
-<!-- END HEADER -->
+    <!-- END HEADER -->
 
-<!-- FLASH MESSAGE -->
-<div class="container">
-    <% if(error && error.length > 0) {%>
+    <!-- FLASH MESSAGE -->
+    <div class="container">
+        <% if(error && error.length > 0) {%>
         <div class="alert alert-danger alert-dismissible" role="alert">
             <%= error %>
         </div>
-    <% } %>
-    <% if(success && success.length > 0) {%>
+        <% } %>
+        <% if(success && success.length > 0) {%>
         <div class="alert alert-success alert-dismissible" role="alert">
             <%= success %>
         </div>
-    <% } %>   
-</div>
+        <% } %>
+    </div>
 
-<!-- START LOGIN FORM -->
+    <!-- START LOGIN FORM -->
 
-<div class="container">
-    <!-- <div class="row"> -->
+    <div class="container">
+        <!-- <div class="row"> -->
         <h1 style="text-align: center" class="mt-4">Login</h1>
         <div style="width: 60%; margin: 25px auto;">
             <form action="/login" method="post">
@@ -62,14 +65,13 @@
                 </div>
             </form>
         </div>
-    <!-- </div> -->
-</div>
+        <!-- </div> -->
+    </div>
 
 
-<!-- END LOGIN FORM -->
+    <!-- END LOGIN FORM -->
 
 
 
 
-<%- include("partials/footer") %>
-
+    <%- include("partials/footer") %>

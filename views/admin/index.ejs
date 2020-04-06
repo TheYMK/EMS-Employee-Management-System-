@@ -1,98 +1,105 @@
 <%- include("../partials/header") %>
 
-	<!-- Wrapper -->
-			<div id="wrapper">
+<!-- Wrapper -->
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%> - <%= currentUser.user_role%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%> -
+					<%= currentUser.user_role%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
 
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
-										<header>
-											<h1><%=currentUser.company_name%></h1>
-											<p><%=currentUser.company_type%></p>
-										</header>
-										<p><%=currentUser.company_description%></p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
-									</div>
-									<span class="image object">
-										<img src="images/header.jpeg" alt="" />
-									</span>
-								</section>
+			<!-- Banner -->
+			<section id="banner">
+				<div class="content">
+					<header>
+						<h1><%=currentUser.company_name%></h1>
+						<p><%=currentUser.company_type%></p>
+					</header>
+					<p><%=currentUser.company_description%></p>
+					<ul class="actions">
+						<li><a href="#" class="button big">Learn More</a></li>
+					</ul>
+				</div>
+				<span class="image object">
+					<img src="images/header.jpeg" alt="" />
+				</span>
+			</section>
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Services</h2>
-									</header>
-									<div class="features">
-										<article>
-											<span class="icon fa-gem"></span>
-											<div class="content">
-												<h3>Improve Workforce Management Efficiencies</h3>
-												<p>E.M.S platform works for you, not against you, you’ll never need to import multiple files and re-key data across different platforms.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-handshake"></span>
-											<div class="content">
-												<h3>Employee Engagement</h3>
-												<p>Tools such as Performance Management provides a modern way to track and evaluate employee development. You’re able to work with employees to establish goals, make them feel valuable and develop a path for their success.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-lock"></span>
-											<div class="content">
-												<h3>Securing Employee Information</h3>
-												<p>E.M.S system provide you with specific security measures, multi-factor authentication and data encryption just to name a few, to keep your employees’ information safe.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-chart-line"></span>
-											<div class="content">
-												<h3>HR Data Analytics & Metrics</h3>
-												<p>With data analytics, solutions are developed and results are measured to not only impact your bottom line but help you gain more exposure to your C-Suite.</p>
-											</div>
-										</article>
-									</div>
-								</section>
+			<!-- Section -->
+			<section>
+				<header class="major">
+					<h2>Services</h2>
+				</header>
+				<div class="features">
+					<article>
+						<span class="icon fa-gem"></span>
+						<div class="content">
+							<h3>Improve Workforce Management Efficiencies</h3>
+							<p>E.M.S platform works for you, not against you, you’ll never need to import multiple files
+								and re-key data across different platforms.</p>
+						</div>
+					</article>
+					<article>
+						<span class="icon solid fa-handshake"></span>
+						<div class="content">
+							<h3>Employee Engagement</h3>
+							<p>Tools such as Performance Management provides a modern way to track and evaluate employee
+								development. You’re able to work with employees to establish goals, make them feel
+								valuable and develop a path for their success.</p>
+						</div>
+					</article>
+					<article>
+						<span class="icon solid fa-lock"></span>
+						<div class="content">
+							<h3>Securing Employee Information</h3>
+							<p>E.M.S system provide you with specific security measures, multi-factor authentication and
+								data encryption just to name a few, to keep your employees’ information safe.</p>
+						</div>
+					</article>
+					<article>
+						<span class="icon solid fa-chart-line"></span>
+						<div class="content">
+							<h3>HR Data Analytics & Metrics</h3>
+							<p>With data analytics, solutions are developed and results are measured to not only impact
+								your bottom line but help you gain more exposure to your C-Suite.</p>
+						</div>
+					</article>
+				</div>
+			</section>
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Departments</h2>
-									</header>
-									<div class="posts">
-										<% departments.forEach(function(dept){ %>
-											<% if(dept.createdBy.username === currentUser.username){ %>
-												<article>
-													<a href="/homeadmin/departments/<%= dept._id%>" class="image"><img src="<%= dept.department_image%>" alt="" /></a>
-													<h3> <%= dept.department_name %></h3>
-													<p><%= dept.department_description.substring(0,100)%> </p>
-													<ul class="actions">
-														<li><a href="/homeadmin/departments/<%= dept._id%>" class="button">More</a></li>
-													</ul>
-												</article>
-											<% } %>
-											
-										<% }) %>
-										<!-- <article>
+			<!-- Section -->
+			<section>
+				<header class="major">
+					<h2>Departments</h2>
+				</header>
+				<div class="posts">
+					<% departments.forEach(function(dept){ %>
+					<% if(dept.createdBy.username === currentUser.username){ %>
+					<article>
+						<a href="/homeadmin/departments/<%= dept._id%>" class="image"><img
+								src="<%= dept.department_image%>" alt="" /></a>
+						<h3> <%= dept.department_name %></h3>
+						<p><%= dept.department_description.substring(0,100)%> </p>
+						<ul class="actions">
+							<li><a href="/homeadmin/departments/<%= dept._id%>" class="button">More</a></li>
+						</ul>
+					</article>
+					<% } %>
+
+					<% }) %>
+					<!-- <article>
 											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
 											<h3>Interdum aenean</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
@@ -140,23 +147,24 @@
 												<li><a href="#" class="button">More</a></li>
 											</ul>
 										</article> -->
-									</div>
-								</section>
+				</div>
+			</section>
 
-						</div>
-					</div>
+		</div>
+	</div>
 
-				<!-- Sidebar -->
-				<%- include("../partials/sidebar") %>
+	<!-- Sidebar -->
+	<%- include("../partials/sidebar") %>
 
-			</div>
+</div>
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-			<script src="/js/main.js"></script>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 
-	</body>
+</body>
+
 </html>

@@ -49,6 +49,15 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
 	}
 };
 
+middlewareObj.isLoginAsAdmin = function(req, res, next) {
+	if (req.isAuthenticated() && req.user.user_role === 'Admin') {
+		return next();
+	}
+
+	req.flash('error', 'Only Admin allowed to see this page');
+	res.redirect('back');
+};
+
 middlewareObj.isLoggedIn = function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();

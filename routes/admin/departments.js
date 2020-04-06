@@ -6,6 +6,7 @@ var Comment = require('../../models/comment');
 var Company = require('../../models/company');
 var Department = require('../../models/department');
 var Employee = require('../../models/employee');
+var Project = require('../../models/project');
 var middleware = require('../../middleware');
 
 var allBlogs;
@@ -79,10 +80,19 @@ router.get('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, re
 					req.flash('error', err.message);
 					res.redirect('back');
 				} else {
-					res.render('admin/departments/show', {
-						dept: foundDepartment,
-						employees: allEmployees,
-						blogs: allBlogs
+					Project.find({}, function(err, allProjects) {
+						if (err) {
+							console.log(err);
+							res.flash('error', err.message);
+							res.redirect('back');
+						} else {
+							res.render('admin/departments/show', {
+								dept: foundDepartment,
+								employees: allEmployees,
+								blogs: allBlogs,
+								projects: allProjects
+							});
+						}
 					});
 				}
 			});

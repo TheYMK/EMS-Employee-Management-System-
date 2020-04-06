@@ -13,7 +13,6 @@ SHOW            /login               GET         show login form                
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
-                                                <!-- ADMIN -->
 INDEX           /homeadmin           GET        render admin home page                  User.find(), Company.find()
 
 
@@ -67,3 +66,28 @@ Name            Path                                            Verb        Purp
 ----------------------------------------------------------------------------------------------------------------
 CREATE          /homeadmin/blogs/:id/comments                   POST       Create a new comment          Comment.create() 
 DESTROY         /homeadmin/blogs/:id/comments/:comment_id       DELETE     Delete a particular comment   Comment.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          PROJECTS ROUTES          ****
+================================================================================================================
+Name            Path                              Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+INDEX           /homeadmin/projects               GET        list all projects                       Project.find()
+NEW             /homeadmin/projects/new           GET        Show a new project form                 N/A
+CREATE          /homeadmin/projects               POST       Create a new project                    Project.create()
+SHOW            /homeadmin/projects/:id           GET        Show info about one specific project    Project.findById()
+EDIT            /homeadmin/projects/:id/edit      GET        Show edit form of one project           Project.findById()
+UPDATE          /homeadmin/projects/:id           PUT        Update a particular project             Project.findByIdAndUpdate()
+DESTROY         /homeadmin/projects/:id           DELETE     Delete a particular project             Project.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          COMPANIES ROUTES          ****
+================================================================================================================
+Name            Path                              Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+SHOW            /homeadmin/companies/:id            GET        Show info about one specific company    Company.findById()
+EDIT            /homeadmin/companies/:id/edit       GET        Show edit form of one company           Company.findById()
+UPDATE          /homeadmin/companies/:id            PUT        Update a particular company             Company.findByIdAndUpdate()
+DESTROY         /homeadmin/companies/:id            DELETE     Delete a particular company             Company.findByIdAndRemove()

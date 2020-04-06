@@ -1,4 +1,5 @@
 <%- include("../../partials/header") %>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -20,59 +21,10 @@
 
 			<!-- Content -->
 			<section>
-				<header class="main">
-					<h1><%= dept.department_name%> Department</h1>
+
+				<header class="major">
+					<h2>Projects List</h2>
 				</header>
-
-				<span class="image main"><img src="<%= dept.department_image %>" alt="" /></span>
-				<div>
-					<a href="/homeadmin/departments/<%=dept._id%>/edit" class="button secondary">Edit</a>
-					<form class="delete-form" action="/homeadmin/departments/<%= dept._id%>?_method=DELETE"
-						method="POST">
-						<button class="button primary">Delete</button>
-					</form>
-				</div>
-
-				<p style="margin-top: 10px;"><%= dept.department_description%></p>
-
-				<hr class="major" />
-
-				<h2>Employee List</h2>
-				<!-- All employees of the department will be displayed here -->
-
-				<!-- Table -->
-				<div class="table-wrapper" style="margin-top: 30px;">
-					<table>
-						<thead>
-							<tr>
-								<th>Employee ID</th>
-								<th>Type</th>
-								<th>Full Name</th>
-								<th>Department</th>
-								<th>Designation</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<% employees.forEach(function(emp){ %>
-							<% if(emp.company === currentUser.company_name && emp.department === dept.department_name){ %>
-							<tr>
-								<td><a href="/homeadmin/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
-								<td><%= emp.type_of_employee%> </td>
-								<td><%= emp.first_name%> <%= emp.last_name%></td>
-								<td><%= emp.department %></td>
-								<td><%= emp.designation %></td>
-							</tr>
-							<% } %>
-							<% }) %>
-						</tbody>
-					</table>
-				</div>
-
-				<hr class="major" />
-
-				<h2>Projects</h2>
-				<!-- All assigned project will be displayed here -->
 
 				<!-- Table -->
 				<div class="table-wrapper" style="margin-top: 30px;">
@@ -84,12 +36,10 @@
 								<th>End</th>
 								<th>Assigned Dept</th>
 								<th>State</th>
-
 							</tr>
 						</thead>
 						<tbody>
 							<% projects.forEach(function(project){ %>
-							<% if(project.company === currentUser.company_name && project.department === dept.department_name){ %>
 							<tr>
 								<td><a href="/homeadmin/projects/<%=project._id%>"><%= project.name %></a></td>
 								<td><%= project.start%> </td>
@@ -97,13 +47,10 @@
 								<td><%= project.department %></td>
 								<td><%= project.state %></td>
 							</tr>
-							<% } %>
-
 							<% }) %>
 						</tbody>
 					</table>
 				</div>
-
 			</section>
 
 		</div>

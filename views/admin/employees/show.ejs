@@ -1,129 +1,132 @@
 <%- include("../../partials/header") %>
 
 <!-- Wrapper -->
-			<div id="wrapper">
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+  <!-- Main -->
+  <div id="main">
+    <div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+      <!-- Header -->
+      <header id="header">
+        <a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+        <ul class="icons">
+          <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+          <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+        </ul>
+      </header>
 
-							<!-- Content -->
-								<section>
+      <!-- Content -->
+      <section>
 
-									<header class="major">
-										<h2>Employee Informations</h2>
-									</header>
+        <header class="major">
+          <h2>Employee Informations</h2>
+        </header>
 
-									<div class="card text-center">
-                                        <div class="card-header">
-                                          <ul class="nav nav-pills card-header-pills">
-                                            <li class="nav-item">
-                                              <a class="button" href="/homeadmin/employees/<%=emp._id%>/edit">Edit</a>
-                                            </li>
-                                            <li class="nav-item">
-											  <form action="/homeadmin/employees/<%=emp._id%>?_method=DELETE" method="POST">
-												<button class="button">Delete</a>
-											  </form>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                        <div class="card-body">
-                                          <img src="<%=emp.photo%>" alt="" class="image fit" style="width: 50%; margin: auto;">
-                                          <div class="row">
-                                            <div class="col-sm-6 mt-3">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Personal Details</h5>
-                                                  <hr/>
-                                                  <p class="card-text"><strong>First Name:</strong> <%=emp.first_name%> | <strong>Last Name:</strong> <%=emp.last_name%> <br>
-                                                    <strong>Bithdate:</strong> <%=emp.date_of_birth%> <br>
-                                                    <strong>Gender:</strong> <%=emp.gender%> <br>
-                                                    <strong>Marital Status:</strong> <%=emp.marital_status%> <br>
-                                                    <strong>Nationality:</strong> <%=emp.nationality%> <br>
-                                                    <strong>Passport No:</strong> <%=emp.passport_no%> <br>
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-6 mt-3">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Contact Details</h5>
-                                                  <hr>
-                                                  <p class="card-text"><strong>Address:</strong> <%=emp.address%> <br>
-                                                    <strong>City:</strong> <%=emp.city%> <br>
-                                                    <strong>Country:</strong> <%=emp.country%> <br>
-                                                    <strong>Mobile:</strong> <%=emp.mobile%> <br>
-                                                    <strong>Phone:</strong> <%=emp.phone%> <br>
-                                                    <strong>Email:</strong> <%=emp.email%> <br>
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+        <div class="card text-center">
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+              <li class="nav-item">
+                <a class="button" href="/homeadmin/employees/<%=emp._id%>/edit">Edit</a>
+              </li>
+              <li class="nav-item">
+                <form action="/homeadmin/employees/<%=emp._id%>?_method=DELETE" method="POST">
+                  <button class="button">Delete</a>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <img src="<%=emp.photo%>" alt="" class="image fit" style="width: 50%; margin: auto;">
+            <div class="row">
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Personal Details</h5>
+                    <hr />
+                    <p class="card-text"><strong>First Name:</strong> <%=emp.first_name%> | <strong>Last Name:</strong>
+                      <%=emp.last_name%> <br>
+                      <strong>Bithdate:</strong> <%=emp.date_of_birth%> <br>
+                      <strong>Gender:</strong> <%=emp.gender%> <br>
+                      <strong>Marital Status:</strong> <%=emp.marital_status%> <br>
+                      <strong>Nationality:</strong> <%=emp.nationality%> <br>
+                      <strong>Passport No:</strong> <%=emp.passport_no%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Contact Details</h5>
+                    <hr>
+                    <p class="card-text"><strong>Address:</strong> <%=emp.address%> <br>
+                      <strong>City:</strong> <%=emp.city%> <br>
+                      <strong>Country:</strong> <%=emp.country%> <br>
+                      <strong>Mobile:</strong> <%=emp.mobile%> <br>
+                      <strong>Phone:</strong> <%=emp.phone%> <br>
+                      <strong>Email:</strong> <%=emp.email%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                                          <div class="row">
-                                            <div class="col-sm-6 mt-3">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Official Status</h5>
-                                                  <hr/>
-                                                  <p class="card-text"><strong>Employee ID:</strong> <%=emp.employee_id%> <br>
-                                                    <strong>Designation:</strong> <%=emp.designation%> <br>
-                                                    <strong>Joining Date:</strong> <%=emp.joining_date%> <br>
-                                                    <strong>Department:</strong> <%=emp.department%> <br>
-                                                    <strong>Standard Salary:</strong> $<%=emp.salary%> <br>
-                                                    <strong>Employment Type:</strong> <%=emp.type_of_employee%> <br>
-                                                    <strong>Attendances Count:</strong> 0
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-6 mt-3">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Bank Informations</h5>
-                                                  <hr>
-                                                  <p class="card-text"><strong>Bank Name:</strong> <%=emp.bank_name%> <br>
-                                                    <strong>Account Name:</strong> <%=emp.account_name%> <br>
-                                                    <strong>Account Number:</strong> <%=emp.account_no%>
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+            <div class="row">
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Official Status</h5>
+                    <hr />
+                    <p class="card-text"><strong>Employee ID:</strong> <%=emp.employee_id%> <br>
+                      <strong>Designation:</strong> <%=emp.designation%> <br>
+                      <strong>Joining Date:</strong> <%=emp.joining_date%> <br>
+                      <strong>Department:</strong> <%=emp.department%> <br>
+                      <strong>Standard Salary:</strong> $<%=emp.salary%> <br>
+                      <strong>Contract Type:</strong> <%=emp.type_of_employee%> <br>
+                      <strong>Qualification:</strong> <%=emp.qualification%> <br>
+                      <strong>Attendances Count:</strong> 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Bank Informations</h5>
+                    <hr>
+                    <p class="card-text"><strong>Bank Name:</strong> <%=emp.bank_name%> <br>
+                      <strong>Account Name:</strong> <%=emp.account_name%> <br>
+                      <strong>Account Number:</strong> <%=emp.account_no%>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                                        </div>
-                                      </div>
-                                    
-								</section>
+          </div>
+        </div>
 
-						</div>
-					</div>
+      </section>
 
-				<!-- Sidebar -->
-				<%- include("../../partials/sidebar") %>
+    </div>
+  </div>
 
-			</div>
+  <!-- Sidebar -->
+  <%- include("../../partials/sidebar") %>
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-			<script src="/js/main.js"></script>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
+
 </html>

@@ -1,225 +1,263 @@
 <%- include("../../partials/header") %>
-	<!-- Wrapper -->
-			<div id="wrapper">
+<!-- Wrapper -->
+<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>Employee Creation</h1>
-									</header>
+			<!-- Content -->
+			<section>
+				<header class="main">
+					<h1>Employee Creation</h1>
+				</header>
 
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+				<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
+					venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor
+					sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu
+					massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris.
+					Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis,
+					hendrerit.</p>
 
-									<hr class="major" />
+				<hr class="major" />
 
-                                    <!-- Form -->
-                                    <form action="/homeadmin/employees" method="POST">
-                                       <!-- Personal Details Card -->
-										<div class="card">
-											<h5 class="card-header">Personal Details</h5>
-											<div class="card-body">
-												<div class="form-row">
-													<div class="form-group col-md-6">
-													  <label for="inputFname">First Name</label>
-													  <input type="text" class="form-control" id="inputFname" name="employee[first_name]" required>
-													</div>
-													<div class="form-group col-md-6">
-													  <label for="inputLname">Last Name</label>
-													  <input type="text" class="form-control" id="inputLname" name="employee[last_name]" required>
-													</div>
-												</div>
+				<!-- Form -->
+				<form action="/homeadmin/employees" method="POST">
+					<!-- Personal Details Card -->
+					<div class="card">
+						<h5 class="card-header">Personal Details</h5>
+						<div class="card-body">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputFname">First Name</label>
+									<input type="text" class="form-control" id="inputFname" name="employee[first_name]"
+										required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputLname">Last Name</label>
+									<input type="text" class="form-control" id="inputLname" name="employee[last_name]"
+										required>
+								</div>
+							</div>
 
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputDob">Date Of Birth</label>
-													  <input type="date" class="form-control" id="inputDob" name="employee[date_of_birth]" required>
-													</div>
-													<div class="form-group col-md-4">
-													  <label for="inputGender">Gender</label>
-													  <select id="inputGender" class="form-control" name="employee[gender]" required>
-														<option selected>- Choose -</option>
-														<option>Male</option>
-														<option>Female</option>
-													  </select>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputMarital">Marital Status</label>
-														<select id="inputMarital" class="form-control" name="employee[marital_status]" required>
-														  <option selected>- Choose -</option>
-														  <option>Married</option>
-														  <option>Single</option>
-														</select>
-													</div>
-												</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputDob">Date Of Birth</label>
+									<input type="date" class="form-control" id="inputDob" name="employee[date_of_birth]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputGender">Gender</label>
+									<select id="inputGender" class="form-control" name="employee[gender]" required>
+										<option selected>- Choose -</option>
+										<option>Male</option>
+										<option>Female</option>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputMarital">Marital Status</label>
+									<select id="inputMarital" class="form-control" name="employee[marital_status]"
+										required>
+										<option selected>- Choose -</option>
+										<option>Married</option>
+										<option>Single</option>
+									</select>
+								</div>
+							</div>
 
-												<div class="form-row">
-													<div class="form-group col-md-6">
-													  <label for="inputNationality">Nationality</label>
-													  <input type="text" class="form-control" id="inputNationality" name="employee[nationality]" required>
-													</div>
-													<div class="form-group col-md-3">
-													  <label for="inputGender">Passport NO</label>
-													  <input type="text" class="form-control" id="inputGender" name="employee[passport_no]" required>
-													</div>
-													<div class="form-group col-md-3">
-														<label for="inputPhoto">Photo(URL)</label>
-														<input type="text" class="form-control" id="inputPhoto" name="employee[photo]" required>
-													</div>
-												</div>
-											</div>
-										  </div>
-										
-										  <!-- Contact Details Card -->
-										<div class="card" style="margin-top: 20px;">
-											<h5 class="card-header">Contact Details</h5>
-											<div class="card-body">
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputAddr">Address</label>
-													  <input type="text" class="form-control" id="inputAddr" name="employee[address]" required>
-													</div>
-													<div class="form-group col-md-4">
-													  <label for="inputCity">City</label>
-													  <input type="text" class="form-control" id="inputCity" name="employee[city]" required>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputEmail">Email</label>
-														<input type="email" class="form-control" id="inputEmail" name="employee[email]" required>
-													  </div>
-												</div>
-
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputCountry">Country</label>
-													  <input type="text" class="form-control" id="inputCountry" name="employee[country]" required>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputMobile">Mobile</label>
-														<input type="text" class="form-control" id="inputMobile" name="employee[mobile]" required>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputPhone">Phone</label>
-														<input type="text" class="form-control" id="inputPhone" name="employee[phone]">
-													</div>
-												</div>
-											</div>
-										  </div>
-
-										<!-- Bank Information Card -->
-										<div class="card" style="margin-top: 20px;">
-											<h5 class="card-header">Bank Information</h5>
-											<div class="card-body">
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputBankN">Bank Name</label>
-													  <input type="text" class="form-control" id="inputBankN" name="employee[bank_name]" required>
-													</div>
-													<div class="form-group col-md-4">
-													  <label for="inputAccountName">Account Name</label>
-													  <input type="text" class="form-control" id="inputAccountName" name="employee[account_name]" required>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputAccountNumber">Account NO</label>
-														<input type="text" class="form-control" id="inputAccountNumber" name="employee[account_no]" required>
-													  </div>
-												</div>
-											</div>
-										</div>
-
-										<!-- Official Status Card -->
-										<div class="card" style="margin-top: 20px;">
-											<h5 class="card-header">Official Status</h5>
-											<div class="card-body">
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputEmployeeID">Employee ID</label>
-													  <input type="text" class="form-control" id="inputEmployeeID" name="employee[employee_id]" required>
-													</div>
-													<div class="form-group col-md-4">
-													  <label for="inputDesignation">Designation</label>
-													  <input type="text" class="form-control" id="inputDesignation" name="employee[designation]" required>
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputJoining">Joining Date</label>
-														<input type="date" class="form-control" id="inputJoining" name="employee[joining_date]" required>
-													  </div>
-												</div>
-
-												<div class="form-row">
-													<div class="form-group col-md-4">
-														<label for="inputDept">Department</label>
-														<select id="inputDept" class="form-control" name="employee[department]">
-														  <option selected>- Choose -</option>
-														  <% departments.forEach(function(dept){ %>
-																<% if(dept.createdBy.username === currentUser.username){ %>
-																	<option><%= dept.department_name%></option>
-																<% } %>
-																
-														  <% }) %>
-														</select>
-													  </div>
-													<div class="form-group col-md-4">
-													  <label for="inputSalary">Salary</label>
-													  <input type="text" class="form-control" id="inputSalary" name="employee[salary]">
-													</div>
-													<div class="form-group col-md-4">
-														<label for="inputCompany">Company</label>
-														<input type="text" class="form-control" id="inputCompany" name="employee[company]" value="<%= currentUser.company_name%>" required>
-													</div>
-												</div>
-
-												<div class="form-row">
-													<div class="form-group col-md-4">
-													  <label for="inputEmployeeType">Employee Type</label>
-													  <select id="inputEmployeeType" class="form-control" name="employee[type_of_employee]" required>
-														<option selected>- Choose -</option>
-														<option>Full-Time</option>
-														<option>Part-Time</option>
-													  </select>
-													</div>
-												</div>
-											</div>
-										</div>
-
-                                        <button type="submit" class="button primary mt-3">Create</button>
-                                      </form>
-
-								</section>
-
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputNationality">Nationality</label>
+									<input type="text" class="form-control" id="inputNationality"
+										name="employee[nationality]" required>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="inputGender">Passport NO</label>
+									<input type="text" class="form-control" id="inputGender"
+										name="employee[passport_no]" required>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="inputPhoto">Photo(URL)</label>
+									<input type="text" class="form-control" id="inputPhoto" name="employee[photo]"
+										required>
+								</div>
+							</div>
 						</div>
 					</div>
 
-				<!-- Sidebar -->
-				<%- include("../../partials/sidebar") %>
+					<!-- Contact Details Card -->
+					<div class="card" style="margin-top: 20px;">
+						<h5 class="card-header">Contact Details</h5>
+						<div class="card-body">
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputAddr">Address</label>
+									<input type="text" class="form-control" id="inputAddr" name="employee[address]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputCity">City</label>
+									<input type="text" class="form-control" id="inputCity" name="employee[city]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputEmail">Email</label>
+									<input type="email" class="form-control" id="inputEmail" name="employee[email]"
+										required>
+								</div>
+							</div>
 
-			</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputCountry">Country</label>
+									<input type="text" class="form-control" id="inputCountry" name="employee[country]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputMobile">Mobile</label>
+									<input type="text" class="form-control" id="inputMobile" name="employee[mobile]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputPhone">Phone</label>
+									<input type="text" class="form-control" id="inputPhone" name="employee[phone]">
+								</div>
+							</div>
+						</div>
+					</div>
 
-		<!-- Scripts -->
-			<script src="/js/jquery.min.js"></script>
-			<script src="/js/browser.min.js"></script>
-			<script src="/js/breakpoints.min.js"></script>
-			<script src="/js/util.js"></script>
-            <script src="/js/main.js"></script>
-            <!-- Bootstrap -->
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+					<!-- Bank Information Card -->
+					<div class="card" style="margin-top: 20px;">
+						<h5 class="card-header">Bank Information</h5>
+						<div class="card-body">
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputBankN">Bank Name</label>
+									<input type="text" class="form-control" id="inputBankN" name="employee[bank_name]"
+										required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputAccountName">Account Name</label>
+									<input type="text" class="form-control" id="inputAccountName"
+										name="employee[account_name]" required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputAccountNumber">Account NO</label>
+									<input type="text" class="form-control" id="inputAccountNumber"
+										name="employee[account_no]" required>
+								</div>
+							</div>
+						</div>
+					</div>
 
-	</body>
+					<!-- Official Status Card -->
+					<div class="card" style="margin-top: 20px;">
+						<h5 class="card-header">Official Status</h5>
+						<div class="card-body">
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputEmployeeID">Employee ID</label>
+									<input type="text" class="form-control" id="inputEmployeeID"
+										name="employee[employee_id]" required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputDesignation">Designation</label>
+									<input type="text" class="form-control" id="inputDesignation"
+										name="employee[designation]" required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputJoining">Joining Date</label>
+									<input type="date" class="form-control" id="inputJoining"
+										name="employee[joining_date]" required>
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputDept">Department</label>
+									<select id="inputDept" class="form-control" name="employee[department]">
+										<option selected>- Choose -</option>
+										<% departments.forEach(function(dept){ %>
+										<% if(dept.createdBy.username === currentUser.username){ %>
+										<option><%= dept.department_name%></option>
+										<% } %>
+
+										<% }) %>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputSalary">Salary</label>
+									<input type="text" class="form-control" id="inputSalary" name="employee[salary]">
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputCompany">Company</label>
+									<input type="text" class="form-control" id="inputCompany" name="employee[company]"
+										value="<%= currentUser.company_name%>" required>
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputEmployeeType">Contract Type</label>
+									<select id="inputEmployeeType" class="form-control"
+										name="employee[type_of_employee]" required>
+										<option selected>- Choose -</option>
+										<option>Full-Time</option>
+										<option>Part-Time</option>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputQualification">Qualification</label>
+									<input type="text" class="form-control" id="inputQualification"
+										name="employee[qualification]" required>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<button type="submit" class="button primary mt-3">Create</button>
+				</form>
+
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+
+</body>
+
 </html>

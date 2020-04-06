@@ -2,11 +2,11 @@
     <div class="inner">
 
         <!-- Search -->
-            <section id="search" class="alt">
-                <form method="post" action="#">
-                    <input type="text" name="query" id="query" placeholder="Search" />
-                </form>
-            </section>
+        <section id="search" class="alt">
+            <form method="post" action="#">
+                <input type="text" name="query" id="query" placeholder="Search" />
+            </form>
+        </section>
 
         <!-- Menu -->
         <nav id="menu">
@@ -34,9 +34,10 @@
                 <li>
                     <span class="opener">Projects</span>
                     <ul>
-                        <li><a href="#">Add New</a></li>
-                        <li><a href="#">View Current</a></li>
-                        <li><a href="#">View Completed</a></li>
+                        <li><a href="/homeadmin/projects/new">Add New</a></li>
+                        <li><a href="/homeadmin/projects">View All</a></li>
+                        <li><a href="/homeadmin/projects">View Current</a></li>
+                        <li><a href="/homeadmin/projects">View Completed</a></li>
                     </ul>
                 </li>
                 <li><a href="#">About Us</a></li>
@@ -45,43 +46,44 @@
         </nav>
 
         <!-- Section -->
-            <section>
-                <header class="major">
-                    <h2>Latest News</h2>
-                </header>
-                <div class="mini-posts">
-                    <% blogs.slice(-3).forEach(function(blog){ %>
-                        <% if(blog.ownedBy === currentUser.company_name) { %>
-                            <article>
-                                <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
-                                <p><%=blog.content.substring(0,100)%>...</p>
-                            </article>
-                        <% } %>
-                        
-                    <% }) %>
-                </div>
-                <ul class="actions">
-                    <li><a href="/homeadmin/blogs" class="button">View All</a></li>
-                </ul>
-            </section>
+        <section>
+            <header class="major">
+                <h2>Latest News</h2>
+            </header>
+            <div class="mini-posts">
+                <% blogs.slice(-3).forEach(function(blog){ %>
+                <% if(blog.ownedBy === currentUser.company_name) { %>
+                <article>
+                    <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
+                    <p><%=blog.content.substring(0,100)%>...</p>
+                </article>
+                <% } %>
+
+                <% }) %>
+            </div>
+            <ul class="actions">
+                <li><a href="/homeadmin/blogs" class="button">View All</a></li>
+            </ul>
+        </section>
 
         <!-- Section -->
-            <section>
-                <header class="major">
-                    <h2>Get in touch</h2>
-                </header>
-                <p>E.M.S was built to make diffucult tasks look easy to handle for everyone. If you need the developer help with anything, feel free to contact me</p>
-                <ul class="contact">
-                    <li class="icon solid fa-envelope"><a href="#">kaymkassai269@gmail.com</a></li>
-                    <li class="icon solid fa-phone">+86 17126619126</li>
-                    <li class="icon solid fa-home">Fengxian, Shanghai, China</li>
-                </ul>
-            </section>
+        <section>
+            <header class="major">
+                <h2>Get in touch</h2>
+            </header>
+            <p>E.M.S was built to make diffucult tasks look easy to handle for everyone. If you need the developer help
+                with anything, feel free to contact me</p>
+            <ul class="contact">
+                <li class="icon solid fa-envelope"><a href="#">kaymkassai269@gmail.com</a></li>
+                <li class="icon solid fa-phone">+86 17126619126</li>
+                <li class="icon solid fa-home">Fengxian, Shanghai, China</li>
+            </ul>
+        </section>
 
         <!-- Footer -->
-            <footer id="footer">
-                <p class="copyright">&copy; Kaym Kassai. All rights reserved</p>
-            </footer>
+        <footer id="footer">
+            <p class="copyright">&copy; Kaym Kassai. All rights reserved</p>
+        </footer>
 
     </div>
 </div>
