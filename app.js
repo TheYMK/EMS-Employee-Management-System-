@@ -29,12 +29,14 @@ var blogsRoutes = require('./routes/admin/blogs');
 var commentsRoutes = require('./routes/admin/comments');
 var projectsRoutes = require('./routes/admin/projects');
 var companiesRoutes = require('./routes/admin/companies');
+var emp_departmentRoutes = require('./routes/employee/departments');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	useCreateIndex: true
+	useCreateIndex: true,
+	useFindAndModify: false
 });
 
 //More blah blah
@@ -80,6 +82,7 @@ app.use(blogsRoutes);
 app.use(commentsRoutes);
 app.use(projectsRoutes);
 app.use(companiesRoutes);
+app.use(emp_departmentRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

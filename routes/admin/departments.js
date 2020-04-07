@@ -119,7 +119,6 @@ router.put('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, re
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			console.log(updatedDepartment);
 			req.flash('success', 'Department updated successfully');
 			res.redirect('/homeadmin/departments/' + req.params.id);
 		}

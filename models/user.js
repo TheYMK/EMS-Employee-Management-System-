@@ -26,6 +26,12 @@ var UserSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Employee'
 		}
+	},
+	department: {
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Employee'
+		}
 	}
 });
 

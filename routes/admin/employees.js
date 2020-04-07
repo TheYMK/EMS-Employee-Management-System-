@@ -57,28 +57,38 @@ router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 					console.log(err);
 					res.redirect('back');
 				} else {
-					var newUser = new User({
-						username: newlyCreated.employee_id,
-						user_email: newlyCreated.email,
-						user_role: newlyCreated.designation,
-						company_name: newlyCreated.company,
-						company: {
-							id: req.user.company.id
-						},
-						employee: {
-							id: emp.id
-						}
-					});
-
-					// newUser.employees.push(updated);
-
-					User.register(newUser, pwd, function(err, user) {
+					Department.findOne({ department_name: emp.department }, function(err, foundDepartment) {
 						if (err) {
 							console.log(err);
-							return res.redirect('back');
-						}
+							res.redirect('back');
+						} else {
+							var newUser = new User({
+								username: newlyCreated.employee_id,
+								user_email: newlyCreated.email,
+								user_role: newlyCreated.designation,
+								company_name: newlyCreated.company,
+								company: {
+									id: req.user.company.id
+								},
+								employee: {
+									id: emp.id
+								},
+								department: {
+									id: foundDepartment.id
+								}
+							});
 
-						res.redirect('/homeadmin/employees');
+							// newUser.employees.push(updated);
+
+							User.register(newUser, pwd, function(err, user) {
+								if (err) {
+									console.log(err);
+									return res.redirect('back');
+								}
+
+								res.redirect('/homeadmin/employees');
+							});
+						}
 					});
 				}
 			});
@@ -132,7 +142,30 @@ router.put('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res)
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			res.redirect('/homeadmin/employees/' + req.params.id);
+			User.findOne({ username: updatedEmployee.employee_id }, function(err, foundUser) {
+				if (err) {
+					console.log(err);
+					res.redirect(back);
+				} else {
+					// foundUser.department.id = foundDepartment.id;
+					// foundUser.save();
+					// foundUser.save();
+					Department.findOne({ department_name: req.body.employee.department }, function(
+						err,
+						foundDepartment
+					) {
+						if (err) {
+							console.log(err);
+							res.redirect('back');
+						} else {
+							// foundDepartment.save();
+							foundUser.department.id = foundDepartment.id;
+							foundUser.save();
+							res.redirect('/homeadmin/employees/' + req.params.id);
+						}
+					});
+				}
+			});
 		}
 	});
 });
