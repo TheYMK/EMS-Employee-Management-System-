@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Comment = require('./comment');
 
 //Blog DB schema
 var blogSchema = new mongoose.Schema({

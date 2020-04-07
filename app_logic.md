@@ -66,3 +66,5 @@ Project: {
 
 
 }
+
+<!-- TO FIX PROJECT DELETION ON DEPARTMENT DELETION: push each new project to projects array inside departmentSchema -->

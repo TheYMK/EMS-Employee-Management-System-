@@ -46,14 +46,26 @@ router.get('/homeadmin/projects/new', middleware.isLoggedIn, function(req, res) 
 
 // CREATE - Create a new project
 router.post('/homeadmin/projects', middleware.isLoggedIn, function(req, res) {
-	Project.create(req.body.project, function(err, newlyCreated) {
+	Department.findOne({ department_name: req.body.project.department }, function(err, foundDepartment) {
 		if (err) {
 			console.log(err);
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			console.log(newlyCreated);
-			res.redirect('/homeadmin/projects');
+			Project.create(req.body.project, function(err, project) {
+				if (err) {
+					console.log(err);
+					req.flash('error', err.message);
+					res.redirect('back');
+				} else {
+					console.log(req.body.project.department);
+					project.save();
+					foundDepartment.projects.push(project);
+					foundDepartment.save();
+					console.log(foundDepartment.projects);
+					res.redirect('/homeadmin/projects');
+				}
+			});
 		}
 	});
 });

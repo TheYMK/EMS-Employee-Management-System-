@@ -70,7 +70,7 @@ router.post('/homeadmin/departments', middleware.isLoggedIn, function(req, res) 
 
 // SHOW - show info about one specific dept
 router.get('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
-	Department.findById(req.params.id, function(err, foundDepartment) {
+	Department.findById(req.params.id).populate('projects').exec(function(err, foundDepartment) {
 		if (err || !foundDepartment) {
 			req.flash('error', err.message);
 			res.redirect('back');
@@ -128,11 +128,12 @@ router.put('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, re
 
 // DELETE - delete a particular departments
 router.delete('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
-	Department.findByIdAndRemove(req.params.id, function(err, deletedDept) {
+	Department.findById(req.params.id, function(err, department) {
 		if (err) {
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
+			department.remove();
 			req.flash('success', 'Department deleted successfully');
 			res.redirect('/homeadmin');
 		}

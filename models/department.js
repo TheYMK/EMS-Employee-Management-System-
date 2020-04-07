@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Project = require('./project');
 
 var departmentSchema = new mongoose.Schema({
 	department_image: String,

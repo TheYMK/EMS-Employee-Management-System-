@@ -16,22 +16,6 @@ router.get('/register', function(req, res) {
 
 //handle registration logic
 router.post('/register', function(req, res) {
-	var sel = req.body.user_role;
-
-	var newUser = new User({
-		username: req.body.username,
-		user_email: req.body.user_email,
-		user_role: sel,
-		company_name: req.body.company_name,
-		company_email: req.body.company_email,
-		company_phone: req.body.company_phone,
-		company_address: req.body.company_address,
-		company_type: req.body.company_type,
-		company_city: req.body.company_city,
-		company_size: req.body.company_size,
-		company_description: req.body.company_description
-	});
-
 	var newCompany = new Company({
 		name: req.body.company_name,
 		city: req.body.company_city,
@@ -43,34 +27,54 @@ router.post('/register', function(req, res) {
 		description: req.body.company_description
 	});
 
-	User.register(newUser, req.body.password, function(err, user) {
-		if (err) {
-			console.log(err);
-			req.flash('error', err.message);
-			return res.redirect('/register');
-		}
-		passport.authenticate('local')(req, res, function() {
-			if (user.user_role === 'Admin') {
-				req.flash('success', 'Welcome to E.M.S' + user.username);
-				res.redirect('/homeadmin');
-			} else if (user.user_role === 'HOD') {
-				req.flash('success', 'Welcome to E.M.S' + user.username);
-				res.redirect('/homebasic');
-			} else if (user.user_role === 'HR') {
-				req.flash('success', 'Welcome to E.M.S' + user.username);
-				res.redirect('/homebasic');
-			} else {
-				req.flash('success', 'Welcome to E.M.S ' + user.username);
-				res.redirect('/homeemployee');
-			}
-		});
-	});
+	var newUser;
 
 	Company.create(newCompany, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
 		} else {
+			var sel = req.body.user_role;
+			newUser = new User({
+				username: req.body.username,
+				user_email: req.body.user_email,
+				user_role: sel,
+				company_name: req.body.company_name,
+				company_email: req.body.company_email,
+				company_phone: req.body.company_phone,
+				company_address: req.body.company_address,
+				company_type: req.body.company_type,
+				company_city: req.body.company_city,
+				company_size: req.body.company_size,
+				company_description: req.body.company_description,
+				company: {
+					id: newlyCreated._id
+				}
+			});
+
 			console.log(newlyCreated);
+
+			User.register(newUser, req.body.password, function(err, user) {
+				if (err) {
+					console.log(err);
+					req.flash('error', err.message);
+					return res.redirect('/register');
+				}
+				passport.authenticate('local')(req, res, function() {
+					if (user.user_role === 'Admin') {
+						req.flash('success', 'Welcome to E.M.S' + user.username);
+						res.redirect('/homeadmin');
+					} else if (user.user_role === 'HOD') {
+						req.flash('success', 'Welcome to E.M.S' + user.username);
+						res.redirect('/homebasic');
+					} else if (user.user_role === 'HR') {
+						req.flash('success', 'Welcome to E.M.S' + user.username);
+						res.redirect('/homebasic');
+					} else {
+						req.flash('success', 'Welcome to E.M.S ' + user.username);
+						res.redirect('/homeemployee');
+					}
+				});
+			});
 		}
 	});
 });
@@ -88,7 +92,9 @@ router.get('/login', function(req, res) {
 router.post('/login', function(req, res) {
 	User.findOne({ username: req.body.username }, function(err, user) {
 		if (err) {
-			res.redirect('back');
+			console.log(err);
+			req.flash('error', err.message);
+			res.redirect('/');
 		} else {
 			if (user != null && user.company_name === req.body.company_name) {
 				if (user.user_role === 'Admin') {
@@ -109,7 +115,8 @@ router.post('/login', function(req, res) {
 					});
 				}
 			} else {
-				res.redirect('back');
+				req.flash('error', 'Oops something went wrong please try again');
+				res.redirect('/');
 			}
 		}
 	});

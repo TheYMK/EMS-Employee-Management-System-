@@ -52,7 +52,7 @@ router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 			console.log(newlyCreated);
 			var pwd = '2020' + newlyCreated.passport_no;
 			var pwdUpdate = { password: pwd };
-			Employee.findByIdAndUpdate(newlyCreated._id, pwdUpdate, function(err, updated) {
+			Employee.findByIdAndUpdate(newlyCreated._id, pwdUpdate, function(err, emp) {
 				if (err) {
 					console.log(err);
 					res.redirect('back');
@@ -61,8 +61,16 @@ router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 						username: newlyCreated.employee_id,
 						user_email: newlyCreated.email,
 						user_role: newlyCreated.designation,
-						company_name: newlyCreated.company
+						company_name: newlyCreated.company,
+						company: {
+							id: req.user.company.id
+						},
+						employee: {
+							id: emp.id
+						}
 					});
+
+					// newUser.employees.push(updated);
 
 					User.register(newUser, pwd, function(err, user) {
 						if (err) {

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var passpoerLocalMongoose = require('passport-local-mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
+var Employee = require('./employee');
 
 var UserSchema = new mongoose.Schema({
 	username: String,
@@ -13,9 +14,33 @@ var UserSchema = new mongoose.Schema({
 	company_type: String,
 	company_city: String,
 	company_size: String,
-	company_description: String
+	company_description: String,
+	company: {
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Company'
+		}
+	},
+	employee: {
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Employee'
+		}
+	}
 });
 
-UserSchema.plugin(passpoerLocalMongoose);
+UserSchema.pre('remove', async function(next) {
+	try {
+		await Employee.remove({
+			_id: {
+				$in: this.employees
+			}
+		});
+	} catch (err) {
+		next(err);
+	}
+});
+
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);

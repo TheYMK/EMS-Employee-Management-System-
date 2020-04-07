@@ -1,18 +1,22 @@
+
+
 ================================================================================================================
                                     ****          INDEX ROUTES          ****
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                               
 SHOW            /register            GET         show register form                     N/A
                 /register            POST        handle register logic                  User.register()  
 SHOW            /login               GET         show login form                        N/A
                 /login               POST        handle login logic                     N/A
 
 ================================================================================================================
-                                    ****          ADMIN ROUTES          ****
+                                    ****          ADMIN HOME PAGE ROUTES          ****
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
 INDEX           /homeadmin           GET        render admin home page                  User.find(), Company.find()
 
 
@@ -21,6 +25,8 @@ INDEX           /homeadmin           GET        render admin home page          
 ================================================================================================================
 Name            Path                            Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+
 INDEX           /homeadmin/departments          GET         list all departments                   Department.find()
 NEW             /homeadmin/departments/new      GET         show a new department form             N/A
 CREATE          /homeadmin/departments          POST        create a new department                Department.create()
@@ -35,6 +41,8 @@ DELETE          /homeadmin/departments/:id      DELETE      delete a particular 
 ================================================================================================================
 Name            Path                            Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+
 INDEX           /homeadmin/employees            GET         list all employees                       Employee.find()
 NEW             /homeadmin/employees/new        GET         show a new employees form                N/A
 CREATE          /homeadmin/employees            POST        create a new employee                    Employee.create()
@@ -64,6 +72,8 @@ DESTROY         /blogs/:id           DELETE     Delete a particular blog        
 ================================================================================================================
 Name            Path                                            Verb        Purpose                      Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+
 CREATE          /homeadmin/blogs/:id/comments                   POST       Create a new comment          Comment.create() 
 DESTROY         /homeadmin/blogs/:id/comments/:comment_id       DELETE     Delete a particular comment   Comment.findByIdAndRemove()
 
@@ -73,6 +83,8 @@ DESTROY         /homeadmin/blogs/:id/comments/:comment_id       DELETE     Delet
 ================================================================================================================
 Name            Path                              Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+
 INDEX           /homeadmin/projects               GET        list all projects                       Project.find()
 NEW             /homeadmin/projects/new           GET        Show a new project form                 N/A
 CREATE          /homeadmin/projects               POST       Create a new project                    Project.create()
@@ -87,7 +99,27 @@ DESTROY         /homeadmin/projects/:id           DELETE     Delete a particular
 ================================================================================================================
 Name            Path                              Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+
 SHOW            /homeadmin/companies/:id            GET        Show info about one specific company    Company.findById()
 EDIT            /homeadmin/companies/:id/edit       GET        Show edit form of one company           Company.findById()
 UPDATE          /homeadmin/companies/:id            PUT        Update a particular company             Company.findByIdAndUpdate()
 DESTROY         /homeadmin/companies/:id            DELETE     Delete a particular company             Company.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          Employee HOME PAGE ROUTES          ****
+================================================================================================================
+Name            Path                 Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+INDEX           /homeemployee        GET        render admin home page                  Employee.findById()
+
+
+================================================================================================================
+                                    ****          DEPARTMENTS ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+SHOW            /homeemployee/departments/:id    GET         show info about one specific dept      Department.findById()
