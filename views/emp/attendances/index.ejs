@@ -1,0 +1,103 @@
+<%- include("../../partials/header") %>
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %>
+					-
+					<%= currentUser.user_role%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="main">
+					<h3>Calendar</h3>
+				</header>
+
+				<div>
+					<iframe
+						src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23f56a6a&amp;ctz=Africa%2FNairobi&amp;title=E.M.S&amp;showPrint=0&amp;showDate=1&amp;showTz=1&amp;showCalendars=0&amp;showTabs=0"
+						style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+				</div>
+
+				<hr class="major" />
+
+				<div class="card text-center">
+					<div class="card-header">
+						Attendances
+					</div>
+					<div class="card-body">
+						<% if(typeof employee.attendances !== 'undefined'){ %>
+						<h5 class="card-title" style="font-size: 30px;">Count: <%= employee.attendances.length%></h5>
+						<% }else { %>
+						<h5 class="card-title" style="font-size: 30px;">Count: 0</h5>
+						<% } %>
+
+						<p class="card-text">A salary payment request will be sent to HRs of your department after 30
+							attendances</p>
+						<form action="/homeemployee/employees/<%=employee._id%>/attendances?_method=PUT" method="POST">
+							<button class="button primary">Mark Attendance</button>
+						</form>
+					</div>
+					<div class="card-footer text-muted">
+						<%= datenow %>
+					</div>
+				</div>
+
+				<hr class="major" />
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Number</th>
+								<th>Date</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<% employee.attendances.forEach(function(attendance){ %>
+							<tr>
+								<td><%= employee.attendances.indexOf(attendance) + 1 %></td>
+								<td><%= attendance.date %></td>
+							</tr>
+							<% }) %>
+
+						</tbody>
+					</table>
+				</div>
+
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/emp_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

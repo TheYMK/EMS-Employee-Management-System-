@@ -68,3 +68,4 @@ Project: {
 }
 
 <!-- TO FIX PROJECT DELETION ON DEPARTMENT DELETION: push each new project to projects array inside departmentSchema -->
+<!-- Push each new attendances to an array if the length of the array exceed 30 push the actual employee to a database that will record employees that should be paid -->

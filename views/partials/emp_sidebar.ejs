@@ -14,13 +14,13 @@
                 <h2>Menu</h2>
             </header>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Attendances</a></li>
+                <li><a href="/homeemployee">Home</a></li>
+                <li><a href="/homeemployee/employees/<%=currentUser.employee.id%>/attendances">Attendances</a></li>
                 <li><a href="/homeemployee/departments/<%=currentUser.department.id%>">View Department</a></li>
                 <li>
                     <span class="opener">Project</span>
                     <ul>
-                        <a href="#">View All</a>
+                        <a href="/homeemployee/projects">View All</a>
                     </ul>
                 </li>
                 <li>
@@ -38,7 +38,7 @@
                 <li>
                     <span class="opener">Payrolls</span>
                     <ul>
-                        <li><a href="#">Payroll report</a></li>
+                        <li><a href="/homeemployee/employees/<%=currentUser.employee.id%>/payrolls">Payroll report</a></li>
                     </ul>
                 </li>
                 <li>

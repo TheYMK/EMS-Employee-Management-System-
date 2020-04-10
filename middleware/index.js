@@ -55,7 +55,21 @@ middlewareObj.isLoginAsAdmin = function(req, res, next) {
 	}
 
 	req.flash('error', 'Only Admin allowed to see this page');
-	res.redirect('back');
+	res.redirect('/login');
+};
+
+middlewareObj.isLoggedAsEmployee = function(req, res, next) {
+	if (
+		req.isAuthenticated() &&
+		req.user.user_role !== 'Admin' &&
+		req.user.user_role !== 'HR' &&
+		req.user.user_role !== 'HOD'
+	) {
+		return next();
+	}
+
+	req.flash('error', 'Only Employee allowed to see this page');
+	res.redirect('/login');
 };
 
 middlewareObj.isLoggedIn = function(req, res, next) {

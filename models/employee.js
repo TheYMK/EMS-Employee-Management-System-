@@ -31,8 +31,12 @@ var employeeSchema = new mongoose.Schema({
 	company: String,
 	type_of_employee: String,
 	qualification: String,
-	attendance: String,
-	password: String
+	password: String,
+	attendances: [
+		{
+			date: String
+		}
+	]
 });
 // var Emp = mongoose.model('Employee', employeeSchema);
 

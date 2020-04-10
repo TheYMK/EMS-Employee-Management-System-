@@ -57,6 +57,7 @@ DELETE          /homeadmin/employees/:id        DELETE      delete a particular 
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
+                                            <!-- Admin -->
 INDEX           /blogs               GET        list all blogs                          Blog.find()
 NEW             /blogs/new           GET        Show a new blog form                    N/A
 CREATE          /blogs               POST       Create a new blog                       Blog.create()
@@ -123,3 +124,46 @@ Name            Path                            Verb        Purpose             
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Emp -->
 SHOW            /homeemployee/departments/:id    GET         show info about one specific dept      Department.findById()
+
+================================================================================================================
+                                    ****          ATTENDANCES ROUTES          ****
+================================================================================================================
+Name            Path                                          Verb        Purpose                           Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+INDEX           /homeemployee/employees/:id/attendances       GET         render index page                 
+UPDATE          /homeemployee/employees/:id/attendances       PUT         update employee attendances       
+
+
+================================================================================================================
+                                    ****          PAYROLLS ROUTES          ****
+================================================================================================================
+Name            Path                                          Verb        Purpose                           Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+INDEX           /homeemployee/employees/:id/payrolls           GET         display all payrolls             Payrolls.find()     
+
+
+================================================================================================================
+                                    ****          PROJECTS ROUTES          ****
+================================================================================================================
+Name            Path                              Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+
+INDEX           /homeemployee/projects             GET        list all projects                       Project.find()
+SHOW            /homeemployee/projects/:id           GET        Show info about one specific project    Project.findById()
+
+================================================================================================================
+                                    ****          BLOGS ROUTES          ****
+================================================================================================================
+Name            Path                 Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+INDEX           /blogs               GET        list all blogs                          Blog.find()
+NEW             /blogs/new           GET        Show a new blog form                    N/A
+CREATE          /blogs               POST       Create a new blog                       Blog.create()
+SHOW            /blogs/:id           GET        Show info about one specific blog       Blog.findById()
+EDIT            /blogs/:id/edit      GET        Show edit form of one blog              Blog.findById()
+UPDATE          /blogs/:id           PUT        Update a particular blog                Blog.findByIdAndUpdate()
+DESTROY         /blogs/:id           DELETE     Delete a particular blog                Blog.findByIdAndRemove()

@@ -25,7 +25,24 @@ router.get('/homeemployee/departments/:id', middleware.isLoggedIn, function(req,
 				req.flash('error', err.message);
 				res.redirect('back');
 			} else {
-				res.render('emp/departments/show', { department: foundDepartment });
+				Employee.find({}, function(err, allEmployees) {
+					if (err) {
+						return console.log(err);
+					}
+
+					Project.find({}, function(err, allProjects) {
+						if (err) {
+							return console.log(err);
+						} else {
+							res.render('emp/departments/show', {
+								dept: foundDepartment,
+								employee: foundEmployee,
+								employees: allEmployees,
+								projects: allProjects
+							});
+						}
+					});
+				});
 			}
 		});
 	});

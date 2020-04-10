@@ -8,16 +8,24 @@ var Department = require('../../models/department');
 var expressSanitizer = require('express-sanitizer');
 var Employee = require('../../models/employee');
 var Project = require('../../models/project');
+var Payroll = require('../../models/payroll');
 var middleware = require('../../middleware');
 
-// INDEX - employee home page
-router.get('/homeemployee', middleware.isLoggedIn, function(req, res) {
-	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
+router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedIn, function(req, res) {
+	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
+			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			res.render('emp/index', { employee: foundEmployee });
+			Payroll.find({}, function(err, allPayroll) {
+				if (err) {
+					console.log(err);
+					res.redirect('back');
+				} else {
+					res.render('emp/payrolls/index', { employee: foundEmployee, payrolls: allPayroll });
+				}
+			});
 		}
 	});
 });

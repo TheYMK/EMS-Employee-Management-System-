@@ -17,6 +17,7 @@ var express = require('express'),
 	Blog = require('./models/blog'),
 	Comment = require('./models/comment'),
 	Project = require('./models/project'),
+	Payroll = require('./models/payroll'),
 	session = require('express-session');
 
 //routes importations
@@ -30,6 +31,9 @@ var commentsRoutes = require('./routes/admin/comments');
 var projectsRoutes = require('./routes/admin/projects');
 var companiesRoutes = require('./routes/admin/companies');
 var emp_departmentRoutes = require('./routes/employee/departments');
+var emp_attendances = require('./routes/employee/attendances');
+var emp_payrolls = require('./routes/employee/payrolls');
+var emp_projects = require('./routes/employee/projects');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
@@ -83,6 +87,9 @@ app.use(commentsRoutes);
 app.use(projectsRoutes);
 app.use(companiesRoutes);
 app.use(emp_departmentRoutes);
+app.use(emp_attendances);
+app.use(emp_payrolls);
+app.use(emp_projects);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================
