@@ -25,7 +25,7 @@
 				</header>
 
 				<div>
-					<a href="/homeadmin/blogs/new" class="button primary">Post Article</a>
+					<a href="/blogs/new" class="button primary">Post Article</a>
 				</div>
 
 				<div class="row text-center" style="display: flex; flex-wrap: wrap;">
@@ -37,7 +37,7 @@
 								<div class="card-body">
 									<h5 class="card-title"><%=blog.title%></h5>
 									<p class="card-text"><%=blog.content.substring(0,100)%>...</p>
-									<a href="/homeadmin/blogs/<%=blog._id%>" class="button">Read More</a>
+									<a href="/blogs/<%=blog._id%>" class="button">Read More</a>
 								</div>
 								<div class="card-footer">
 									<small class="text-muted">Posted on <%=blog.createdAt.toDateString()%></small>
@@ -56,7 +56,12 @@
 	</div>
 
 	<!-- Sidebar -->
-	<%- include("../../partials/sidebar") %>
+	<% if(currentUser.user_role === 'Admin'){ %>
+		<%- include("../../partials/sidebar") %>
+	<% }else { %>
+		<%- include("../../partials/emp_sidebar") %>
+	<% } %>
+	
 
 </div>
 

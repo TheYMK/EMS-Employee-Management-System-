@@ -11,6 +11,15 @@ var Project = require('../../models/project');
 var Payroll = require('../../models/payroll');
 var middleware = require('../../middleware');
 
+var allBlogs;
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
+
 router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
@@ -23,7 +32,11 @@ router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedIn, functi
 					console.log(err);
 					res.redirect('back');
 				} else {
-					res.render('emp/payrolls/index', { employee: foundEmployee, payrolls: allPayroll });
+					res.render('emp/payrolls/index', {
+						employee: foundEmployee,
+						payrolls: allPayroll,
+						blogs: allBlogs
+					});
 				}
 			});
 		}

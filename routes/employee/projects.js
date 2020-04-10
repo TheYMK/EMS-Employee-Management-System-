@@ -11,6 +11,15 @@ var Project = require('../../models/project');
 var Payroll = require('../../models/payroll');
 var middleware = require('../../middleware');
 
+var allBlogs;
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
+
 var currentEmployee;
 // INDEX - list all projects
 router.get('/homeemployee/projects', middleware.isLoggedIn, function(req, res) {
@@ -27,7 +36,11 @@ router.get('/homeemployee/projects', middleware.isLoggedIn, function(req, res) {
 					res.redirect('back');
 				} else {
 					currentEmployee = foundEmployee;
-					res.render('emp/projects/index', { projects: allProjects, employee: foundEmployee });
+					res.render('emp/projects/index', {
+						projects: allProjects,
+						employee: foundEmployee,
+						blogs: allBlogs
+					});
 				}
 			});
 		}
@@ -55,7 +68,8 @@ router.get('/homeemployee/projects/:id', middleware.isLoggedIn, function(req, re
 					res.render('emp/projects/show', {
 						project: foundProject,
 						employees: allEmployees,
-						employee: currentEmployee
+						employee: currentEmployee,
+						blogs: allBlogs
 					});
 				}
 			});

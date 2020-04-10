@@ -10,6 +10,15 @@ var Employee = require('../../models/employee');
 var Project = require('../../models/project');
 var middleware = require('../../middleware');
 
+var allBlogs;
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
+
 // SHOW - show info about one specific dept
 router.get('/homeemployee/departments/:id', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
@@ -38,7 +47,8 @@ router.get('/homeemployee/departments/:id', middleware.isLoggedIn, function(req,
 								dept: foundDepartment,
 								employee: foundEmployee,
 								employees: allEmployees,
-								projects: allProjects
+								projects: allProjects,
+								blogs: allBlogs
 							});
 						}
 					});

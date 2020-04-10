@@ -48,11 +48,34 @@
                         <a href="#">Apply For Leave</a>
                     </ul>
                 </li>
-                <li><a href="#">News</a></li>
+                <li><a href="/blogs">News</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
+
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>Latest News</h2>
+            </header>
+            <div class="mini-posts">
+                <% blogs.slice(-3).forEach(function(blog){ %>
+                <% if(blog.ownedBy === currentUser.company_name) { %>
+                <article>
+                    <a href="/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
+                    <p><%=blog.content.substring(0,100)%>...</p>
+                </article>
+                <% } %>
+
+                <% }) %>
+            </div>
+            <ul class="actions">
+                <li><a href="/blogs" class="button">View All</a></li>
+            </ul>
+        </section>
+
+        <!-- Section -->
 
         <section>
             <header class="major">

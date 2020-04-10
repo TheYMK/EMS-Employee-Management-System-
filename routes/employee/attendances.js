@@ -18,6 +18,15 @@ var yyyy = today.getFullYear();
 
 today = dd + '/' + mm + '/' + yyyy;
 
+var allBlogs;
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
+
 // INDEX - render index page to show options for attendances
 router.get('/homeemployee/employees/:id/attendances', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
@@ -29,7 +38,8 @@ router.get('/homeemployee/employees/:id/attendances', middleware.isLoggedIn, fun
 
 		res.render('emp/attendances/index', {
 			employee: foundEmployee,
-			datenow: today
+			datenow: today,
+			blogs: allBlogs
 		});
 	});
 });

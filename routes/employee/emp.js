@@ -10,6 +10,15 @@ var Employee = require('../../models/employee');
 var Project = require('../../models/project');
 var middleware = require('../../middleware');
 
+var allBlogs;
+Blog.find({}, function(err, blogs) {
+	if (err) {
+		console.log(err);
+	} else {
+		allBlogs = blogs;
+	}
+});
+
 // INDEX - employee home page
 router.get('/homeemployee', middleware.isLoggedIn, function(req, res) {
 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
@@ -17,7 +26,7 @@ router.get('/homeemployee', middleware.isLoggedIn, function(req, res) {
 			console.log(err);
 			res.redirect('back');
 		} else {
-			res.render('emp/index', { employee: foundEmployee });
+			res.render('emp/index', { employee: foundEmployee, blogs: allBlogs });
 		}
 	});
 });

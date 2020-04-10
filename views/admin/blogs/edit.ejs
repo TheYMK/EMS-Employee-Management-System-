@@ -34,7 +34,7 @@
 				<hr class="major" />
 
 				<!-- Form -->
-				<form action="/homeadmin/blogs/<%= blog._id %>?_method=PUT" method="POST">
+				<form action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputTitle">Title</label>
@@ -61,8 +61,11 @@
 		</div>
 	</div>
 
-	<!-- Sidebar -->
-	<%- include("../../partials/sidebar") %>
+	<% if(currentUser.user_role === 'Admin'){ %>
+		<%- include("../../partials/sidebar") %>
+	<% }else { %>
+		<%- include("../../partials/emp_sidebar") %>
+	<% } %>
 
 </div>
 

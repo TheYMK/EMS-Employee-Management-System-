@@ -19,7 +19,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all blogs
-router.get('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
+router.get('/blogs', middleware.isLoggedIn, function(req, res) {
 	Blog.find({ ownedBy: req.user.company_name }, function(err, allBlogs) {
 		if (err) {
 			console.log(err);
@@ -31,12 +31,12 @@ router.get('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
 });
 
 // NEW - Show a new blog form
-router.get('/homeadmin/blogs/new', middleware.isLoggedIn, function(req, res) {
+router.get('/blogs/new', middleware.isLoggedIn, function(req, res) {
 	res.render('admin/blogs/new', { blogs: allBlogs });
 });
 
 // CREATE - Create a new blog
-router.post('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
+router.post('/blogs', middleware.isLoggedIn, function(req, res) {
 	var blogTitle = req.body.blogTitle;
 	var blogImage = req.body.blogImage;
 	var blogContent = req.sanitize(req.body.blogContent);
@@ -53,13 +53,13 @@ router.post('/homeadmin/blogs', middleware.isLoggedIn, function(req, res) {
 			req.flash('error', err.message);
 		} else {
 			console.log(newlyCreated);
-			res.redirect('/homeadmin/blogs');
+			res.redirect('/blogs');
 		}
 	});
 });
 
 // SHOW - Show info about one specific blog
-router.get('/homeadmin/blogs/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/blogs/:id', middleware.isLoggedIn, function(req, res) {
 	Blog.findById(req.params.id).populate('comments').exec(function(err, foundBlog) {
 		if (err || !foundBlog) {
 			req.flash('error', err.message);
@@ -71,7 +71,7 @@ router.get('/homeadmin/blogs/:id', middleware.isLoggedIn, function(req, res) {
 });
 
 // EDIT - Show edit form of one blog
-router.get('/homeadmin/blogs/:id/edit', middleware.checkBlogOwnership, function(req, res) {
+router.get('/blogs/:id/edit', middleware.checkBlogOwnership, function(req, res) {
 	Blog.findById(req.params.id, function(err, foundBlog) {
 		if (err || !foundBlog) {
 			req.flash('error', 'Blog not found');
@@ -83,26 +83,26 @@ router.get('/homeadmin/blogs/:id/edit', middleware.checkBlogOwnership, function(
 });
 
 // UPDATE - Update a particular blog
-router.put('/homeadmin/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
+router.put('/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
 	req.body.blog.content = req.sanitize(req.body.blog.content);
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
 		if (err) {
 			req.flash('error', err.message);
-			res.redirect('/homeadmin/blogs');
+			res.redirect('/blogs');
 		} else {
-			res.redirect('/homeadmin/blogs/' + req.params.id);
+			res.redirect('/blogs/' + req.params.id);
 		}
 	});
 });
 
 // DESTROY - Delete a particular blog
-router.delete('/homeadmin/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
+router.delete('/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
 	Blog.findByIdAndRemove(req.params.id, function(err, blog) {
 		if (err) {
-			res.redirect('/homeadmin/blogs');
+			res.redirect('/blogs');
 		} else {
 			blog.remove();
-			res.redirect('/homeadmin/blogs');
+			res.redirect('/blogs');
 		}
 	});
 });

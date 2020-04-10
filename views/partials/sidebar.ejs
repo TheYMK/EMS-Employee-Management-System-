@@ -30,7 +30,7 @@
                         <li><a href="/homeadmin/employees">View All</a></li>
                     </ul>
                 </li>
-                <li><a href="/homeadmin/blogs">News</a></li>
+                <li><a href="/blogs">News</a></li>
                 <li>
                     <span class="opener">Projects</span>
                     <ul>
@@ -54,7 +54,7 @@
                 <% blogs.slice(-3).forEach(function(blog){ %>
                 <% if(blog.ownedBy === currentUser.company_name) { %>
                 <article>
-                    <a href="/homeadmin/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
+                    <a href="/blogs/<%=blog._id%>" class="image"><img src="<%=blog.image%>" alt="" /></a>
                     <p><%=blog.content.substring(0,100)%>...</p>
                 </article>
                 <% } %>
@@ -62,7 +62,7 @@
                 <% }) %>
             </div>
             <ul class="actions">
-                <li><a href="/homeadmin/blogs" class="button">View All</a></li>
+                <li><a href="/blogs" class="button">View All</a></li>
             </ul>
         </section>
 

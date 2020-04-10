@@ -34,7 +34,7 @@
 				<hr class="major" />
 
 				<!-- Form -->
-				<form action="/homeadmin/blogs" method="POST">
+				<form action="/blogs" method="POST">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputTitle">Title</label>
@@ -59,7 +59,11 @@
 	</div>
 
 	<!-- Sidebar -->
-	<%- include("../../partials/sidebar") %>
+	<% if(currentUser.user_role === 'Admin'){ %>
+		<%- include("../../partials/sidebar") %>
+	<% }else { %>
+		<%- include("../../partials/emp_sidebar") %>
+	<% } %>
 
 </div>
 
