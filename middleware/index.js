@@ -49,9 +49,11 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
 	}
 };
 
-middlewareObj.isLoginAsAdmin = function(req, res, next) {
-	if (req.isAuthenticated() && req.user.user_role === 'Admin') {
-		return next();
+middlewareObj.isLoggedInAsAdmin = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		if (req.user.user_role === 'Admin') {
+			return next();
+		}
 	}
 
 	req.flash('error', 'Only Admin allowed to see this page');
@@ -59,13 +61,10 @@ middlewareObj.isLoginAsAdmin = function(req, res, next) {
 };
 
 middlewareObj.isLoggedAsEmployee = function(req, res, next) {
-	if (
-		req.isAuthenticated() &&
-		req.user.user_role !== 'Admin' &&
-		req.user.user_role !== 'HR' &&
-		req.user.user_role !== 'HOD'
-	) {
-		return next();
+	if (req.isAuthenticated()) {
+		if (req.user.user_role !== 'Admin' && req.user.user_role !== 'HR' && req.user.user_role !== 'HOD') {
+			return next();
+		}
 	}
 
 	req.flash('error', 'Only Employee allowed to see this page');

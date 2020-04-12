@@ -20,7 +20,7 @@ Blog.find({}, function(err, blogs) {
 	}
 });
 
-router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);

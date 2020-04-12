@@ -20,7 +20,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // SHOW - show info about one specific dept
-router.get('/homeemployee/departments/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee/departments/:id', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);

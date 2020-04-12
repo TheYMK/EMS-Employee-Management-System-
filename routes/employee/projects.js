@@ -22,7 +22,7 @@ Blog.find({}, function(err, blogs) {
 
 var currentEmployee;
 // INDEX - list all projects
-router.get('/homeemployee/projects', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee/projects', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
@@ -48,7 +48,7 @@ router.get('/homeemployee/projects', middleware.isLoggedIn, function(req, res) {
 });
 
 // SHOW - show info about one specific project
-router.get('/homeemployee/projects/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee/projects/:id', middleware.isLoggedAsEmployee, function(req, res) {
 	Project.findById(req.params.id, function(err, foundProject) {
 		if (err) {
 			console.log(err);

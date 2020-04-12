@@ -18,7 +18,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all employees
-router.get('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/employees', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.find({}, function(err, allEmployees) {
 		if (err) {
 			console.log(err);
@@ -30,7 +30,7 @@ router.get('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 });
 
 // NEW - show a new employees form
-router.get('/homeadmin/employees/new', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/employees/new', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.find({}, function(err, allDepartment) {
 		if (err) {
 			console.log(err);
@@ -42,7 +42,7 @@ router.get('/homeadmin/employees/new', middleware.isLoggedIn, function(req, res)
 });
 
 // CREATE - create a new employee
-router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
+router.post('/homeadmin/employees', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.create(req.body.employee, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
@@ -97,7 +97,7 @@ router.post('/homeadmin/employees', middleware.isLoggedIn, function(req, res) {
 });
 
 // SHOW - show info about one specific employee
-router.get('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/employees/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
@@ -110,7 +110,7 @@ router.get('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res)
 });
 
 // EDIT - show edit form of one employee
-router.get('/homeadmin/employees/:id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/employees/:id/edit', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err || !foundEmployee) {
 			console.log(err);
@@ -135,7 +135,7 @@ router.get('/homeadmin/employees/:id/edit', middleware.isLoggedIn, function(req,
 });
 
 // UPDATE - update a particular employee
-router.put('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
+router.put('/homeadmin/employees/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.findByIdAndUpdate(req.params.id, req.body.employee, function(err, updatedEmployee) {
 		if (err) {
 			console.log(err);
@@ -171,7 +171,7 @@ router.put('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res)
 });
 
 // DELETE - delete a particular employee
-router.delete('/homeadmin/employees/:id', middleware.isLoggedIn, function(req, res) {
+router.delete('/homeadmin/employees/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Employee.findByIdAndRemove(req.params.id, function(err, deletedEmployee) {
 		if (err) {
 			console.log(err);

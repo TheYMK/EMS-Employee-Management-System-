@@ -20,7 +20,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - employee home page
-router.get('/homeemployee', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);

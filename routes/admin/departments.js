@@ -19,7 +19,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all departments
-router.get('/homeadmin/departments', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/departments', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.find({}, function(err, allDepartments) {
 		if (err) {
 			req.flash('error', err.message);
@@ -31,12 +31,12 @@ router.get('/homeadmin/departments', middleware.isLoggedIn, function(req, res) {
 });
 
 // NEW - show a new department form
-router.get('/homeadmin/departments/new', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/departments/new', middleware.isLoggedInAsAdmin, function(req, res) {
 	res.render('admin/departments/new', { blogs: allBlogs });
 });
 
 // CREATE - create a new department
-router.post('/homeadmin/departments', middleware.isLoggedIn, function(req, res) {
+router.post('/homeadmin/departments', middleware.isLoggedInAsAdmin, function(req, res) {
 	var name = req.body.department_name;
 	var hod = req.body.department_hod;
 	var category = req.body.department_category;
@@ -69,7 +69,7 @@ router.post('/homeadmin/departments', middleware.isLoggedIn, function(req, res) 
 });
 
 // SHOW - show info about one specific dept
-router.get('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.findById(req.params.id).populate('projects').exec(function(err, foundDepartment) {
 		if (err || !foundDepartment) {
 			req.flash('error', err.message);
@@ -101,7 +101,7 @@ router.get('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, re
 });
 
 // EDIT - show edit form of one department
-router.get('/homeadmin/departments/:id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/departments/:id/edit', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.findById(req.params.id, function(err, foundDepartment) {
 		if (err || !foundDepartment) {
 			req.flash('error', 'Department not found');
@@ -113,7 +113,7 @@ router.get('/homeadmin/departments/:id/edit', middleware.isLoggedIn, function(re
 });
 
 // Update - update a particular departments
-router.put('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
+router.put('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.findByIdAndUpdate(req.params.id, req.body.department, function(err, updatedDepartment) {
 		if (err) {
 			req.flash('error', err.message);
@@ -126,7 +126,7 @@ router.put('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, re
 });
 
 // DELETE - delete a particular departments
-router.delete('/homeadmin/departments/:id', middleware.isLoggedIn, function(req, res) {
+router.delete('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.findById(req.params.id, function(err, department) {
 		if (err) {
 			req.flash('error', err.message);

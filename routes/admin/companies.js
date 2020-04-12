@@ -19,7 +19,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // SHOW - show info about one specific company
-router.get('/homeadmin/companies/:id', function(req, res) {
+router.get('/homeadmin/companies/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Company.findById(req.params.id, function(err, foundCompany) {
 		if (err) {
 			console.log(err);

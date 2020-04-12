@@ -20,7 +20,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all projects
-router.get('/homeadmin/projects', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/projects', middleware.isLoggedInAsAdmin, function(req, res) {
 	Project.find({ company: req.user.company_name }, function(err, allProjects) {
 		if (err) {
 			console.log(err);
@@ -33,7 +33,7 @@ router.get('/homeadmin/projects', middleware.isLoggedIn, function(req, res) {
 });
 
 // NEW - show a new project form
-router.get('/homeadmin/projects/new', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/projects/new', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.find({}, function(err, allDepartments) {
 		if (err) {
 			console.log(err);
@@ -45,7 +45,7 @@ router.get('/homeadmin/projects/new', middleware.isLoggedIn, function(req, res) 
 });
 
 // CREATE - Create a new project
-router.post('/homeadmin/projects', middleware.isLoggedIn, function(req, res) {
+router.post('/homeadmin/projects', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.findOne({ department_name: req.body.project.department }, function(err, foundDepartment) {
 		if (err) {
 			console.log(err);
@@ -71,7 +71,7 @@ router.post('/homeadmin/projects', middleware.isLoggedIn, function(req, res) {
 });
 
 // SHOW - Show info about one specific project
-router.get('/homeadmin/projects/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/projects/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Project.findById(req.params.id, function(err, foundProject) {
 		if (err) {
 			console.log(err);
@@ -100,7 +100,7 @@ router.get('/homeadmin/projects/:id', middleware.isLoggedIn, function(req, res) 
 });
 
 // EDIT - show info about one specific project
-router.get('/homeadmin/projects/:id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin/projects/:id/edit', middleware.isLoggedInAsAdmin, function(req, res) {
 	Project.findById(req.params.id, function(err, foundProject) {
 		if (err) {
 			console.log(err);
@@ -123,7 +123,7 @@ router.get('/homeadmin/projects/:id/edit', middleware.isLoggedIn, function(req, 
 });
 
 // UPDATE - Update a particular project
-router.put('/homeadmin/projects/:id', middleware.isLoggedIn, function(req, res) {
+router.put('/homeadmin/projects/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Project.findByIdAndUpdate(req.params.id, req.body.project, function(err, updatedProject) {
 		if (err) {
 			console.log(err);
@@ -136,7 +136,7 @@ router.put('/homeadmin/projects/:id', middleware.isLoggedIn, function(req, res) 
 });
 
 // DELETE - Delete a particular project
-router.delete('/homeadmin/projects/:id', middleware.isLoggedIn, function(req, res) {
+router.delete('/homeadmin/projects/:id', middleware.isLoggedInAsAdmin, function(req, res) {
 	Project.findByIdAndRemove(req.params.id, function(err, deletedProject) {
 		if (err) {
 			console.log(err);

@@ -8,7 +8,7 @@ var Department = require('../../models/department');
 var middleware = require('../../middleware');
 
 // INDEX - admin home page
-router.get('/homeadmin', middleware.isLoggedIn, function(req, res) {
+router.get('/homeadmin', middleware.isLoggedInAsAdmin, function(req, res) {
 	Department.find({}, function(err, allDepartments) {
 		if (err) {
 			console.log(err);

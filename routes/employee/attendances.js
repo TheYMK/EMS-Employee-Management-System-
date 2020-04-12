@@ -28,7 +28,7 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - render index page to show options for attendances
-router.get('/homeemployee/employees/:id/attendances', middleware.isLoggedIn, function(req, res) {
+router.get('/homeemployee/employees/:id/attendances', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
@@ -45,7 +45,7 @@ router.get('/homeemployee/employees/:id/attendances', middleware.isLoggedIn, fun
 });
 
 // Update - update employee to set attendances
-router.put('/homeemployee/employees/:id/attendances', middleware.isLoggedIn, function(req, res) {
+router.put('/homeemployee/employees/:id/attendances', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {
 			console.log(err);
