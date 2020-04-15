@@ -107,6 +107,18 @@ DESTROY         /homeadmin/companies/:id            DELETE     Delete a particul
 
 
 ================================================================================================================
+                                    ****          PAYROLLS ROUTES          ****
+================================================================================================================
+Name            Path                          Verb        Purpose                               Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Admin -->
+INDEX           /homeadmin/payrolls           GET         display all payrolls                  Payroll.find() 
+EDIT            /homeadmin/payrolls/:id       GET         display edit form of a payroll        Payroll.findById()
+UPDATE          /homeadmin/payrolls/:id       PUT         update a particular payroll status    Payroll.findByIdAndUpdate()
+DESTROY         /homeadmin/payrolls/:id       DELETE      delete a particular payroll           Payroll.findByIdAndRemove()
+
+
+================================================================================================================
                                     ****          Employee HOME PAGE ROUTES          ****
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
@@ -139,7 +151,7 @@ UPDATE          /homeemployee/employees/:id/attendances       PUT         update
 Name            Path                                          Verb        Purpose                           Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Emp -->
-INDEX           /homeemployee/employees/:id/payrolls           GET         display all payrolls             Payrolls.find()     
+INDEX           /homeemployee/employees/:id/payrolls           GET         display all payrolls             Payroll.find()     
 
 
 ================================================================================================================

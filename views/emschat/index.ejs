@@ -21,19 +21,19 @@
 			<main class="join-main">
 				<form action="/emschat/chatroom" method="GET">
 					<div class="form-control">
-						<label for="username" style="color: #f56a6a;" >Username</label>
+						<label for="username" style="color: #f56a6a;" >Username (full name - designation)</label>
 						<input
 							type="text"
 							name="username"
 							id="username"
-							value="<%=employee.first_name%> <%=employee.last_name%>"
+							value="<%=employee.first_name%> <%=employee.last_name%> - <%=employee.designation%>"
 							required
 						/>
 					</div>
 					<div class="form-control">
 						<label for="room" style="color: #f56a6a;">Room</label>
 						<select name="room" id="room">
-							<option value="<%=department.department_name %>"><%=department.department_name%></option>
+							<option value="<%=department.department_name %> - <%= currentUser.company_name%>"><%=department.department_name%> - <%= currentUser.company_name%></option>
 						</select>
 					</div>
 					<button type="submit" class="button primary fit">Join Chat</button>
