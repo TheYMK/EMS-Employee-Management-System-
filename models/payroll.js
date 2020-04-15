@@ -11,7 +11,10 @@ var payrollSchema = new mongoose.Schema({
 	},
 	start_date: String,
 	end_date: String,
-	status: String
+	status: {
+		type: String,
+		default: 'Pending'
+	}
 });
 
 module.exports = mongoose.model('Payroll', payrollSchema);

@@ -48,7 +48,7 @@
                                         <td><%= payroll.start_date %></td>
                                         <td><%= payroll.end_date %></td>
                                         <td>$<%= employee.salary %></td>
-                                        <td>Pending</td>
+                                        <td><%= payroll.status%></td>
                                     </tr>
                                 <%}%>
                             <% }) %>

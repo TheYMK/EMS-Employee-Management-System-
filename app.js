@@ -1,8 +1,15 @@
 //===========================================================
 //                BASIC CONFIGURATIONS
 //===========================================================
-var express = require('express'),
+const path = require('path'),
+	http = require('http'),
+	express = require('express'),
+	socketio = require('socket.io'),
+	formatMessage = require('./utils/messages'),
+	{ userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/users'),
 	app = express(),
+	server = http.createServer(app),
+	io = socketio(server),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
 	flash = require('connect-flash'),
@@ -22,6 +29,7 @@ var express = require('express'),
 
 //routes importations
 var indexRoutes = require('./routes/index');
+var emschatsRoutes = require('./routes/emschats');
 var adminRoutes = require('./routes/admin/admin');
 var empRoutes = require('./routes/employee/emp');
 var departmentsRoutes = require('./routes/admin/departments');
@@ -52,6 +60,52 @@ app.use(methodOverride('_method'));
 app.use(flash());
 
 // ===========================================================
+//                SOCKET.IO CONFIGURATIONS
+// ===========================================================
+const botName = 'Bot';
+//Run when a client connects
+io.on('connection', (socket) => {
+	socket.on('joinRoom', ({ username, room }) => {
+		const user = userJoin(socket.id, username, room);
+
+		socket.join(user.room);
+
+		// Welcome current user
+		socket.emit('message', formatMessage(botName, 'Welcome to EMS ChatCord!'));
+
+		// Broadcast when a user connects
+		socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined the chat`));
+
+		// Send users and rooms info
+		io.to(user.room).emit('roomUsers', {
+			room: user.room,
+			users: getRoomUsers(user.room)
+		});
+	});
+
+	// Listen for chatMessage
+	socket.on('chatMessage', (msg) => {
+		const user = getCurrentUser(socket.id);
+
+		io.to(user.room).emit('message', formatMessage(user.username, msg));
+	});
+
+	// Runs when client disconnects
+	socket.on('disconnect', () => {
+		const user = userLeave(socket.id);
+
+		if (user) {
+			io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat`));
+			// Send users and rooms info
+			io.to(user.room).emit('roomUsers', {
+				room: user.room,
+				users: getRoomUsers(user.room)
+			});
+		}
+	});
+});
+
+// ===========================================================
 //                PASSPORT CONFIGURATIONS
 // ===========================================================
 app.use(
@@ -78,6 +132,7 @@ app.use(function(req, res, next) {
 //                ROUTES CONFIGURATIONS
 //===========================================================
 app.use(indexRoutes);
+app.use(emschatsRoutes);
 app.use(adminRoutes);
 app.use(empRoutes);
 app.use(departmentsRoutes);
@@ -93,6 +148,7 @@ app.use(emp_projects);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================
-app.listen(3000, function() {
+const PORT = 3000 || process.env.PORT;
+server.listen(PORT, function() {
 	console.log('EMS server is listening for requests...');
 });

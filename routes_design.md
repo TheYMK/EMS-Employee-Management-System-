@@ -1,5 +1,3 @@
-
-
 ================================================================================================================
                                     ****          INDEX ROUTES          ****
 ================================================================================================================
@@ -167,3 +165,12 @@ SHOW            /blogs/:id           GET        Show info about one specific blo
 EDIT            /blogs/:id/edit      GET        Show edit form of one blog              Blog.findById()
 UPDATE          /blogs/:id           PUT        Update a particular blog                Blog.findByIdAndUpdate()
 DESTROY         /blogs/:id           DELETE     Delete a particular blog                Blog.findByIdAndRemove()
+
+================================================================================================================
+                                    ****          CHAT ROUTES          ****
+================================================================================================================
+Name            Path                 Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Emp -->
+INDEX           /emschat            GET         display chat index page                
+SHOW            /emschat/chatroom   GET         show chat room
