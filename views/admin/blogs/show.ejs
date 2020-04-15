@@ -66,7 +66,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <% if(comment.author.username === currentUser.username){ %>
+                                <% if(comment.author.username === blog.author.username){ %>
                                 <h4 class="media-heading"><%=comment.author.username%> - <em>author</em></h4>
                                 <% }else { %>
                                 <h4 class="media-heading"><%=comment.author.username%></h4>

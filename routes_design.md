@@ -55,7 +55,7 @@ DELETE          /homeadmin/employees/:id        DELETE      delete a particular 
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
-                                            <!-- Admin -->
+                                            <!-- Global -->
 INDEX           /blogs               GET        list all blogs                          Blog.find()
 NEW             /blogs/new           GET        Show a new blog form                    N/A
 CREATE          /blogs               POST       Create a new blog                       Blog.create()
@@ -171,6 +171,15 @@ DESTROY         /blogs/:id           DELETE     Delete a particular blog        
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
-                                                <!-- Emp -->
-INDEX           /emschat            GET         display chat index page                
-SHOW            /emschat/chatroom   GET         show chat room
+                                                <!-- Global -->
+INDEX           /emschat            GET         display chat index page                 N/A
+SHOW            /emschat/chatroom   GET         show chat room                          N/A
+
+
+================================================================================================================
+                                    ****          ABOUT US ROUTES          ****
+================================================================================================================
+Name            Path                 Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Global -->
+SHOW           /about            GET         display about us show page               N/A

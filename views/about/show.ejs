@@ -1,0 +1,77 @@
+<%- include("../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+    <div class="inner">
+
+      <!-- Header -->
+      <header id="header">
+        <a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+        <ul class="icons">
+          <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+          <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+        </ul>
+      </header>
+
+      <!-- Content -->
+      <section>
+
+        <header class="major">
+          <h2>The Developer</h2>
+        </header>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="images/about.JPG" alt="" class="image fit" style="width: 50%; margin: auto;">
+          </div>
+          <div class="col-sm-6 mt-3 text-center">
+            
+            <p><strong>First Name:</strong> Kaym | <strong>Last Name:</strong> Kassai <br>
+                <strong>Chinese Name:</strong> 凯义 <br>
+               <strong>Location:</strong> Shanghai, China <br>
+               <strong>Occupation:</strong> Student (grd 2020) <br>
+               <strong>School:</strong> Shanghai Institute Of Technology <br>
+               <strong>Student ID:</strong> 1650400501 <br>
+               <strong>Major:</strong> Software Engineering <br>
+               <strong>Phone Number:</strong> +86-17126619126 <br>
+               <strong>Email:</strong> kaymkassai269@gmail.com <br>
+            </p>
+          </div>
+        </div>
+        
+        <header class="major mt-5">
+          <h2>The Software</h2>
+        </header>
+
+        <p>E.M.S was built to make difficult tasks look easy to handle for everyone.</p>
+
+      </section>
+
+    </div>
+  </div>
+
+   <!-- Sidebar -->
+    <% if(currentUser.user_role === 'Admin'){ %>
+    <%- include("../partials/sidebar") %>
+    <% }else { %>
+        <%- include("../partials/emp_sidebar") %>
+    <% } %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

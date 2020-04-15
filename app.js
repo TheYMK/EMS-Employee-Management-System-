@@ -30,6 +30,7 @@ const path = require('path'),
 //routes importations
 var indexRoutes = require('./routes/index');
 var emschatsRoutes = require('./routes/emschats');
+var aboutRoutes = require('./routes/about');
 var adminRoutes = require('./routes/admin/admin');
 var empRoutes = require('./routes/employee/emp');
 var departmentsRoutes = require('./routes/admin/departments');
@@ -133,6 +134,7 @@ app.use(function(req, res, next) {
 //===========================================================
 app.use(indexRoutes);
 app.use(emschatsRoutes);
+app.use(aboutRoutes);
 app.use(adminRoutes);
 app.use(empRoutes);
 app.use(departmentsRoutes);
