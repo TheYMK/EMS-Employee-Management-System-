@@ -169,7 +169,7 @@ SHOW            /homeemployee/projects/:id           GET        Show info about 
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
-                                                <!-- Emp -->
+                                                <!-- emp -->
 INDEX           /blogs               GET        list all blogs                          Blog.find()
 NEW             /blogs/new           GET        Show a new blog form                    N/A
 CREATE          /blogs               POST       Create a new blog                       Blog.create()
@@ -195,3 +195,18 @@ Name            Path                 Verb        Purpose                        
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Global -->
 SHOW           /about            GET         display about us show page               N/A
+
+
+================================================================================================================
+                                    ****          LEAVES ROUTES          ****
+================================================================================================================
+Name            Path                        Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- emp -->
+INDEX           /homeemployee/leaves/employees/:id       GET        list all leaves                         
+NEW             /homeemployee/leaves/employees/:id/new   GET        Show a new leave form                    
+CREATE          /homeemployee/leaves/employees/:id       POST       Create a new leave                       
+SHOW            /homeemployee/leaves/:id                 GET        Show info about one specific leave       
+EDIT            /homeemployee/leaves/:id/edit            GET        Show edit form of one leave              
+UPDATE          /homeemployee/leaves/:id                 PUT        Update a particular leave                
+DESTROY         /homeemployee/leaves/:id                 DELETE     Delete a particular leave                

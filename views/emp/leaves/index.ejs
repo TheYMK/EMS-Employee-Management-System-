@@ -1,0 +1,90 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2>Leaves Report</h2>
+				</header>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Leave Category</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Reason</th>
+                                <th>Applied on</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+							</tr>
+						</thead>
+						<tbody>
+                            <% leaves.forEach(function(leave){ %>
+                                <% if(leave.employee.id.equals(employee.id)){ %>
+                                    <tr>
+                                        <td><%=leave.category%></td>
+                                        <td><%=leave.start_date%></td>
+                                        <td><%=leave.end_date%></td>
+                                        <td><%=leave.reason%></td>
+                                        <td><%=leave.apply_date.toDateString()%></td>
+                                        <td><%=leave.status%></td>
+                                        <td>
+											<% if(leave.status === 'Pending'){ %>
+												<form action="/homeemployee/leaves/<%=leave._id%>?_method=DELETE" method="POST" class="delete-form">
+													<button class="button primary small">Cancel</button>
+												</form>
+											<% }else { %>
+												<button class="button primary small">Remove</button>
+											<% } %>
+											
+										</td>
+                                    </tr>
+                                <% } %>
+                            <% }) %>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/emp_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

@@ -33,7 +33,6 @@
 						<strong>Department: </strong><%=employee.department%> <br>
 						<strong>Contract Type: </strong><%=employee.type_of_employee%> <br>
 						<strong>Joining Date: </strong><%=employee.joining_date%> <br>
-						<strong>Attendances: </strong><%=employee.attendances.length%>
 					</p>
 					<div class="d-flex justify-content-center">
 						<ul class="actions">
@@ -50,43 +49,63 @@
 			<!-- Section -->
 			<section>
 				<header class="major">
-					<h2>Services</h2>
+					<h2>Overview</h2>
 				</header>
-				<div class="features">
-					<article>
-						<span class="icon fa-gem"></span>
-						<div class="content">
-							<h3>Improve Workforce Management Efficiencies</h3>
-							<p>E.M.S platform works for you, not against you, you’ll never need to import multiple files
-								and re-key data across different platforms.</p>
+
+				<div class="card-columns">
+					
+					<div class="card text-white bg-danger mb-3">
+						<div class="card-header" style="font-weight: 800;"">Projects</div>
+						<div class="card-body">
+						  
+							<p class="card-text" style="font-size: 20px;"><strong style="color: white;">Assigned Projects:</strong> <%=projects.length%> <br>
+								<strong style="color: white;">Team:</strong> <%=team.length %> employees
+							</p>
 						</div>
-					</article>
-					<article>
-						<span class="icon solid fa-handshake"></span>
-						<div class="content">
-							<h3>Employee Engagement</h3>
-							<p>Tools such as Performance Management provides a modern way to track and evaluate employee
-								development. You’re able to work with employees to establish goals, make them feel
-								valuable and develop a path for their success.</p>
+					</div>
+
+					<div class="card text-white bg-info mb-3">
+						<div class="card-header" style="font-weight: 800;"">Attendances</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Count: </strong><%=employee.attendances.length%> <br>
+								<strong style="color: white;">Last record: </strong><%=employee.attendances[employee.attendances.length -1].date%>
+							</p>
 						</div>
-					</article>
-					<article>
-						<span class="icon solid fa-lock"></span>
-						<div class="content">
-							<h3>Securing Employee Information</h3>
-							<p>E.M.S system provide you with specific security measures, multi-factor authentication and
-								data encryption just to name a few, to keep your employees’ information safe.</p>
+					</div>
+					
+					<div class="card text-white bg-dark mb-3">
+						<div class="card-header" style="font-weight: 800;"">Payrolls</div>
+						<div class="card-body" >
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Pending:</strong> <br>
+								<strong style="color: white;">Payed:</strong>
+							</p>
 						</div>
-					</article>
-					<article>
-						<span class="icon solid fa-chart-line"></span>
-						<div class="content">
-							<h3>HR Data Analytics & Metrics</h3>
-							<p>With data analytics, solutions are developed and results are measured to not only impact
-								your bottom line but help you gain more exposure to your C-Suite.</p>
+					</div>
+
+					<div class="card text-white bg-success mb-3">
+						<div class="card-header" style="font-weight: 800;"">Leaves</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Pending:</strong> <%=pendingLeaves%> <br>
+								<strong style="color: white;">Approved:</strong> <%=approvedLeaves%>
+							</p>
 						</div>
-					</article>
+					</div>
+
+					<div class="card text-white bg-primary mb-3">
+						<div class="card-header" style="font-weight: 800;"">Tasks</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Recent:</strong>
+							</p>
+						</div>
+					</div>
+
 				</div>
+
+				
 			</section>
 
 			<!-- Section -->

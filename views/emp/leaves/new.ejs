@@ -1,0 +1,82 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2>Leave Application</h2>
+				</header>
+
+                <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis
+                    dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet.
+                    Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada
+                    et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget
+                    turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.
+                
+                </p>
+
+                <!-- Form -->
+                <form action="/homeemployee/leaves/employees/<%=employee._id%>" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label for="inputCat">Category</label>
+                          <input type="text" class="form-control" id="inputCat" name="category">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputDate">Start Date</label>
+                            <input type="date" class="form-control" id="inputDate" name="start_date">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputEdate">End Date</label>
+                            <input type="date" class="form-control" id="inputEdate" name="end_date">
+                        </div>
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-12">
+                              <label for="inputReason">Reason</label>
+                              <textarea name="reason" id="" cols="30" rows="10"></textarea>
+                          </div>
+                      </div>
+
+                      <button class="button primary">Apply</button>
+                </form>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/emp_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>
