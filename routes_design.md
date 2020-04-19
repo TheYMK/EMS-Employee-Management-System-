@@ -124,7 +124,7 @@ DESTROY         /homeadmin/payrolls/:id       DELETE      delete a particular pa
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Emp -->
-INDEX           /homeemployee        GET        render admin home page                  Employee.findById()
+INDEX           /homeemployee        GET        render employee home page                  Employee.findById()
 
 
 ================================================================================================================
@@ -210,3 +210,30 @@ SHOW            /homeemployee/leaves/:id                 GET        Show info ab
 EDIT            /homeemployee/leaves/:id/edit            GET        Show edit form of one leave              
 UPDATE          /homeemployee/leaves/:id                 PUT        Update a particular leave                
 DESTROY         /homeemployee/leaves/:id                 DELETE     Delete a particular leave                
+
+
+
+================================================================================================================
+                                    ****          HRS HOME PAGE ROUTES          ****
+================================================================================================================
+Name            Path               Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+INDEX           /homehr            GET         render hr home page                     Employee.find()
+
+
+
+================================================================================================================
+                                    ****          EMPLOYEES ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+
+INDEX           /homehr/employees            GET         list all employees                       Employee.find()
+NEW             /homehr/employees/new        GET         show a new employees form                N/A
+CREATE          /homehr/employees            POST        create a new employee                    Employee.create()
+SHOW            /homehr/employees/:id        GET         show info about one specific employee    Employee.findById()
+EDIT            /homehr/employees/:id/edit   GET         show edit form of one employee           Employee.findById()
+UPDATE          /homehr/employees/:id        PUT         update a particular employee             Employee.findByIdAndUpate()
+DELETE          /homehr/employees/:id        DELETE      delete a particular employee             Employee.findByIdAndRemove()

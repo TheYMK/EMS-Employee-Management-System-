@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 var Employee = require('./employee');
+var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
 	username: String,
@@ -46,6 +47,23 @@ UserSchema.pre('remove', async function(next) {
 		next(err);
 	}
 });
+
+// bcrypt middleware
+// UserSchema.pre('save', function(next) {
+// 	const user = this;
+// 	if (user.isModified('password')) {
+// 		bcrypt.genSalt(10, function(err, salt) {
+// 			if (err) return next(err);
+// 			bcrypt.hash(user.password, salt, function(err, hash) {
+// 				if (err) return next(err);
+// 				user.password = hash;
+// 				next();
+// 			});
+// 		});
+// 	} else {
+// 		next();
+// 	}
+// });
 
 UserSchema.plugin(passportLocalMongoose);
 

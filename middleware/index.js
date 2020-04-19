@@ -71,6 +71,17 @@ middlewareObj.isLoggedAsEmployee = function(req, res, next) {
 	res.redirect('/login');
 };
 
+middlewareObj.isLoggedInAsHR = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		if (req.user.user_role === 'HR') {
+			return next();
+		}
+	}
+
+	req.flash('error', 'Only HR allowed to see this page');
+	res.redirect('/login');
+};
+
 middlewareObj.isLoggedIn = function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();

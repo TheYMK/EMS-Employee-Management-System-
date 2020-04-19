@@ -135,39 +135,53 @@ router.get('/homeadmin/employees/:id/edit', middleware.isLoggedInAsAdmin, functi
 });
 
 // UPDATE - update a particular employee
-router.put('/homeadmin/employees/:id', middleware.isLoggedInAsAdmin, function(req, res) {
-	Employee.findByIdAndUpdate(req.params.id, req.body.employee, function(err, updatedEmployee) {
-		if (err) {
-			console.log(err);
-			req.flash('error', err.message);
-			res.redirect('back');
-		} else {
-			User.findOne({ username: updatedEmployee.employee_id }, function(err, foundUser) {
-				if (err) {
-					console.log(err);
-					res.redirect(back);
-				} else {
-					// foundUser.department.id = foundDepartment.id;
-					// foundUser.save();
-					// foundUser.save();
-					Department.findOne({ department_name: req.body.employee.department }, function(
-						err,
-						foundDepartment
-					) {
-						if (err) {
-							console.log(err);
-							res.redirect('back');
-						} else {
-							// foundDepartment.save();
-							foundUser.department.id = foundDepartment.id;
-							foundUser.save();
-							res.redirect('/homeadmin/employees/' + req.params.id);
-						}
-					});
-				}
-			});
-		}
-	});
+router.put('/homeadmin/employees/:id', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body.employee);
+
+		let usr = {
+			username: req.body.employee.employee_id
+		};
+
+		const updatedUser = await User.findOneAndUpdate({ 'employee.id': updatedEmployee.id }, usr);
+
+		const foundUser = await User.findOne({ username: req.body.employee.employee_id });
+		const foundDepartment = await Department.findOne({ department_name: req.body.employee.department });
+
+		foundUser.department.id = foundDepartment.id;
+		await foundUser.save();
+
+		// Removing from employee user db
+		await User.findOneAndRemove({ 'employee.id': updatedEmployee.id });
+
+		// recreating user with new informations
+		var pwd = '2020' + req.body.employee.passport_no;
+		var pwdUpdate = { password: pwd };
+
+		var newUser = new User({
+			username: req.body.employee.employee_id,
+			user_email: req.body.employee.email,
+			user_role: req.body.employee.designation,
+			company_name: req.body.employee.company,
+			company: {
+				id: req.user.company.id
+			},
+			employee: {
+				id: updatedEmployee.id
+			},
+			department: {
+				id: foundDepartment.id
+			}
+		});
+
+		const user = await User.register(newUser, pwd);
+
+		res.redirect('/homeadmin/employees/' + req.params.id);
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		res.redirect('back');
+	}
 });
 
 // DELETE - delete a particular employee

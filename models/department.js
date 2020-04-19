@@ -8,6 +8,7 @@ var departmentSchema = new mongoose.Schema({
 	department_hod: String,
 	department_description: String,
 	department_employees: String,
+	company: String,
 	projects: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

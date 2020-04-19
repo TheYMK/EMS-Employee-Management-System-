@@ -28,23 +28,25 @@ const path = require('path'),
 	session = require('express-session');
 
 //routes importations
-var indexRoutes = require('./routes/index');
-var emschatsRoutes = require('./routes/emschats');
-var aboutRoutes = require('./routes/about');
-var adminRoutes = require('./routes/admin/admin');
-var empRoutes = require('./routes/employee/emp');
-var departmentsRoutes = require('./routes/admin/departments');
-var employeesRoutes = require('./routes/admin/employees');
-var blogsRoutes = require('./routes/admin/blogs');
-var commentsRoutes = require('./routes/admin/comments');
-var projectsRoutes = require('./routes/admin/projects');
-var companiesRoutes = require('./routes/admin/companies');
-var payrollsRoutes = require('./routes/admin/payrolls');
-var emp_departmentRoutes = require('./routes/employee/departments');
-var emp_attendances = require('./routes/employee/attendances');
-var emp_payrolls = require('./routes/employee/payrolls');
-var emp_projects = require('./routes/employee/projects');
-var emp_leaves = require('./routes/employee/leaves');
+const indexRoutes = require('./routes/index');
+const emschatsRoutes = require('./routes/emschats');
+const aboutRoutes = require('./routes/about');
+const adminRoutes = require('./routes/admin/admin');
+const empRoutes = require('./routes/employee/emp');
+const hrRoutes = require('./routes/hr/hr');
+const departmentsRoutes = require('./routes/admin/departments');
+const employeesRoutes = require('./routes/admin/employees');
+const blogsRoutes = require('./routes/admin/blogs');
+const commentsRoutes = require('./routes/admin/comments');
+const projectsRoutes = require('./routes/admin/projects');
+const companiesRoutes = require('./routes/admin/companies');
+const payrollsRoutes = require('./routes/admin/payrolls');
+const emp_departmentRoutes = require('./routes/employee/departments');
+const emp_attendancesRoutes = require('./routes/employee/attendances');
+const emp_payrollsRoutes = require('./routes/employee/payrolls');
+const emp_projectsRoutes = require('./routes/employee/projects');
+const emp_leavesRoutes = require('./routes/employee/leaves');
+const hr_employeesRoutes = require('./routes/hr/employees');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
@@ -109,7 +111,7 @@ io.on('connection', (socket) => {
 });
 
 // ===========================================================
-//                PASSPORT CONFIGURATIONS
+//                PASSPORT.JS CONFIGURATIONS
 // ===========================================================
 app.use(
 	require('express-session')({
@@ -124,6 +126,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// ===========================================================
+//                FLASH CONFIGURATIONS
+// ===========================================================
 app.use(function(req, res, next) {
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash('error');
@@ -139,6 +144,7 @@ app.use(emschatsRoutes);
 app.use(aboutRoutes);
 app.use(adminRoutes);
 app.use(empRoutes);
+app.use(hrRoutes);
 app.use(departmentsRoutes);
 app.use(employeesRoutes);
 app.use(blogsRoutes);
@@ -147,10 +153,11 @@ app.use(projectsRoutes);
 app.use(companiesRoutes);
 app.use(payrollsRoutes);
 app.use(emp_departmentRoutes);
-app.use(emp_attendances);
-app.use(emp_payrolls);
-app.use(emp_projects);
-app.use(emp_leaves);
+app.use(emp_attendancesRoutes);
+app.use(emp_payrollsRoutes);
+app.use(emp_projectsRoutes);
+app.use(emp_leavesRoutes);
+app.use(hr_employeesRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

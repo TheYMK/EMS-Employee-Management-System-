@@ -52,59 +52,7 @@
 					<h2>Overview</h2>
 				</header>
 
-				<div class="card-columns">
-					
-					<div class="card text-white bg-danger mb-3">
-						<div class="card-header" style="font-weight: 800;"">Projects</div>
-						<div class="card-body">
-						  
-							<p class="card-text" style="font-size: 20px;"><strong style="color: white;">Assigned Projects:</strong> <%=projects.length%> <br>
-							</p>
-						</div>
-					</div>
-
-					<div class="card text-white bg-info mb-3">
-						<div class="card-header" style="font-weight: 800;"">Attendances</div>
-						<div class="card-body">
-							<p class="card-text" style="font-size: 20px;">
-								<strong style="color: white;">Count: </strong><%=employee.attendances.length%> <br>
-								<% if(employee.attendances.length > 0) { %>
-									<strong style="color: white;">Last record: </strong><%=employee.attendances[employee.attendances.length -1].date%>
-								<% } %>
-							</p>
-						</div>
-					</div>
-					
-					<div class="card text-white bg-dark mb-3">
-						<div class="card-header" style="font-weight: 800;"">Payrolls</div>
-						<div class="card-body" >
-							<p class="card-text" style="font-size: 20px;">
-								<strong style="color: white;">Pending:</strong> <br>
-								<strong style="color: white;">Payed:</strong>
-							</p>
-						</div>
-					</div>
-
-					<div class="card text-white bg-success mb-3">
-						<div class="card-header" style="font-weight: 800;"">Leaves</div>
-						<div class="card-body">
-							<p class="card-text" style="font-size: 20px;">
-								<strong style="color: white;">Pending:</strong> <%=pendingLeaves%> <br>
-								<strong style="color: white;">Approved:</strong> <%=approvedLeaves%>
-							</p>
-						</div>
-					</div>
-
-					<div class="card text-white bg-primary mb-3">
-						<div class="card-header" style="font-weight: 800;"">Tasks</div>
-						<div class="card-body">
-							<p class="card-text" style="font-size: 20px;">
-								<strong style="color: white;">Recent:</strong>
-							</p>
-						</div>
-					</div>
-
-				</div>
+				
 
 				
 			</section>
@@ -121,7 +69,7 @@
 	</div>
 
 	<!-- Sidebar -->
-	<%- include("../partials/emp_sidebar") %>
+	<%- include("../partials/hr_sidebar") %>
 
 </div>
 

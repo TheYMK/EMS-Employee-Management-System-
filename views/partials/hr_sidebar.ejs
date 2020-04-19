@@ -14,38 +14,32 @@
                 <h2>Menu</h2>
             </header>
             <ul>
-                <li><a href="/homeemployee">Home</a></li>
-                <li><a href="/homeemployee/employees/<%=currentUser.employee.id%>/attendances">Attendances</a></li>
-                <li><a href="/homeemployee/departments/<%=currentUser.department.id%>">View Department</a></li>
+                <li><a href="/homehr">Home</a></li>
                 <li>
-                    <span class="opener">Projects</span>
+                    <span class="opener">Manage Employees</span>
                     <ul>
-                        <a href="/homeemployee/projects">View All</a>
+                        <li><a href="/homehr/employees/new">Add New</a></li>
+                        <li><a href="/homehr/employees">View All</a></li>
                     </ul>
                 </li>
+                <li><a href="#">View Attendances</a></li>
                 <li>
-                    <span class="opener">Tasks</span>
+                    <span class="opener">Manage Payrolls</span>
                     <ul>
                         <li><a href="#">View All</a></li>
                     </ul>
                 </li>
                 <li>
+                    <span class="opener">Manage Leaves</span>
+                    <ul>
+                        <li><a href="#">View All</a></li>
+                    </ul>
+                </li>
+                
+                <li>
                     <span class="opener">Chat Rooms</span>
                     <ul>
                         <li><a href="/emschat">Join Chat Room</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <span class="opener">Payrolls</span>
-                    <ul>
-                        <li><a href="/homeemployee/employees/<%=currentUser.employee.id%>/payrolls">Payroll reports</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <span class="opener">Leave Applications</span>
-                    <ul>
-                        <a href="/homeemployee/leaves/employees/<%=currentUser.employee.id%>">View All</a>
-                        <a href="/homeemployee/leaves/employees/<%=currentUser.employee.id%>/new">Apply For Leave</a>
                     </ul>
                 </li>
                 <li><a href="/blogs">Events</a></li>

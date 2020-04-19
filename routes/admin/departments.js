@@ -53,6 +53,7 @@ router.post('/homeadmin/departments', middleware.isLoggedInAsAdmin, function(req
 		department_hod: hod,
 		department_category: category,
 		department_description: description,
+		company: req.user.company_name,
 		createdBy
 	};
 

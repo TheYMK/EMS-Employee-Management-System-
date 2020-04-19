@@ -61,14 +61,14 @@ router.post('/register', function(req, res) {
 				}
 				passport.authenticate('local')(req, res, function() {
 					if (user.user_role === 'Admin') {
-						req.flash('success', 'Welcome to E.M.S' + user.username);
+						req.flash('success', 'Welcome to E.M.S ' + user.username);
 						res.redirect('/homeadmin');
 					} else if (user.user_role === 'HOD') {
-						req.flash('success', 'Welcome to E.M.S' + user.username);
+						req.flash('success', 'Welcome to E.M.S ' + user.username);
 						res.redirect('/homebasic');
 					} else if (user.user_role === 'HR') {
-						req.flash('success', 'Welcome to E.M.S' + user.username);
-						res.redirect('/homebasic');
+						req.flash('success', 'Welcome to E.M.S ' + user.username);
+						res.redirect('/homehr');
 					} else {
 						req.flash('success', 'Welcome to E.M.S ' + user.username);
 						res.redirect('/homeemployee');
@@ -107,7 +107,7 @@ router.post('/login', function(req, res) {
 					});
 				} else if (user.user_role === 'HR') {
 					passport.authenticate('local')(req, res, function() {
-						res.redirect('/homebasic');
+						res.redirect('/homehr');
 					});
 				} else {
 					passport.authenticate('local')(req, res, function() {
