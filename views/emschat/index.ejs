@@ -37,7 +37,16 @@
 						</select>
 					</div>
 					<button type="submit" class="button primary fit">Join Chat</button>
-					<a href="/homeemployee" class="button fit" style="margin-top: 20px;">Back</a>
+					<% if(currentUser.user_role === 'Admin'){%>
+						<a href="/homeadmin" class="button fit" style="margin-top: 20px;">Back</a>
+					<% }else if(currentUser.user_role === 'HR'){ %>
+						<a href="/homehr" class="button fit" style="margin-top: 20px;">Back</a>
+					<% }else if(currentUser.user_role === 'HOD'){ %>
+						<a href="/homehod" class="button fit" style="margin-top: 20px;">Back</a>
+					<% }else { %>
+						<a href="/homeemployee" class="button fit" style="margin-top: 20px;">Back</a>
+					<% } %>
+					
 				</form>
 			</main>
 		</div>

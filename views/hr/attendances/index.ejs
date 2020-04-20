@@ -23,7 +23,13 @@
 			<!-- Content -->
 			<section>
 
-				<header class="major">
+				<div>
+					<iframe
+						src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23f56a6a&amp;ctz=Africa%2FNairobi&amp;title=E.M.S&amp;showPrint=0&amp;showDate=1&amp;showTz=1&amp;showCalendars=0&amp;showTabs=0"
+						style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+				</div>
+
+				<header class="major mt-5">
 					<h2>Employee List</h2>
 				</header>
 
@@ -32,24 +38,29 @@
 					<table>
 						<thead>
 							<tr>
+                                <th>Date</th>
 								<th>Employee ID</th>
-								<th>Type</th>
 								<th>Full Name</th>
 								<th>Department</th>
-								<th>Designation</th>
-
+                                <th>Designation</th>
 							</tr>
 						</thead>
 						<tbody>
 							<% employees.forEach(function(emp){ %>
-							<% if(emp.company === currentUser.company_name && emp.employee_id !== currentUser.username){ %>
-							<tr>
-								<td><a href="/homehr/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
-								<td><%= emp.type_of_employee%> </td>
-								<td><%= emp.first_name%> <%= emp.last_name%></td>
-								<td><%= emp.department %></td>
-								<td><%= emp.designation %></td>
-							</tr>
+                            <% if(emp.company === currentUser.company_name && emp.employee_id !== currentUser.username){ %>
+                                <% if(emp.attendances.length > 0){ %>
+                                    <% emp.attendances.forEach(function(attendance){ %>
+                                        <tr>
+                                            <td><%=attendance.date%></td>
+                                            <td><a href="/homehr/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
+                                            <td><%= emp.first_name%> <%= emp.last_name%></td>
+                                            <td><%= emp.department %></td>
+                                            <td><%= emp.designation %></td>
+                                        </tr>
+                                    <% }) %>
+                                    
+                                <% } %>
+							
 							<% } %>
 							<% }) %>
 						</tbody>

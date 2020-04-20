@@ -14,7 +14,7 @@ middlewareObj.checkBlogOwnership = function(req, res, next) {
 				res.redirect('back');
 			} else {
 				//does a user own the blog
-				if (foundBlog.author.id.equals(req.user.id)) {
+				if (foundBlog.author.id.equals(req.user.id) || req.user.user_role === 'Admin') {
 					next();
 				} else {
 					req.flash('error', "You don't have permission to do that");

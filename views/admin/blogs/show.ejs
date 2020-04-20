@@ -32,7 +32,7 @@
 
                 <p style="color: #f56a6a;"><em>Submitted By <%= blog.author.username %></em></p>
 
-                <% if(currentUser && blog.author.id.equals(currentUser._id)){ %>
+                <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser.user_role === 'Admin'){ %>
                 <a class="button small" href="/blogs/<%= blog._id%>/edit">Edit</a>
                 <form class="delete-form" action="/blogs/<%= blog._id%>?_method=DELETE" method="POST">
                     <button class="button small">Delete</button>

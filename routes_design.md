@@ -237,3 +237,36 @@ SHOW            /homehr/employees/:id        GET         show info about one spe
 EDIT            /homehr/employees/:id/edit   GET         show edit form of one employee           Employee.findById()
 UPDATE          /homehr/employees/:id        PUT         update a particular employee             Employee.findByIdAndUpate()
 DELETE          /homehr/employees/:id        DELETE      delete a particular employee             Employee.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          ATTENDANCES ROUTES          ****
+================================================================================================================
+Name            Path                           Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+
+INDEX           /homehr/attendances            GET         list all attendances                   Attendances.find()
+
+
+================================================================================================================
+                                    ****          PAYROLLS ROUTES          ****
+================================================================================================================
+Name            Path                          Verb        Purpose                               Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+INDEX           /homehr/payrolls           GET         display all payrolls                  Payroll.find() 
+EDIT            /homehr/payrolls/:id       GET         display edit form of a payroll        Payroll.findById()
+UPDATE          /homehr/payrolls/:id       PUT         update a particular payroll status    Payroll.findByIdAndUpdate()
+DESTROY         /homehr/payrolls/:id       DELETE      delete a particular payroll           Payroll.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          LEAVES ROUTES          ****
+================================================================================================================
+Name            Path                          Verb        Purpose                               Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+INDEX           /homehr/leaves           GET         display all leaves                  Leave.find() 
+UPDATE          /homehr/leaves/:id       PUT         update a particular leave status    Leave.findByIdAndUpdate()
+DESTROY         /homehr/leaves/:id       DELETE      delete a particular leave           Leave.findByIdAndRemove()

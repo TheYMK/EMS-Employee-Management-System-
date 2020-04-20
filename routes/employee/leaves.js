@@ -60,8 +60,10 @@ router.post('/homeemployee/leaves/employees/:id', middleware.isLoggedAsEmployee,
 		end_date: req.body.end_date,
 		reason: req.body.reason,
 		employee: {
-			id: req.user.employee.id
-		}
+			id: req.user.employee.id,
+			employee_id: req.user.username
+		},
+		company: req.user.company_name
 	};
 
 	Leave.create(newLeave, function(err, newlyCreated) {
@@ -77,37 +79,12 @@ router.post('/homeemployee/leaves/employees/:id', middleware.isLoggedAsEmployee,
 	});
 });
 
-// router.post('/homeemployee/leaves/employees/:id', middleware.isLoggedAsEmployee, (req, res) => {
-// 	const newLeave = {
-// 		category: req.body.category,
-// 		start_date: req.body.start_date,
-// 		end_date: req.body.end_date,
-// 		reason: req.body.reason,
-// 		employee: {
-// 			id: req.user.employee.id
-// 		}
-// 	};
-
-// 	Leave.create(newLeave)
-// 		.exec()
-// 		.then((newlyCreated) => {
-// 			console.log(newlyCreated);
-// 			req.flash('success', 'Leave application sent successfully');
-// 			return res.redirect('/homeemployee/leaves/employees/' + req.user.employee.id);
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			req.flash('error', err.message);
-// 			return res.redirect('back');
-// 		});
-// });
-
 // Destroy - delete a particular leave
 router.delete('/homeemployee/leaves/:id', middleware.isLoggedAsEmployee, (req, res) => {
 	Leave.findByIdAndRemove(req.params.id)
 		.exec()
 		.then((deletedLeave) => {
-			req.flash('success', 'Leave Cancelled');
+			req.flash('success', 'Leave removed successfully');
 			return res.redirect('/homeemployee/leaves/employees/' + req.user.employee.id);
 		})
 		.catch((err) => {

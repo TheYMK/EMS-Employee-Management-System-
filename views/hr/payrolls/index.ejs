@@ -1,0 +1,92 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+				</ul>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2>Payroll List</h2>
+				</header>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Employee ID</th>
+								<th>From</th>
+								<th>To</th>
+								<th>Salary due</th>
+								<th>Payment Status</th>
+								<th>Action</th>
+
+							</tr>
+						</thead>
+						<tbody>
+                            <% payrolls.forEach(function(payroll){ %>
+                                <% employees.forEach(function(employee){ %>
+                                        <% if(payroll.employee.employee_id === employee.employee_id && employee.company === currentUser.company_name){ %>
+                                            <tr>
+                                                <td><a href="/homehr/employees/<%=employee._id%>"><%= payroll.employee.employee_id %> </a></td>
+                                                <td><%= payroll.start_date %></td>
+                                                <td><%= payroll.end_date %></td>
+                                                <td>$<%= employee.salary %></td>
+												<td><%= payroll.status%></td>
+												<td>
+													<% if(payroll.status === 'Pending') { %>
+														<a href="/homehr/payrolls/<%=payroll._id%>" class="button primary small">Pay</a>
+													<% }else { %>
+														<form action="/homehr/payrolls/<%=payroll._id%>?_method=DELETE" method="POST" class="delete-form">
+															<button class="button small">Remove</button>
+														</form>
+												    <% } %>
+													
+												</td>
+                                            </tr>
+                                        <% } %>
+                                <% }) %>
+                                    
+                            
+                            <% }) %>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/hr_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

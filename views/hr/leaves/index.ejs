@@ -32,6 +32,7 @@
 					<table>
 						<thead>
 							<tr>
+								<th>Employee ID</th>
 								<th>Leave Category</th>
 								<th>Start Date</th>
 								<th>End Date</th>
@@ -44,8 +45,9 @@
 						</thead>
 						<tbody>
                             <% leaves.forEach(function(leave){ %>
-                                <% if(leave.employee.id.equals(employee.id)){ %>
+                                <% if(leave.company === currentUser.company_name){ %>
                                     <tr>
+										<td><a href="/homehr/employees/<%=leave.employee.id%>"><%=leave.employee.employee_id%></a></td>
                                         <td><%=leave.category%></td>
                                         <td><%=leave.start_date%></td>
                                         <td><%=leave.end_date%></td>
@@ -54,11 +56,11 @@
                                         <td><%=leave.status%></td>
                                         <td>
 											<% if(leave.status === 'Pending'){ %>
-												<form action="/homeemployee/leaves/<%=leave._id%>?_method=DELETE" method="POST" class="delete-form">
-													<button class="button primary small">Cancel</button>
+												<form action="/homehr/leaves/<%=leave._id%>?_method=PUT" method="POST" class="delete-form">
+													<button class="button primary small">Approve</button>
 												</form>
 											<% }else { %>
-												<form action="/homeemployee/leaves/<%=leave._id%>?_method=DELETE" method="POST" class="delete-form">
+												<form action="/homehr/leaves/<%=leave._id%>?_method=DELETE" method="POST" class="delete-form">
 													<button class="button small">Remove</button>
 												</form>
 											<% } %>
@@ -76,7 +78,7 @@
 	</div>
 
 	<!-- Sidebar -->
-	<%- include("../../partials/emp_sidebar") %>
+	<%- include("../../partials/hr_sidebar") %>
 
 </div>
 

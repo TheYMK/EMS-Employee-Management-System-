@@ -15,8 +15,10 @@ var leaveSchema = new mongoose.Schema({
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Employee'
-		}
-	}
+		},
+		employee_id: String
+	},
+	company: String
 });
 
 module.exports = mongoose.model('Leave', leaveSchema);
