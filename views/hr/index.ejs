@@ -52,6 +52,52 @@
 					<h2>Overview</h2>
 				</header>
 
+				<div class="card-columns">
+					
+					
+					<div class="card text-white bg-info mb-3">
+						<div class="card-header" style="font-weight: 800;"">Attendances</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Total: </strong> <%= attendances.length%><br>
+								<strong style="color: white;">Late: </strong> <br>
+								<strong style="color: white;">On Time: </strong> <br>
+							</p>
+						</div>
+					</div>
+					
+					<div class="card text-white bg-dark mb-3">
+						<div class="card-header" style="font-weight: 800;"">Payrolls</div>
+						<div class="card-body" >
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Pending:</strong> <%=totalPendingPayrolls%><br>
+								<strong style="color: white;">Paid:</strong> <%=totalPaidPayrolls%>
+							</p>
+						</div>
+					</div>
+
+					<div class="card text-white bg-success mb-3">
+						<div class="card-header" style="font-weight: 800;"">Leaves</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Pending: </strong><%=totalPendingLeaves%><br>
+								<strong style="color: white;">Approved: </strong><%=totalApprovedLeaves%>
+							</p>
+						</div>
+					</div>
+
+					<div class="card text-white bg-primary mb-3">
+						<div class="card-header" style="font-weight: 800;"">Employee</div>
+						<div class="card-body">
+							<p class="card-text" style="font-size: 20px;">
+								<strong style="color: white;">Total: </strong><%=employees.length%> <br>
+								<strong style="color: white;">Full-Time: </strong> <%=fullTimes%><br>
+								<strong style="color: white;">Part-Time: </strong> <%=partTimes%>
+							</p>
+						</div>
+					</div>
+
+				</div>
 				
 
 				

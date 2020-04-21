@@ -20,6 +20,7 @@ Blog.find({}, function(err, blogs) {
 	}
 });
 
+// INDEX - list all payrolls
 router.get('/homeemployee/employees/:id/payrolls', middleware.isLoggedAsEmployee, function(req, res) {
 	Employee.findById(req.params.id, function(err, foundEmployee) {
 		if (err) {

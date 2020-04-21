@@ -53,7 +53,7 @@ router.get('/homehr/payrolls/:id', middleware.isLoggedInAsHR, async (req, res) =
 router.put('/homehr/payrolls/:id', middleware.isLoggedInAsHR, async (req, res) => {
 	try {
 		let payroll = {
-			status: 'Payed'
+			status: 'Paid'
 		};
 		const updatedPayroll = await Payroll.findByIdAndUpdate(req.params.id, payroll);
 
