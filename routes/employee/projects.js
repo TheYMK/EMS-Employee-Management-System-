@@ -61,6 +61,7 @@ router.get('/homeemployee/projects/:id', middleware.isLoggedAsEmployee, function
 					req.flash('error', err.message);
 					res.redirect('back');
 				} else {
+					// not useful
 					allEmployees.forEach(function(emp) {
 						foundProject.employees.push(emp);
 					});

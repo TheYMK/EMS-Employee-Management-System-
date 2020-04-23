@@ -292,3 +292,19 @@ Name            Path                            Verb        Purpose             
 SHOW            /homehod/departments/:id        GET         show info about one specific dept       Department.findById()
 EDIT            /homehod/departments/:id/edit   GET         show edit form of a department          Department.findById()
 UPDATE          /homehod/departments/:id        PUT         update a particular department          Department.findByIdAndUpdate()
+
+
+================================================================================================================
+                                    ****          PROJECTS ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hod -->
+
+INDEX           /homehod/projects               GET        list all projects                       Project.find()
+NEW             /homehod/projects/new           GET        Show a new project form                 N/A
+CREATE          /homehod/projects               POST       Create a new project                    Project.create()
+SHOW            /homehod/projects/:id           GET        Show info about one specific project    Project.findById()
+EDIT            /homehod/projects/:id/edit      GET        Show edit form of one project           Project.findById()
+UPDATE          /homehod/projects/:id           PUT        Update a particular project             Project.findByIdAndUpdate()
+DESTROY         /homehod/projects/:id           DELETE     Delete a particular project             Project.findByIdAndRemove()

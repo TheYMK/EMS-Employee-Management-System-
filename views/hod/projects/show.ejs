@@ -1,0 +1,117 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2><%= project.name%></h2>
+				</header>
+
+				<div class="card text-center">
+					<div class="card-header">
+						<ul class="nav nav-pills card-header-pills">
+							<li class="nav-item">
+								<a class="button" href="/homehod/projects/<%=project._id%>/edit">Edit</a>
+							</li>
+							<li class="nav-item">
+								<form action="/homehod/projects/<%=project._id%>?_method=DELETE" method="POST">
+									<button class="button">Delete</a>
+								</form>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-12 mt-3">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">Project Details</h5>
+										<hr />
+										<p class="card-text"><strong>Start Date:</strong> <%=project.start%> |
+											<strong>Deadline:</strong> <%=project.end%> <br>
+											<strong>State:</strong> <%=project.state%> <br>
+											<strong>Company:</strong> <%=project.company%><br>
+											<strong>Department:</strong> <%=project.department%> <br>
+											<strong>Description:</strong> <%= project.description%>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<h3 class="text-center mt-4">Assigned Team</h3>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Employee ID</th>
+								<th>Type</th>
+								<th>Full Name</th>
+								<th>Designation</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<% employees.forEach(function(emp){ %>
+							<% if(emp.company === currentUser.company_name && emp.department === project.department){ %>
+							<tr>
+
+								<td><%= emp.employee_id %></a></td>
+								<td><%= emp.type_of_employee%> </td>
+								<td>
+                                    <% if(emp.employee_id === currentUser.username){ %>
+										<a href="#">You</a>
+									<% }else { %>
+										<%= emp.first_name%> <%= emp.last_name%>
+									<% } %>
+                                </td>
+								<td><%= emp.designation %></td>
+								<!-- Write down the logic to check if a user is on the list or not -->
+
+							</tr>
+							<% } %>
+							<% }) %>
+						</tbody>
+					</table>
+				</div>
+
+
+
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/hod_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>
