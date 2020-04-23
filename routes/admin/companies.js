@@ -9,25 +9,17 @@ var expressSanitizer = require('express-sanitizer');
 var Employee = require('../../models/employee');
 var middleware = require('../../middleware');
 
-var allBlogs;
-Blog.find({}, function(err, blogs) {
-	if (err) {
-		console.log(err);
-	} else {
-		allBlogs = blogs;
-	}
-});
-
 // SHOW - show info about one specific company
-router.get('/homeadmin/companies/:id', middleware.isLoggedInAsAdmin, function(req, res) {
-	Company.findById(req.params.id, function(err, foundCompany) {
-		if (err) {
-			console.log(err);
-			res.redirect('back');
-		} else {
-			res.render('admin/companies/show', { company: foundCompany, blogs: allBlogs });
-		}
-	});
+router.get('/homeadmin/companies/:id', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		const foundCompany = await Company.findById(req.params.id);
+		const allBlogs = await Blog.find({});
+
+		res.render('admin/companies/show', { company: foundCompany, blogs: allBlogs });
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+	}
 });
 
 module.exports = router;

@@ -19,15 +19,15 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all departments
-router.get('/homeadmin/departments', middleware.isLoggedInAsAdmin, function(req, res) {
-	Department.find({}, function(err, allDepartments) {
-		if (err) {
-			req.flash('error', err.message);
-			res.redirect('back');
-		} else {
-			res.render('admin/departments/index', { departments: allDepartments, blogs: allBlogs });
-		}
-	});
+router.get('/homeadmin/departments', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		const allDepartments = await Department.find({});
+		const allBlogs = await Blog.find({});
+		res.render('admin/departments/index', { departments: allDepartments, blogs: allBlogs });
+	} catch (err) {
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
 // NEW - show a new department form

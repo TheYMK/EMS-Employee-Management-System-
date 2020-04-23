@@ -31,7 +31,7 @@ var UserSchema = new mongoose.Schema({
 	department: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Employee'
+			ref: 'Department'
 		}
 	}
 });

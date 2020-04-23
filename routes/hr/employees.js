@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../../models/user');
-var Blog = require('../../models/blog');
-var Comment = require('../../models/comment');
-var Company = require('../../models/company');
-var Department = require('../../models/department');
-var Employee = require('../../models/employee');
-var middleware = require('../../middleware');
+const express = require('express');
+const router = express.Router();
+const User = require('../../models/user');
+const Blog = require('../../models/blog');
+const Comment = require('../../models/comment');
+const Company = require('../../models/company');
+const Department = require('../../models/department');
+const Employee = require('../../models/employee');
+const middleware = require('../../middleware');
 
 var allBlogs;
 Blog.find({}, function(err, blogs) {

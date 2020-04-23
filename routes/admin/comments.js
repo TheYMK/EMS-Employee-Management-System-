@@ -10,44 +10,38 @@ var Employee = require('../../models/employee');
 var middleware = require('../../middleware');
 
 // CREATE - Create a new comment
-router.post('/blogs/:id/comments', middleware.isLoggedIn, function(req, res) {
-	Blog.findById(req.params.id, function(err, foundBlog) {
-		if (err) {
-			console.log(err);
-			res.redirect('back');
-		} else {
-			//Create a comment
-			Comment.create(req.body.comment, function(err, comment) {
-				if (err) {
-					console.log(err);
-					res.redirect('back');
-				} else {
-					//add username and id to comment
-					comment.author.id = req.user.id;
-					comment.author.username = req.user.username;
-					//save comment
-					comment.save();
-					foundBlog.comments.push(comment);
-					foundBlog.save();
-					req.flash('success', 'Comment added');
-					res.redirect('/blogs/' + foundBlog._id);
-				}
-			});
-		}
-	});
+router.post('/blogs/:id/comments', middleware.isLoggedIn, async (req, res) => {
+	try {
+		const foundBlog = await Blog.findById(req.params.id);
+		const comment = await Comment.create(req.body.comment);
+
+		//add username and id to comment
+		comment.author.id = req.user.id;
+		comment.author.username = req.user.username;
+		//save comment
+		await comment.save();
+		foundBlog.comments.push(comment);
+		await foundBlog.save();
+		req.flash('success', 'Comment added');
+		return res.redirect('/blogs/' + foundBlog._id);
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
-// DELETE - delete a particular comment
+// DESTROY - delete a particular comment
+router.delete('/blogs/:id/comments/:comment_id', middleware.checkCommentOwnership, async (req, res) => {
+	try {
+		await Comment.findByIdAndRemove(req.params.comment_id);
 
-router.delete('/blogs/:id/comments/:comment_id', middleware.checkCommentOwnership, function(req, res) {
-	Comment.findByIdAndRemove(req.params.comment_id, function(err) {
-		if (err) {
-			res.redirect('back');
-		} else {
-			req.flash('success', 'Comment deleted');
-			res.redirect('/blogs/' + req.params.id);
-		}
-	});
+		req.flash('success', 'Comment deleted');
+		return res.redirect('/blogs/' + req.params.id);
+	} catch (err) {
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
 module.exports = router;

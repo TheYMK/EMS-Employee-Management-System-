@@ -1,15 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-var Blog = require('../models/blog');
-var Comment = require('../models/comment');
-var Company = require('../models/company');
-var Department = require('../models/department');
-var expressSanitizer = require('express-sanitizer');
-var Employee = require('../models/employee');
-var Project = require('../models/project');
-var Payroll = require('../models/payroll');
-var middleware = require('../middleware');
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const Blog = require('../models/blog');
+const Comment = require('../models/comment');
+const Company = require('../models/company');
+const Department = require('../models/department');
+const expressSanitizer = require('express-sanitizer');
+const Employee = require('../models/employee');
+const Project = require('../models/project');
+const Payroll = require('../models/payroll');
+const middleware = require('../middleware');
 
 var allBlogs;
 Blog.find({}, function(err, blogs) {

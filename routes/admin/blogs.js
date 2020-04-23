@@ -19,43 +19,48 @@ Blog.find({}, function(err, blogs) {
 });
 
 // INDEX - list all blogs
-router.get('/blogs', middleware.isLoggedIn, function(req, res) {
-	Blog.find({ ownedBy: req.user.company_name }, function(err, allBlogs) {
-		if (err) {
-			console.log(err);
-			req.flash('error', err.message);
-		} else {
-			res.render('admin/blogs/index', { blogs: allBlogs });
-		}
-	});
+router.get('/blogs', middleware.isLoggedIn, async (req, res) => {
+	try {
+		// finding all blogs
+		const allBlogs = await Blog.find({ ownedBy: req.user.company_name });
+		res.render('admin/blogs/index', { blogs: allBlogs });
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
 // NEW - Show a new blog form
-router.get('/blogs/new', middleware.isLoggedIn, function(req, res) {
-	res.render('admin/blogs/new', { blogs: allBlogs });
+router.get('/blogs/new', middleware.isLoggedIn, async (req, res) => {
+	try {
+		res.render('admin/blogs/new', { blogs: allBlogs });
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 // CREATE - Create a new blog
-router.post('/blogs', middleware.isLoggedIn, function(req, res) {
-	var blogTitle = req.body.blogTitle;
-	var blogImage = req.body.blogImage;
-	var blogContent = req.sanitize(req.body.blogContent);
-	var owner = req.user.company_name;
-	var author = {
-		id: req.user.id,
-		username: req.user.username
-	};
-	var newBlog = { title: blogTitle, image: blogImage, content: blogContent, ownedBy: owner, author };
+router.post('/blogs', middleware.isLoggedIn, async (req, res) => {
+	try {
+		let blogTitle = req.body.blogTitle;
+		let blogImage = req.body.blogImage;
+		let blogContent = req.sanitize(req.body.blogContent);
+		let owner = req.user.company_name;
+		let author = {
+			id: req.user.id,
+			username: req.user.username
+		};
+		let newBlog = { title: blogTitle, image: blogImage, content: blogContent, ownedBy: owner, author };
 
-	Blog.create(newBlog, function(err, newlyCreated) {
-		if (err) {
-			console.log(err);
-			req.flash('error', err.message);
-		} else {
-			console.log(newlyCreated);
-			res.redirect('/blogs');
-		}
-	});
+		const newlyCreated = await Blog.create(newBlog);
+		console.log(newlyCreated);
+		res.redirect('/blogs');
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
 // SHOW - Show info about one specific blog
@@ -71,40 +76,42 @@ router.get('/blogs/:id', middleware.isLoggedIn, function(req, res) {
 });
 
 // EDIT - Show edit form of one blog
-router.get('/blogs/:id/edit', middleware.checkBlogOwnership, function(req, res) {
-	Blog.findById(req.params.id, function(err, foundBlog) {
-		if (err || !foundBlog) {
-			req.flash('error', 'Blog not found');
-			console.log(err);
-		} else {
-			res.render('admin/blogs/edit', { blog: foundBlog, blogs: allBlogs });
-		}
-	});
+router.get('/blogs/:id/edit', middleware.checkBlogOwnership, async (req, res) => {
+	try {
+		const foundBlog = await Blog.findById(req.params.id);
+		const allBlogs = await Blog.find({});
+
+		res.render('admin/blogs/edit', { blog: foundBlog, blogs: allBlogs });
+	} catch (err) {
+		console.log(err);
+		req.flash('error', 'Blog not found');
+		return res.redirect('back');
+	}
 });
 
 // UPDATE - Update a particular blog
-router.put('/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
-	req.body.blog.content = req.sanitize(req.body.blog.content);
-	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
-		if (err) {
-			req.flash('error', err.message);
-			res.redirect('/blogs');
-		} else {
-			res.redirect('/blogs/' + req.params.id);
-		}
-	});
+router.put('/blogs/:id', middleware.checkBlogOwnership, async (req, res) => {
+	try {
+		req.body.blog.content = req.sanitize(req.body.blog.content);
+		const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body.blog);
+
+		res.redirect('/blogs/' + req.params.id);
+	} catch (err) {
+		req.flash('error', err.message);
+		return res.redirect('/blogs');
+	}
 });
 
 // DESTROY - Delete a particular blog
-router.delete('/blogs/:id', middleware.checkBlogOwnership, function(req, res) {
-	Blog.findByIdAndRemove(req.params.id, function(err, blog) {
-		if (err) {
-			res.redirect('/blogs');
-		} else {
-			blog.remove();
-			res.redirect('/blogs');
-		}
-	});
+router.delete('/blogs/:id', middleware.checkBlogOwnership, async (req, res) => {
+	try {
+		const blog = await Blog.findByIdAndRemove(req.params.id);
+		blog.remove();
+		res.redirect('/blogs');
+	} catch (err) {
+		req.flash('error', err.message);
+		return res.redirect('/blogs');
+	}
 });
 
 module.exports = router;
