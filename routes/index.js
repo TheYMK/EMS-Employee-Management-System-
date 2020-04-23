@@ -65,7 +65,7 @@ router.post('/register', function(req, res) {
 						res.redirect('/homeadmin');
 					} else if (user.user_role === 'HOD') {
 						req.flash('success', 'Welcome to E.M.S ' + user.username);
-						res.redirect('/homebasic');
+						res.redirect('/homehod');
 					} else if (user.user_role === 'HR') {
 						req.flash('success', 'Welcome to E.M.S ' + user.username);
 						res.redirect('/homehr');
@@ -103,7 +103,7 @@ router.post('/login', function(req, res) {
 					});
 				} else if (user.user_role === 'HOD') {
 					passport.authenticate('local')(req, res, function() {
-						res.redirect('/homebasic');
+						res.redirect('/homehod');
 					});
 				} else if (user.user_role === 'HR') {
 					passport.authenticate('local')(req, res, function() {

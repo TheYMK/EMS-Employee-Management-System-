@@ -58,9 +58,11 @@
 		<%- include("../../partials/sidebar") %>
 	<% }else if(currentUser.user_role === 'HR'){ %>
 		<%- include("../../partials/hr_sidebar") %>
-	<% }else { %>
+	<% }else if(currentUser.user_role === 'HOD'){ %>
+        <%- include("../../partials/hod_sidebar") %>
+    <% }else { %>
         <%- include("../../partials/emp_sidebar") %>
-    <% } %>
+    <% } %> %>
 
 </div>
 

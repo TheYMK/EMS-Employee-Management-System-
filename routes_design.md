@@ -270,3 +270,25 @@ Name            Path                          Verb        Purpose               
 INDEX           /homehr/leaves           GET         display all leaves                  Leave.find() 
 UPDATE          /homehr/leaves/:id       PUT         update a particular leave status    Leave.findByIdAndUpdate()
 DESTROY         /homehr/leaves/:id       DELETE      delete a particular leave           Leave.findByIdAndRemove()
+
+
+
+
+================================================================================================================
+                                    ****          HODS HOME PAGE ROUTES          ****
+================================================================================================================
+Name            Path               Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hod -->
+INDEX           /homehod            GET         render hod home page                     Employee.find()
+
+
+================================================================================================================
+                                    ****          DEPARTMENTS ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hod -->
+SHOW            /homehod/departments/:id        GET         show info about one specific dept       Department.findById()
+EDIT            /homehod/departments/:id/edit   GET         show edit form of a department          Department.findById()
+UPDATE          /homehod/departments/:id        PUT         update a particular department          Department.findByIdAndUpdate()

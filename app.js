@@ -34,6 +34,7 @@ const aboutRoutes = require('./routes/about');
 const adminRoutes = require('./routes/admin/admin');
 const empRoutes = require('./routes/employee/emp');
 const hrRoutes = require('./routes/hr/hr');
+const hodRoutes = require('./routes/hod/hod');
 const departmentsRoutes = require('./routes/admin/departments');
 const employeesRoutes = require('./routes/admin/employees');
 const blogsRoutes = require('./routes/admin/blogs');
@@ -50,6 +51,7 @@ const hr_employeesRoutes = require('./routes/hr/employees');
 const hr_attendancesRoutes = require('./routes/hr/attendances');
 const hr_payrollsRoutes = require('./routes/hr/payrolls');
 const hr_leavesRoutes = require('./routes/hr/leaves');
+const hod_departmentsRoutes = require('./routes/hod/departments');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/ems_db', {
@@ -148,6 +150,7 @@ app.use(aboutRoutes);
 app.use(adminRoutes);
 app.use(empRoutes);
 app.use(hrRoutes);
+app.use(hodRoutes);
 app.use(departmentsRoutes);
 app.use(employeesRoutes);
 app.use(blogsRoutes);
@@ -164,6 +167,7 @@ app.use(hr_employeesRoutes);
 app.use(hr_attendancesRoutes);
 app.use(hr_payrollsRoutes);
 app.use(hr_leavesRoutes);
+app.use(hod_departmentsRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================

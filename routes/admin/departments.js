@@ -114,16 +114,45 @@ router.get('/homeadmin/departments/:id/edit', middleware.isLoggedInAsAdmin, func
 });
 
 // Update - update a particular departments
-router.put('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, function(req, res) {
-	Department.findByIdAndUpdate(req.params.id, req.body.department, function(err, updatedDepartment) {
-		if (err) {
-			req.flash('error', err.message);
-			res.redirect('back');
-		} else {
-			req.flash('success', 'Department updated successfully');
-			res.redirect('/homeadmin/departments/' + req.params.id);
-		}
-	});
+router.put('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		const updatedDepartment = await Department.findByIdAndUpdate(req.params.id, req.body.department);
+		const foundDepartment = await Department.findById(req.params.id);
+		const allEmployees = await Employee.find({});
+		const allProjects = await Project.find({});
+
+		// update department name for all employees belonging to this department
+		allEmployees.forEach(async function(employee) {
+			if (
+				employee.company === req.user.company_name &&
+				employee.department === updatedDepartment.department_name
+			) {
+				let emp = {
+					department: foundDepartment.department_name
+				};
+
+				const updatedEmployee = await Employee.findByIdAndUpdate(employee.id, emp);
+			}
+		});
+
+		// update department name for all projects belonging to this department
+		allProjects.forEach(async function(project) {
+			if (project.company === req.user.company_name && project.department === updatedDepartment.department_name) {
+				let prjct = {
+					department: foundDepartment.department_name
+				};
+
+				const updatedProject = await Project.findByIdAndUpdate(project.id, prjct);
+			}
+		});
+
+		req.flash('success', 'Department updated successfully');
+		return res.redirect('/homeadmin/departments/' + req.params.id);
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
 
 // DELETE - delete a particular departments
