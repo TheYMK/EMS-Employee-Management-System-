@@ -25,7 +25,8 @@ const path = require('path'),
 	Comment = require('./models/comment'),
 	Project = require('./models/project'),
 	Payroll = require('./models/payroll'),
-	session = require('express-session');
+	session = require('express-session'),
+	chartjs = require('chart.js');
 
 //routes importations
 const indexRoutes = require('./routes/index');

@@ -87,7 +87,256 @@
 					<h2>Overview</h2>
 				</header>
 
-				<div class="card-columns">
+				<div class="row">
+					<div class="col-md-6" style="margin-bottom: 50px;">
+						<div class="container" style="width: 500px;">
+							<canvas id="myEmployeeChart"></canvas>
+						</div>
+					</div>
+
+					<div class="col-md-6" style="margin-bottom: 50px;">
+						<div class="container" style="width: 500px;">
+							<canvas id="myPayrollsChart"></canvas>
+						</div>
+					</div>
+
+					<div class="col-md-6" style="margin-bottom: 50px;">
+						<div class="container" style="width: 500px;">
+							<canvas id="myLeavesChart"></canvas>
+						</div>
+					</div>
+
+					<div class="col-md-6" style="margin-bottom: 50px;">
+						<div class="container" style="width: 500px;">
+							<canvas id="myAttendancesChart"></canvas>
+						</div>
+					</div>
+				</div>
+			
+				<script>
+					let myEmployeeChart = document.getElementById('myEmployeeChart').getContext('2d');
+					let myPayrollsChart = document.getElementById('myPayrollsChart').getContext('2d');
+					let myLeavesChart = document.getElementById('myLeavesChart').getContext('2d');
+					let myAttendancesChart = document.getElementById('myAttendancesChart').getContext('2d');
+
+					let fullTimes = parseInt('<%=fullTimes%>');
+					let partTimes = parseInt('<%=partTimes%>');
+					
+					let totalPendingPayrolls = parseInt('<%=totalPendingPayrolls%>');
+					let totalPaidPayrolls = parseInt('<%=totalPaidPayrolls%>');
+					
+					let totalPendingLeaves = parseInt('<%=totalPendingLeaves%>');
+					let totalApprovedLeaves = parseInt('<%=totalApprovedLeaves%>');
+
+					let totalLate = 20;
+					let totalOnTime = 45;
+
+
+					// Global Options
+					Chart.defaults.global.defaultFontFamily = 'Lato';
+					Chart.defaults.global.defaultFontSize = 15;
+					Chart.defaults.global.defaultFontColor = '#777';
+					// employees chart
+					let employeesChart = new Chart(myEmployeeChart, {
+						type: 'pie', //bar, horizontalBar, pie, line, dounut, radar, polarArea
+						data: {
+							labels: ['Full-Time', 'Part-Time'],
+							datasets: [{
+								label: 'Employees',
+								data: [
+									fullTimes,
+									partTimes
+								],
+								// backgroundColor: 'green'
+								backgroundColor: [
+									'red',
+									'pink'
+								],
+								hoverBorderWidth: 3,
+								hoverBorderColor: 'black'
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Employees Chart',
+								fontSize: 15
+							},
+							legend: {
+								display: true,
+								position: 'top',
+								labels: {
+									fontColor: 'black'
+								}
+							},
+							layout: {
+								padding:{
+									left: 0,
+									right: 0,
+									bottom: 0,
+									top: 0
+								}
+							},
+							tooltips: {
+								enabled: true
+							}
+						}
+					
+					
+					});
+					
+					// payrolls chart
+					let payrollsChart = new Chart(myPayrollsChart, {
+						type: 'pie', //bar, horizontalBar, pie, line, dounut, radar, polarArea
+						data: {
+							labels: ['Pending', 'Paid'],
+							datasets: [{
+								label: 'Payrolls',
+								data: [
+									totalPendingPayrolls,
+									totalPaidPayrolls
+								],
+								// backgroundColor: 'green'
+								backgroundColor: [
+									'#98b4eb',
+									'#3471eb'
+								],
+								hoverBorderWidth: 3,
+								hoverBorderColor: 'black'
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Payrolls Chart',
+								fontSize: 15
+							},
+							legend: {
+								display: true,
+								position: 'top',
+								labels: {
+									fontColor: 'black'
+								}
+							},
+							layout: {
+								padding:{
+									left: 0,
+									right: 0,
+									bottom: 0,
+									top: 0
+								}
+							},
+							tooltips: {
+								enabled: true
+							}
+						}
+					
+					
+					});
+					
+					// leaves chart
+					let leavesChart = new Chart(myLeavesChart, {
+						type: 'pie', //bar, horizontalBar, pie, line, dounut, radar, polarArea
+						data: {
+							labels: ['Pending', 'Approved'],
+							datasets: [{
+								label: 'Leaves',
+								data: [
+									totalPendingLeaves,
+									totalApprovedLeaves
+								],
+								// backgroundColor: 'green'
+								backgroundColor: [
+									'#edba7b',
+									'#e88d1e'
+								],
+								hoverBorderWidth: 3,
+								hoverBorderColor: 'black'
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Leaves Chart',
+								fontSize: 15
+							},
+							legend: {
+								display: true,
+								position: 'top',
+								labels: {
+									fontColor: 'black'
+								}
+							},
+							layout: {
+								padding:{
+									left: 0,
+									right: 0,
+									bottom: 0,
+									top: 0
+								}
+							},
+							tooltips: {
+								enabled: true
+							}
+						}
+					
+					
+					});
+
+					// attendances chart
+					let attendancesChart = new Chart(myAttendancesChart, {
+						type: 'pie', //bar, horizontalBar, pie, line, dounut, radar, polarArea
+						data: {
+							labels: ['On Time', 'Late'],
+							datasets: [{
+								label: 'Attendances',
+								data: [
+									totalOnTime,
+									totalLate
+								],
+								// backgroundColor: 'green'
+								backgroundColor: [
+									'#540db8',
+									'#a781de'
+								],
+								hoverBorderWidth: 3,
+								hoverBorderColor: 'black'
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Attendances Chart',
+								fontSize: 15
+							},
+							legend: {
+								display: true,
+								position: 'top',
+								labels: {
+									fontColor: 'black'
+								}
+							},
+							layout: {
+								padding:{
+									left: 0,
+									right: 0,
+									bottom: 0,
+									top: 0
+								}
+							},
+							tooltips: {
+								enabled: true
+							}
+						}
+					
+					
+					});
+					
+					</script>
+			
+
+
+				<!-- <div class="card-columns">
 					
 					
 					<div class="card text-white bg-info mb-3">
@@ -132,7 +381,7 @@
 						</div>
 					</div>
 
-				</div>
+				</div> -->
 				
 
 				
