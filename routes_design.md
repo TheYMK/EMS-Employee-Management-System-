@@ -308,3 +308,19 @@ SHOW            /homehod/projects/:id           GET        Show info about one s
 EDIT            /homehod/projects/:id/edit      GET        Show edit form of one project           Project.findById()
 UPDATE          /homehod/projects/:id           PUT        Update a particular project             Project.findByIdAndUpdate()
 DESTROY         /homehod/projects/:id           DELETE     Delete a particular project             Project.findByIdAndRemove()
+
+
+================================================================================================================
+                                    ****          TASKS ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hod -->
+
+INDEX           /homehod/tasks                  GET        list all tasks                          Task.find()
+NEW             /homehod/tasks/new              GET        Show a new task form                    N/A
+CREATE          /homehod/tasks                  POST       Create a new task                       Task.create()
+SHOW            /homehod/tasks/:id              GET        Show info about one specific task       Task.findById()
+EDIT            /homehod/tasks/:id/edit         GET        Show edit form of one task              Task.findById()
+UPDATE          /homehod/tasks/:id              PUT        Update a particular task                Task.findByIdAndUpdate()
+DESTROY         /homehod/tasks/:id              DELETE     Delete a particular projetaskct         Task.findByIdAndRemove()

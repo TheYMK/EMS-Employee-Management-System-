@@ -1,0 +1,68 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2><%= task.name%> Task</h2>
+				</header>
+
+                <div class="card text-center">
+                    <div class="card-header">
+                      <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                          <a class="button" href="/homehod/tasks/<%=task._id%>/edit">Edit</a>
+                        </li>
+                        <li class="nav-item">
+                          <form action="/homehod/tasks/<%=task._id%>?_method=DELETE" method="POST" class="delete-form">
+                            <button class="button">Delete</button>
+                          </form>
+                          
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Task Details</h5>
+                      <p class="card-text"><strong>Start Date:</strong> <%=task.start%> | <strong>End Date:</strong> <%=task.end%> <br>
+                        <strong>Assigned Employee:</strong> <%=assignedEmployee.first_name%> <%=assignedEmployee.last_name%> (<%= assignedEmployee.employee_id%>) - <%= assignedEmployee.designation%><br>
+                        <strong>Department:</strong> <%= task.department.department_name%> | <strong>Company:</strong> <%=task.company.name%> <br>
+                        <strong>Status:</strong> <%= task.status %> <br>
+                        <strong>Description:</strong> <%= task.description%>
+                    </p>
+                    </div>
+                  </div>
+
+
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/hod_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

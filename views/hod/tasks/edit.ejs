@@ -1,0 +1,134 @@
+<%- include("../../partials/header") %>
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+    <div class="inner">
+
+      <!-- Header -->
+      <header id="header">
+        <a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+            <%= currentUser.user_role%></a>
+      </header>
+
+      <!-- Content -->
+      <section>
+        <header class="main">
+          <h1>Update Task</h1>
+        </header>
+
+        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis
+          dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet.
+          Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada
+          et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget
+          turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+
+        <hr class="major" />
+
+        <!-- Form -->
+        <form action="/homehod/tasks/<%=task._id%>?_method=PUT" method="POST">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputName4">Name</label>
+              <input type="text" class="form-control" id="inputName4" name="task[name]" value="<%=task.name%>">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputStart">Start Date</label>
+              <input type="date" class="form-control" id="inputStart" name="task[start]" value="<%=task.start%>">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputEnd">End Date</label>
+              <input type="date" class="form-control" id="inputEnd" name="task[end]" value="<%=task.end%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputDept">Department</label>
+              <select id="inputDept" class="form-control" name="task[department]">
+                <option selected><%= employee.department%></option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputCompany">Company</label>
+              <input type="text" class="form-control" id="inputCompany" name="task[company]"
+                value="<%=currentUser.company_name%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputStatus">Status</label>
+              <select name="task[status]" id="inputState" class="form-control">
+                <option selected><%=task.status%></option>
+                <option>Not started yet</option>
+                <option>In progress</option>
+                <option>Completed</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputEmp">Assign Employee</label>
+              <select name="task[employee]" id="inputEmp" class="form-control">
+                <option selected> - Choose -</option>
+                <% employees.forEach(function(employee) { %>
+                      <% if(employee.department === department.department_name) { %>
+                              <option><%= employee.first_name%> <%= employee.last_name%> - <%= employee.designation%></option>
+                      <% } %>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputProject">Select Project</label>
+              <select name="task[project]" id="inputProject" class="form-control">
+                <option selected> - Choose -</option>
+                <% projects.forEach(function(project){ %>
+                      <% if(project.department === department.department_name){%>
+                            <option><%= project.name %></option>
+                      <% } %>
+                <% }) %>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <textarea id="inputDescription" cols="30" rows="10" name="task[description]"><%=task.description%></textarea>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                Check me out
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="button primary">Update</button>
+        </form>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <%- include("../../partials/hod_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
