@@ -42,7 +42,70 @@ router.get('/homeadmin/employees/new', middleware.isLoggedInAsAdmin, function(re
 });
 
 // CREATE - create a new employee
+// router.post('/homeadmin/employees', middleware.isLoggedInAsAdmin, async (req, res) => {
+// 	try {
+// 		const dept = await Department.findOne({department_name: })
+// 		let empl = {
+// 			first_name: req.body.employee.first_name,
+// 			last_name: req.body.employee.last_name,
+// 			date_of_birth: req.body.employee.date_of_birth,
+// 			gender: req.body.employee.gender,
+// 			marital_status: req.body.employee.marital_status,
+// 			nationality: req.body.employee.nationality,
+// 			passport_no: req.body.employee.passport_no,
+// 			photo: req.body.employee.photo,
+// 			address: req.body.employee.address,
+// 			city: req.body.employee.city,
+// 			email: req.body.employee.email,
+// 			country: req.body.employee.country,
+// 			mobile: req.body.employee.mobile,
+// 			phone: req.body.employee.phone,
+// 			bank_name: req.body.employee.bank_name,
+// 			account_name: req.body.employee.account_name,
+// 			account_no: req.body.employee.account_no,
+// 			employee_id: req.body.employee.employee_id,
+// 			designation: req.body.employee.designation,
+// 			joining_date: req.body.employee.joining_date,
+// 			department: req.body.employee.department,
+// 			salary: req.body.employee.salary,
+// 			company: req.body.employee.company,
+// 			type_of_employee: req.body.employee.type_of_employee,
+// 			qualification: req.body.employee.qualification
+// 		};
+// 	} catch (err) {
+// 		console.log(err);
+// 		req.flash('error', err.message);
+// 		return res.redirect('back');
+// 	}
+// });
 router.post('/homeadmin/employees', middleware.isLoggedInAsAdmin, function(req, res) {
+	// let empl = {
+	// 	first_name: req.body.employee.first_name,
+	// 	last_name: req.body.employee.last_name,
+	// 	date_of_birth: req.body.employee.date_of_birth,
+	// 	gender: req.body.employee.gender,
+	// 	marital_status: req.body.employee.marital_status,
+	// 	nationality: req.body.employee.nationality,
+	// 	passport_no: req.body.employee.passport_no,
+	// 	photo: req.body.employee.photo,
+	// 	address: req.body.employee.address,
+	// 	city: req.body.employee.city,
+	// 	email: req.body.employee.email,
+	// 	country: req.body.employee.country,
+	// 	mobile: req.body.employee.mobile,
+	// 	phone: req.body.employee.phone,
+	// 	bank_name: req.body.employee.bank_name,
+	// 	account_name: req.body.employee.account_name,
+	// 	account_no: req.body.employee.account_no,
+	// 	employee_id: req.body.employee.employee_id,
+	// 	designation: req.body.employee.designation,
+	// 	joining_date: req.body.employee.joining_date,
+	// 	department: req.body.employee.department,
+	// 	salary: req.body.employee.salary,
+	// 	company: req.body.employee.company,
+	// 	type_of_employee: req.body.employee.type_of_employee,
+	// 	qualification: req.body.employee.qualification
+	// };
 	Employee.create(req.body.employee, function(err, newlyCreated) {
 		if (err) {
 			console.log(err);
@@ -57,7 +120,10 @@ router.post('/homeadmin/employees', middleware.isLoggedInAsAdmin, function(req, 
 					console.log(err);
 					res.redirect('back');
 				} else {
-					Department.findOne({ department_name: emp.department }, function(err, foundDepartment) {
+					Department.findOne({ department_name: emp.department, company: req.user.company_name }, function(
+						err,
+						foundDepartment
+					) {
 						if (err) {
 							console.log(err);
 							res.redirect('back');

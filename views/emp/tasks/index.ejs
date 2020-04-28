@@ -17,7 +17,7 @@
 			<section>
 
 				<header class="major">
-					<h2>Projects List</h2>
+					<h2>Tasks List</h2>
 				</header>
 
 				<!-- Table -->
@@ -34,7 +34,7 @@
 						</thead>
 						<tbody>
 							<% tasks.forEach(function(task){ %>
-                                    <% if(task.department.id.equals(department.id)) { %>
+                                    <% if(task.company.name === currentUser.company_name && task.department.id.equals(department.id)) { %>
                                         <% if(task.employee.employee_id === currentUser.username) { %>
                                             <tr>
                                                 <td><a href="/homeemployee/tasks/<%=task._id%>"><%= task.name%></a></td>

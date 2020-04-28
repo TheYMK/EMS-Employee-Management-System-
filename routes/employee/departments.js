@@ -20,42 +20,65 @@ Blog.find({}, function(err, blogs) {
 });
 
 // SHOW - show info about one specific dept
-router.get('/homeemployee/departments/:id', middleware.isLoggedAsEmployee, function(req, res) {
-	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
-		if (err) {
-			console.log(err);
-			req.flash('error', err.message);
-			return res.redirect('back');
-		}
+router.get('/homeemployee/departments/:id', middleware.isLoggedAsEmployee, async (req, res) => {
+	try {
+		const foundEmployee = await Employee.findById(req.user.employee.id);
+		const foundDepartment = await Department.findById(req.params.id);
+		const allEmployees = await Employee.find({});
+		const allProjects = await Project.find({});
 
-		Department.findOne({ department_name: foundEmployee.department }, function(err, foundDepartment) {
-			if (err) {
-				console.log(err);
-				req.flash('error', err.message);
-				res.redirect('back');
-			} else {
-				Employee.find({}, function(err, allEmployees) {
-					if (err) {
-						return console.log(err);
-					}
+		console.log(foundDepartment);
+		console.log(foundEmployee);
 
-					Project.find({}, function(err, allProjects) {
-						if (err) {
-							return console.log(err);
-						} else {
-							res.render('emp/departments/show', {
-								dept: foundDepartment,
-								employee: foundEmployee,
-								employees: allEmployees,
-								projects: allProjects,
-								blogs: allBlogs
-							});
-						}
-					});
-				});
-			}
+		return res.render('emp/departments/show', {
+			dept: foundDepartment,
+			employee: foundEmployee,
+			employees: allEmployees,
+			projects: allProjects,
+			blogs: allBlogs
 		});
-	});
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
 });
+// router.get('/homeemployee/departments/:id', middleware.isLoggedAsEmployee, function(req, res) {
+// 	Employee.findById(req.user.employee.id, function(err, foundEmployee) {
+// 		if (err) {
+// 			console.log(err);
+// 			req.flash('error', err.message);
+// 			return res.redirect('back');
+// 		}
+
+// 		Department.findOne({ department_name: foundEmployee.department }, function(err, foundDepartment) {
+// 			if (err) {
+// 				console.log(err);
+// 				req.flash('error', err.message);
+// 				res.redirect('back');
+// 			} else {
+// 				Employee.find({}, function(err, allEmployees) {
+// 					if (err) {
+// 						return console.log(err);
+// 					}
+
+// 					Project.find({}, function(err, allProjects) {
+// 						if (err) {
+// 							return console.log(err);
+// 						} else {
+// 							res.render('emp/departments/show', {
+// 								dept: foundDepartment,
+// 								employee: foundEmployee,
+// 								employees: allEmployees,
+// 								projects: allProjects,
+// 								blogs: allBlogs
+// 							});
+// 						}
+// 					});
+// 				});
+// 			}
+// 		});
+// 	});
+// });
 
 module.exports = router;

@@ -116,7 +116,21 @@ router.get('/homeadmin/departments/:id/edit', middleware.isLoggedInAsAdmin, func
 // Update - update a particular departments
 router.put('/homeadmin/departments/:id', middleware.isLoggedInAsAdmin, async (req, res) => {
 	try {
-		const updatedDepartment = await Department.findByIdAndUpdate(req.params.id, req.body.department);
+		var createdBy = {
+			id: req.user.id,
+			username: req.user.username
+		};
+		let dpt = {
+			department_name: req.body.department.department_name,
+			department_hod: req.body.department.department_hod,
+			department_category: req.body.department.department_category,
+			department_image: req.body.department.department_image,
+			department_description: req.body.department.department_description,
+			company: req.user.company_name,
+			createdBy
+		};
+
+		const updatedDepartment = await Department.findByIdAndUpdate(req.params.id, dpt);
 		const foundDepartment = await Department.findById(req.params.id);
 		const allEmployees = await Employee.find({});
 		const allProjects = await Project.find({});

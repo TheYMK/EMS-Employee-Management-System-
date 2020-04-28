@@ -25,7 +25,6 @@ router.get('/homehod/tasks', middleware.isLoggedInAsHOD, async (req, res) => {
 		var yyyy = today.getFullYear();
 
 		today = yyyy + '-' + mm + '-' + dd;
-		console.log(today);
 
 		allTasks.forEach(async function(task) {
 			if (task.end === today) {
@@ -90,7 +89,10 @@ router.post('/homehod/tasks', middleware.isLoggedInAsHOD, async (req, res) => {
 	try {
 		let firstName = req.body.task.employee.split(' ');
 		const foundEmployee = await Employee.findOne({ first_name: firstName });
-		const foundDepartment = await Department.findOne({ department_name: req.body.task.department });
+		const foundDepartment = await Department.findOne({
+			department_name: req.body.task.department,
+			company: req.user.company_name
+		});
 		const foundCompany = await Company.findOne({ name: req.body.task.company });
 		const foundProject = await Project.findOne({ name: req.body.task.project });
 
