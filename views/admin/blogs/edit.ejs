@@ -8,7 +8,12 @@
 
 			<!-- Header -->
 			<header id="header">
-				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+				<% if(currentUser.user_role === 'Admin') { %>
+					<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+				<% }else { %>
+					<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+						<%= currentUser.user_role%></a>
+				<% } %>
 			</header>
 
 			<!-- Content -->

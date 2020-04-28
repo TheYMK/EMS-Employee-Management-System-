@@ -1,0 +1,73 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+			</header>
+
+			<!-- Content -->
+			<section>
+
+				<header class="major">
+					<h2>Projects List</h2>
+				</header>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Start</th>
+                                <th>End</th>
+                                <th>Project</th>
+                                <th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% tasks.forEach(function(task){ %>
+                                    <% if(task.department.id.equals(department.id)) { %>
+                                        <% if(task.employee.employee_id === currentUser.username) { %>
+                                            <tr>
+                                                <td><a href="/homeemployee/tasks/<%=task._id%>"><%= task.name%></a></td>
+                                                <td><%= task.start%></td>
+                                                <td><%= task.end%></td>
+                                                <td><%= task.project.name%></td>
+                                                <td><%= task.status%></td>
+                                                
+                                            </tr>
+                                        <% } %>
+									<% } %>
+							<% }) %>
+                            
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/emp_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

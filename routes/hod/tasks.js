@@ -18,6 +18,37 @@ router.get('/homehod/tasks', middleware.isLoggedInAsHOD, async (req, res) => {
 		const allBlogs = await Blog.find({});
 		const allTasks = await Task.find({});
 		const foundDepartment = await Department.findById(req.user.department.id);
+
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
+
+		today = yyyy + '-' + mm + '-' + dd;
+		console.log(today);
+
+		allTasks.forEach(async function(task) {
+			if (task.end === today) {
+				let tsk = {
+					status: 'Completed'
+				};
+
+				const updatedTask = await Task.findByIdAndUpdate(task.id, tsk);
+			} else if (task.start === today) {
+				let tsk = {
+					status: 'In progress'
+				};
+
+				const updatedTask = await Task.findByIdAndUpdate(task.id, tsk);
+			} else {
+				let tsk = {
+					status: 'Not started yet'
+				};
+
+				const updatedTask = await Task.findByIdAndUpdate(task.id, tsk);
+			}
+		});
+
 		return res.render('hod/tasks/index', {
 			employee: foundEmployee,
 			blogs: allBlogs,

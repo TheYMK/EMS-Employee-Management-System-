@@ -126,8 +126,10 @@
 					let paidPayrolls = parseInt('<%=payedPayrolls%>');
 					let pendingLeaves = parseInt('<%=pendingLeaves%>');
 					let approvedLeaves = parseInt('<%=approvedLeaves%>');
-					let pendingTasks = 20;
-					let completedTasks = 24;
+
+					let notYetStartedTasks = parseInt('<%=notStartedTasks%>');
+					let inProgressTasks = parseInt('<%=inProgressTasks%>');
+					let completedTasks = parseInt('<%=completedTasks%>');
 
 					// Global Options
 					Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -284,17 +286,20 @@
 					let tasksChart = new Chart(myTasksChart, {
 						type: 'pie', //bar, horizontalBar, pie, line, dounut, radar, polarArea
 						data: {
-							labels: ['Pending', 'Completed'],
+							labels: ['Not yet started', 'In progress', 'Completed'],
 							datasets: [{
 								label: 'Tasks',
 								data: [
-									pendingTasks,
+									notYetStartedTasks,
+									inProgressTasks,
 									completedTasks
 								],
 								// backgroundColor: 'green'
 								backgroundColor: [
 									'#b1deda',
-									'#2db5b1'
+									'#2db5b1',
+									'#08a1d4'
+					
 								],
 								hoverBorderWidth: 3,
 								hoverBorderColor: 'black'
@@ -303,7 +308,7 @@
 						options: {
 							title: {
 								display: true,
-								text: 'Leaves Chart',
+								text: 'Tasks Chart',
 								fontSize: 15
 							},
 							legend: {

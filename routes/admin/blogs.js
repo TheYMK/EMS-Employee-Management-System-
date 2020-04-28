@@ -23,7 +23,9 @@ router.get('/blogs', middleware.isLoggedIn, async (req, res) => {
 	try {
 		// finding all blogs
 		const allBlogs = await Blog.find({ ownedBy: req.user.company_name });
-		res.render('admin/blogs/index', { blogs: allBlogs });
+		const foundEmployee = await Employee.findOne({ employee_id: req.user.username });
+
+		res.render('admin/blogs/index', { blogs: allBlogs, employee: foundEmployee });
 	} catch (err) {
 		console.log(err);
 		req.flash('error', err.message);
@@ -34,7 +36,8 @@ router.get('/blogs', middleware.isLoggedIn, async (req, res) => {
 // NEW - Show a new blog form
 router.get('/blogs/new', middleware.isLoggedIn, async (req, res) => {
 	try {
-		res.render('admin/blogs/new', { blogs: allBlogs });
+		const foundEmployee = await Employee.findOne({ employee_id: req.user.username });
+		res.render('admin/blogs/new', { blogs: allBlogs, employee: foundEmployee });
 	} catch (err) {
 		console.log(err);
 	}
@@ -70,7 +73,14 @@ router.get('/blogs/:id', middleware.isLoggedIn, function(req, res) {
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			res.render('admin/blogs/show', { blog: foundBlog, blogs: allBlogs });
+			Employee.findOne({ employee_id: req.user.username }, function(err, foundEmployee) {
+				if (err || !foundEmployee) {
+					req.flash('error', err.message);
+					res.redirect('back');
+				} else {
+					res.render('admin/blogs/show', { blog: foundBlog, blogs: allBlogs, employee: foundEmployee });
+				}
+			});
 		}
 	});
 });
@@ -80,8 +90,9 @@ router.get('/blogs/:id/edit', middleware.checkBlogOwnership, async (req, res) =>
 	try {
 		const foundBlog = await Blog.findById(req.params.id);
 		const allBlogs = await Blog.find({});
+		const foundEmployee = await Employee.findOne({ employee_id: req.user.username });
 
-		res.render('admin/blogs/edit', { blog: foundBlog, blogs: allBlogs });
+		res.render('admin/blogs/edit', { blog: foundBlog, blogs: allBlogs, employee: foundEmployee });
 	} catch (err) {
 		console.log(err);
 		req.flash('error', 'Blog not found');

@@ -10,6 +10,7 @@ const Employee = require('../../models/employee');
 const Project = require('../../models/project');
 const Leave = require('../../models/leave');
 const Payroll = require('../../models/payroll');
+const Task = require('../../models/task');
 var middleware = require('../../middleware');
 
 // INDEX - employee home page
@@ -22,6 +23,7 @@ router.get('/homeemployee', middleware.isLoggedAsEmployee, async (req, res) => {
 		const allPayrolls = await Payroll.find({});
 		const allBlogs = await Blog.find({});
 		const allEmployees = await Employee.find({});
+		const allTasks = await Task.find({});
 
 		let prjcts = [];
 		let prjctTeam = [];
@@ -62,6 +64,26 @@ router.get('/homeemployee', middleware.isLoggedAsEmployee, async (req, res) => {
 			}
 		});
 
+		let notStartedTasks = 0;
+		let inProgressTasks = 0;
+		let completedTasks = 0;
+
+		allTasks.forEach(function(task) {
+			if (
+				task.company.name === req.user.company_name &&
+				task.department.department_name === foundEmployee.department &&
+				task.employee.employee_id === req.user.username
+			) {
+				if (task.status === 'In progress') {
+					inProgressTasks++;
+				} else if (task.status === 'Completed') {
+					completedTasks++;
+				} else {
+					notStartedTasks++;
+				}
+			}
+		});
+
 		res.render('emp/index', {
 			employee: foundEmployee,
 			team: prjctTeam,
@@ -71,7 +93,10 @@ router.get('/homeemployee', middleware.isLoggedAsEmployee, async (req, res) => {
 			pendingLeaves: pendingLeaves,
 			approvedLeaves: approvedLeaves,
 			pendingPayrolls: pendingPayrolls,
-			payedPayrolls: payedPayrolls
+			payedPayrolls: payedPayrolls,
+			notStartedTasks: notStartedTasks,
+			inProgressTasks: inProgressTasks,
+			completedTasks: completedTasks
 		});
 	} catch (err) {
 		console.log(err);

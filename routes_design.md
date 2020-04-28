@@ -164,12 +164,14 @@ Name            Path                              Verb        Purpose           
 INDEX           /homeemployee/projects             GET        list all projects                       Project.find()
 SHOW            /homeemployee/projects/:id           GET        Show info about one specific project    Project.findById()
 
+
+
 ================================================================================================================
                                     ****          BLOGS ROUTES          ****
 ================================================================================================================
 Name            Path                 Verb        Purpose                                Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
-                                                <!-- emp -->
+                                                <!-- Emp -->
 INDEX           /blogs               GET        list all blogs                          Blog.find()
 NEW             /blogs/new           GET        Show a new blog form                    N/A
 CREATE          /blogs               POST       Create a new blog                       Blog.create()
@@ -177,6 +179,8 @@ SHOW            /blogs/:id           GET        Show info about one specific blo
 EDIT            /blogs/:id/edit      GET        Show edit form of one blog              Blog.findById()
 UPDATE          /blogs/:id           PUT        Update a particular blog                Blog.findByIdAndUpdate()
 DESTROY         /blogs/:id           DELETE     Delete a particular blog                Blog.findByIdAndRemove()
+
+
 
 ================================================================================================================
                                     ****          CHAT ROUTES          ****
@@ -212,6 +216,14 @@ UPDATE          /homeemployee/leaves/:id                 PUT        Update a par
 DESTROY         /homeemployee/leaves/:id                 DELETE     Delete a particular leave                
 
 
+================================================================================================================
+                                    ****          TASKS ROUTES          ****
+================================================================================================================
+Name            Path                        Verb        Purpose                                Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- emp -->
+INDEX           /homeemployee/tasks       GET           list all tasks                     
+SHOW            /homeemployee/tasks/:id   GET           Show info about one specific task               
 
 ================================================================================================================
                                     ****          HRS HOME PAGE ROUTES          ****
