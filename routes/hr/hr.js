@@ -93,6 +93,25 @@ router.get('/homehr', middleware.isLoggedInAsHR, async (req, res) => {
 			}
 		});
 
+		// getting total employees of employees who marked attendances on time and/or late
+		let totalOnTime = 0;
+		let totalLate = 0;
+
+		allEmployees.forEach(function(employee) {
+			if (employee.company === req.user.company_name) {
+				employee.attendances.forEach(function(attendance) {
+					if (attendance.time === employee.hour_start) {
+						totalOnTime++;
+					} else {
+						totalLate++;
+					}
+				});
+			}
+		});
+
+		// console.log(totalLate);
+		// console.log(totalOnTime);
+
 		res.render('hr/index', {
 			employee: foundEmployee,
 			department: foundDepartment,
@@ -104,7 +123,9 @@ router.get('/homehr', middleware.isLoggedInAsHR, async (req, res) => {
 			totalPendingPayrolls: totalPendingPayrolls,
 			totalPaidPayrolls: totalPaidPayrolls,
 			totalPendingLeaves: totalPendingLeaves,
-			totalApprovedLeaves: totalApprovedLeaves
+			totalApprovedLeaves: totalApprovedLeaves,
+			totalOnTime: totalOnTime,
+			totalLate: totalLate
 		});
 	} catch (err) {
 		console.log(err);

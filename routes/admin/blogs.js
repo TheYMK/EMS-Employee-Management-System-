@@ -67,20 +67,19 @@ router.post('/blogs', middleware.isLoggedIn, async (req, res) => {
 });
 
 // SHOW - Show info about one specific blog
-router.get('/blogs/:id', middleware.isLoggedIn, function(req, res) {
-	Blog.findById(req.params.id).populate('comments').exec(function(err, foundBlog) {
+router.get('/blogs/:id', middleware.isLoggedIn, async function(req, res) {
+	Blog.findById(req.params.id).populate('comments').exec(async function(err, foundBlog) {
 		if (err || !foundBlog) {
 			req.flash('error', err.message);
 			res.redirect('back');
 		} else {
-			Employee.findOne({ employee_id: req.user.username }, function(err, foundEmployee) {
-				if (err || !foundEmployee) {
-					req.flash('error', err.message);
-					res.redirect('back');
-				} else {
-					res.render('admin/blogs/show', { blog: foundBlog, blogs: allBlogs, employee: foundEmployee });
-				}
-			});
+			try {
+				const foundEmployee = await Employee.findOne({ employee_id: req.user.username });
+				return res.render('admin/blogs/show', { blog: foundBlog, blogs: allBlogs, employee: foundEmployee });
+			} catch (err) {
+				req.flash('error', err.message);
+				return res.redirect('back');
+			}
 		}
 	});
 });

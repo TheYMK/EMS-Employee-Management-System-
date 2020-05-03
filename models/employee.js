@@ -32,9 +32,12 @@ var employeeSchema = new mongoose.Schema({
 	type_of_employee: String,
 	qualification: String,
 	password: String,
+	hour_start: String,
+	hour_end: String,
 	attendances: [
 		{
-			date: String
+			date: String,
+			time: String
 		}
 	]
 });

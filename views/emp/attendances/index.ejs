@@ -38,6 +38,7 @@
 						<h5 class="card-title" style="font-size: 30px;">Count: 0</h5>
 						<% } %>
 
+						<p>Working hours: <strong>From</strong> <%=employee.hour_start%> <strong>To</strong> <%=employee.hour_end%></p>
 						<p class="card-text">A salary payment request will be sent to HRs of your department after 30
 							attendances</p>
 						<form action="/homeemployee/employees/<%=employee._id%>/attendances?_method=PUT" method="POST">
@@ -58,7 +59,7 @@
 							<tr>
 								<th>Day</th>
 								<th>Date</th>
-
+								<th>Time</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -66,6 +67,7 @@
 							<tr>
 								<td><%= employee.attendances.indexOf(attendance) + 1 %></td>
 								<td><%= attendance.date %></td>
+								<td><%= attendance.time%></td>
 							</tr>
 							<% }) %>
 

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var companySchema = new mongoose.Schema({
 	name: String,
+	ein: String,
 	city: String,
 	type: String,
 	address: String,

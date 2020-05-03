@@ -35,7 +35,8 @@
 								<th>Employee ID</th>
 								<th>Full Name</th>
 								<th>Department</th>
-                                <th>Designation</th>
+								<th>Designation</th>
+								<th>Time</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -48,7 +49,8 @@
                                             <td><a href="/homehr/employees/<%=emp._id%>"><%= emp.employee_id %></a></td>
                                             <td><%= emp.first_name%> <%= emp.last_name%></td>
                                             <td><%= emp.department %></td>
-                                            <td><%= emp.designation %></td>
+											<td><%= emp.designation %></td>
+											<td><%=emp.attendances[emp.attendances.length -1].time%></td>
                                         </tr>
                                     <% }) %>
                                     

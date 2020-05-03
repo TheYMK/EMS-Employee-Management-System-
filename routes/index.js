@@ -16,7 +16,7 @@ router.get('/register', function(req, res) {
 
 //handle registration logic
 router.post('/register', function(req, res) {
-	var newCompany = new Company({
+	let newCompany = new Company({
 		name: req.body.company_name,
 		city: req.body.company_city,
 		type: req.body.company_type,
@@ -24,10 +24,11 @@ router.post('/register', function(req, res) {
 		email: req.body.company_email,
 		phone: req.body.company_phone,
 		size: req.body.company_size,
-		description: req.body.company_description
+		description: req.body.company_description,
+		ein: req.body.ein
 	});
 
-	var newUser;
+	let newUser;
 
 	Company.create(newCompany, function(err, newlyCreated) {
 		if (err) {
@@ -47,7 +48,8 @@ router.post('/register', function(req, res) {
 				company_size: req.body.company_size,
 				company_description: req.body.company_description,
 				company: {
-					id: newlyCreated._id
+					id: newlyCreated._id,
+					ein: req.body.ein
 				}
 			});
 

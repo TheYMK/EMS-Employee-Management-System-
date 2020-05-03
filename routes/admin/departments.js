@@ -1,15 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../../models/user');
-var Blog = require('../../models/blog');
-var Comment = require('../../models/comment');
-var Company = require('../../models/company');
-var Department = require('../../models/department');
-var Employee = require('../../models/employee');
-var Project = require('../../models/project');
-var middleware = require('../../middleware');
+const express = require('express');
+const router = express.Router();
+const User = require('../../models/user');
+const Blog = require('../../models/blog');
+const Comment = require('../../models/comment');
+const Company = require('../../models/company');
+const Department = require('../../models/department');
+const Employee = require('../../models/employee');
+const Project = require('../../models/project');
+const middleware = require('../../middleware');
 
-var allBlogs;
+let allBlogs;
 Blog.find({}, function(err, blogs) {
 	if (err) {
 		console.log(err);
@@ -37,23 +37,24 @@ router.get('/homeadmin/departments/new', middleware.isLoggedInAsAdmin, function(
 
 // CREATE - create a new department
 router.post('/homeadmin/departments', middleware.isLoggedInAsAdmin, function(req, res) {
-	var name = req.body.department_name;
-	var hod = req.body.department_hod;
-	var category = req.body.department_category;
-	var description = req.body.department_description;
-	var image = req.body.department_image;
-	var createdBy = {
+	const name = req.body.department_name;
+	const hod = req.body.department_hod;
+	const category = req.body.department_category;
+	const description = req.body.department_description;
+	const image = req.body.department_image;
+	const createdBy = {
 		id: req.user.id,
 		username: req.user.username
 	};
 
-	var newDepartment = {
+	const newDepartment = {
 		department_image: image,
 		department_name: name,
 		department_hod: hod,
 		department_category: category,
 		department_description: description,
 		company: req.user.company_name,
+		company_ein: req.user.company.ein,
 		createdBy
 	};
 
