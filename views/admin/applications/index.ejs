@@ -1,0 +1,76 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%= currentUser.username%></a>
+			</header>
+
+			<!-- Content -->
+			<section>
+                
+                <div>
+                    <a href="/homeadmin/applications/new" class="button primary mb-3">New application</a>
+                </div>
+
+				<header class="major">
+					<h2>Application List</h2>
+				</header>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Designation</th>
+                                <th>Qualification</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<% applications.forEach(function(application){ %>
+								<% if(application.company.ein === currentUser.company.ein){ %>
+									<tr>
+										<td><%=application.applicant.first_name%> <%= application.applicant.last_name%></td>
+										<td><%=application.applicant.type_of_employee%></td>
+										<td><%=application.applicant.desired_designation%></td>
+										<td> <%=application.applicant.qualification%> </td>
+										<td><%=application.status%></td>
+										<td><a href="/homeadmin/applications/<%=application._id%>" class="button small">View</a></td>
+									</tr>
+								<% } %>
+							<% }) %>
+							
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

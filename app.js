@@ -4,6 +4,10 @@
 const path = require('path'),
 	http = require('http'),
 	express = require('express'),
+	crypto = require('crypto'),
+	multer = require('multer'),
+	GridFsStorage = require('multer-gridfs-storage'),
+	Grid = require('gridfs-stream'),
 	socketio = require('socket.io'),
 	formatMessage = require('./utils/messages'),
 	{ userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/users'),
@@ -26,6 +30,7 @@ const path = require('path'),
 	Project = require('./models/project'),
 	Payroll = require('./models/payroll'),
 	Task = require('./models/task'),
+	Application = require('./models/application'),
 	session = require('express-session'),
 	chartjs = require('chart.js');
 
@@ -44,6 +49,7 @@ const commentsRoutes = require('./routes/admin/comments');
 const projectsRoutes = require('./routes/admin/projects');
 const companiesRoutes = require('./routes/admin/companies');
 const payrollsRoutes = require('./routes/admin/payrolls');
+const applicationsRoutes = require('./routes/admin/applications');
 const emp_departmentRoutes = require('./routes/employee/departments');
 const emp_attendancesRoutes = require('./routes/employee/attendances');
 const emp_payrollsRoutes = require('./routes/employee/payrolls');
@@ -59,11 +65,24 @@ const hod_projectsRoutes = require('./routes/hod/projects');
 const hod_tasksRoutes = require('./routes/hod/tasks');
 
 //database connection
-mongoose.connect('mongodb://localhost:27017/ems_db', {
+const mongoURI = 'mongodb://localhost:27017/ems_db';
+
+mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true,
 	useFindAndModify: false
+});
+
+const conn = mongoose.connection;
+
+// init gfs
+let gfs;
+
+conn.once('open', () => {
+	// Init stream
+	gfs = Grid(conn.db, mongoose.mongo);
+	gfs.collection('uploads');
 });
 
 //More blah blah
@@ -163,6 +182,7 @@ app.use(commentsRoutes);
 app.use(projectsRoutes);
 app.use(companiesRoutes);
 app.use(payrollsRoutes);
+app.use(applicationsRoutes);
 app.use(emp_departmentRoutes);
 app.use(emp_attendancesRoutes);
 app.use(emp_payrollsRoutes);

@@ -42,6 +42,9 @@
     }
 
 
+
+first store the cv in db, display it filename in cv input form, the filename to applications db hhhh smart
+
     
 
 }
