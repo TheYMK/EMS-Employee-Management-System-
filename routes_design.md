@@ -113,23 +113,23 @@ Name            Path                          Verb        Purpose               
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Admin -->
 INDEX           /homeadmin/payrolls           GET         display all payrolls                  Payroll.find() 
-EDIT            /homeadmin/payrolls/:id       GET         display edit form of a payroll        Payroll.findById()
+EDIT            /homeadmin/payrolls/:id/edit  GET         display edit form of a payroll        Payroll.findById()
 UPDATE          /homeadmin/payrolls/:id       PUT         update a particular payroll status    Payroll.findByIdAndUpdate()
 DESTROY         /homeadmin/payrolls/:id       DELETE      delete a particular payroll           Payroll.findByIdAndRemove()
 
 ================================================================================================================
                                     ****          APPLICATIONS ROUTES          ****
 ================================================================================================================
-Name            Path                          Verb        Purpose                               Mongoose Method
+Name            Path                               Verb        Purpose                               Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Admin -->
-INDEX           /homeadmin/applications       GET         display all applications              Application.find()
-NEW             /homeadmin/applications/new   GET         display new application form          N/A
-CREATE          /homeadmin/applications       POST        create a new application              Application.create()
-SHOW            /homeadmin/applications/:id   GET         show infos a particular application   Application.findById()
-EDIT            /homeadmin/applications/:id   GET         display edit form of a application    Application.findById()
-UPDATE          /homeadmin/applications/:id   PUT         update a particular application       Application.findByIdAndUpdate()
-DESTROY         /homeadmin/applications/:id   DELETE      delete a particular application       Application.findByIdAndRemove()
+INDEX           /homeadmin/applications            GET         display all applications              Application.find()
+NEW             /homeadmin/applications/new        GET         display new application form          N/A
+CREATE          /homeadmin/applications            POST        create a new application              Application.create()
+SHOW            /homeadmin/applications/:id        GET         show infos a particular application   Application.findById()
+EDIT            /homeadmin/applications/:id/edit   GET         display edit form of a application    Application.findById()
+UPDATE          /homeadmin/applications/:id        PUT         update a particular application       Application.findByIdAndUpdate()
+DESTROY         /homeadmin/applications/:id        DELETE      delete a particular application       Application.findByIdAndRemove()
 
 
 ================================================================================================================
@@ -282,7 +282,7 @@ Name            Path                          Verb        Purpose               
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Hr -->
 INDEX           /homehr/payrolls           GET         display all payrolls                  Payroll.find() 
-EDIT            /homehr/payrolls/:id       GET         display edit form of a payroll        Payroll.findById()
+SHOW            /homehr/payrolls/:id       GET         display edit form of a payroll        Payroll.findById()
 UPDATE          /homehr/payrolls/:id       PUT         update a particular payroll status    Payroll.findByIdAndUpdate()
 DESTROY         /homehr/payrolls/:id       DELETE      delete a particular payroll           Payroll.findByIdAndRemove()
 
@@ -297,6 +297,18 @@ INDEX           /homehr/leaves           GET         display all leaves         
 UPDATE          /homehr/leaves/:id       PUT         update a particular leave status    Leave.findByIdAndUpdate()
 DESTROY         /homehr/leaves/:id       DELETE      delete a particular leave           Leave.findByIdAndRemove()
 
+
+================================================================================================================
+                                    ****          APPLICATIONS ROUTES          ****
+================================================================================================================
+Name            Path                            Verb        Purpose                               Mongoose Method
+----------------------------------------------------------------------------------------------------------------
+                                                <!-- Hr -->
+INDEX           /homehr/applications            GET         display all applications              Application.find()
+SHOW            /homehr/applications/:id        GET         show infos a particular application   Application.findById()
+EDIT            /homehr/applications/:id/edit   GET         display edit form of a application    Application.findById()
+UPDATE          /homehr/applications/:id        PUT         update a particular application       Application.findByIdAndUpdate()
+DESTROY         /homehr/applications/:id        DELETE      delete a particular application       Application.findByIdAndRemove()
 
 
 

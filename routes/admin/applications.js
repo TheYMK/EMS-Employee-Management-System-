@@ -176,6 +176,7 @@ router.post('/homeadmin/applications', middleware.isLoggedInAsAdmin, async (req,
 				photo: req.body.application.photo,
 				address: req.body.application.address,
 				city: req.body.application.city,
+				country: req.body.application.country,
 				mobile: req.body.application.mobile,
 				phone: req.body.application.phone,
 				email: req.body.application.email,
@@ -219,6 +220,81 @@ router.get('/homeadmin/applications/:id', middleware.isLoggedInAsAdmin, async (r
 				file: file
 			});
 		});
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
+});
+
+// EDIT
+// @route GET /homeadmin/applications/:id/edit
+// @desc Edit a particular application
+router.get('/homeadmin/applications/:id/edit', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		const allBlogs = await Blog.find({});
+		const allDepartments = await Department.find({});
+		const foundApplication = await Application.findById(req.params.id);
+
+		gfs.files.find().toArray((err, files) => {
+			// Check if files
+			if (!files || files.length === 0) {
+				console.log('no cv uploaded');
+				let emptyFile = {
+					filename: 'Empty file'
+				};
+				files.push(emptyFile);
+				return res.render('admin/applications/new', {
+					blogs: allBlogs,
+					departments: allDepartments,
+					files: files
+				});
+			} else {
+				return res.render('admin/applications/edit', {
+					blogs: allBlogs,
+					departments: allDepartments,
+					files: files,
+					application: foundApplication
+				});
+			}
+		});
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+		return res.redirect('back');
+	}
+});
+
+// UPDATE
+// @route PUT /homeadmin/applications/:id
+// @desc update a particular application
+router.put('/homeadmin/applications/:id', middleware.isLoggedInAsAdmin, async (req, res) => {
+	try {
+		let application = {
+			applicant: {
+				first_name: req.body.application.first_name,
+				last_name: req.body.application.last_name,
+				date_of_birth: req.body.application.date_of_birth,
+				gender: req.body.application.gender,
+				nationality: req.body.application.nationality,
+				photo: req.body.application.photo,
+				address: req.body.application.address,
+				city: req.body.application.city,
+				country: req.body.application.country,
+				mobile: req.body.application.mobile,
+				phone: req.body.application.phone,
+				email: req.body.application.email,
+				department: req.body.application.department,
+				type_of_employee: req.body.application.type_of_employee,
+				desired_designation: req.body.application.desired_designation,
+				qualification: req.body.application.qualification
+			}
+		};
+
+		const updatedApplication = await Application.findByIdAndUpdate(req.params.id, application);
+
+		req.flash('success', 'Application updated successfully');
+		return res.redirect('/homeadmin/applications');
 	} catch (err) {
 		console.log(err);
 		req.flash('error', err.message);

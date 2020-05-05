@@ -54,19 +54,25 @@
 								<div class="form-group col-md-4">
 									<label for="inputGender">Gender</label>
 									<select id="inputGender" class="form-control" name="employee[gender]"
-										value="<%=emp.gender%>" required>
-										<option selected>- Choose -</option>
-										<option>Male</option>
-										<option>Female</option>
+										required>
+										<option selected><%= emp.gender%></option>
+										<% if(emp.gender === 'Male'){ %>
+                                            <option>Female</option>
+                                        <% }else { %>
+                                            <option>Male</option>
+                                        <% } %>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputMarital">Marital Status</label>
 									<select id="inputMarital" class="form-control" name="employee[marital_status]"
-										value="<%=emp.marital_status%>" required>
-										<option selected>- Choose -</option>
-										<option>Married</option>
-										<option>Single</option>
+										required>
+										<option selected><%=emp.marital_status%></option>
+										<% if(emp.marital_status === 'Married'){ %>
+                                            <option>Single</option>
+                                        <% }else { %>
+                                            <option>Married</option>
+                                        <% } %>
 									</select>
 								</div>
 							</div>
@@ -210,8 +216,11 @@
 									<select id="inputEmployeeType" class="form-control"
 										name="employee[type_of_employee]" required>
 										<option selected><%=emp.type_of_employee%></option>
-										<option>Full-Time</option>
-										<option>Part-Time</option>
+										<% if(emp.type_of_employee === 'Full-Time'){ %>
+                                            <option>Part-Time</option>
+                                        <% }else { %>
+                                            <option>Full-Time</option>
+                                        <% } %>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
