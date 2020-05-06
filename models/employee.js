@@ -23,6 +23,7 @@ var employeeSchema = new mongoose.Schema({
 	account_name: String,
 	account_no: String,
 	// Official Status
+	curriculum_vitae: String,
 	employee_id: String,
 	designation: String,
 	joining_date: String,

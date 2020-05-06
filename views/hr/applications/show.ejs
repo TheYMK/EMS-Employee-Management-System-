@@ -1,0 +1,122 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+    <div class="inner">
+
+      <!-- Header -->
+      <header id="header">
+        <a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+            <%= currentUser.user_role%></a>
+      </header>
+
+      <!-- Content -->
+      <section>
+
+        <header class="major">
+          <h2>Application Informations</h2>
+        </header>
+
+        <div class="card text-center">
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+              <li class="nav-item">
+                <a class="button primary" href="/homehr/applications/<%=application._id%>/edit">Approve</a>
+              </li>
+              <li class="nav-item">
+                <form action="/homehr/applications/<%=application._id%>/reject?_method=PUT" method="POST">
+                  <button class="button">Reject</a>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <img src="<%=application.applicant.photo%>" alt="" class="image fit" style="width: 50%; margin: auto;">
+            <div class="row">
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Personal Details</h5>
+                    <hr />
+                    <p class="card-text"><strong>First Name:</strong> <%=application.applicant.first_name%> | <strong>Last Name:</strong>
+                      <%=application.applicant.last_name%> <br>
+                      <strong>Bithdate:</strong> <%=application.applicant.date_of_birth%> <br>
+                      <strong>Gender:</strong> <%=application.applicant.gender%> <br>
+                      <strong>Nationality:</strong> <%=application.applicant.nationality%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Contact Details</h5>
+                    <hr>
+                    <p class="card-text"><strong>Address:</strong> <%=application.applicant.address%> <br>
+                      <strong>City:</strong> <%=application.applicant.city%> <br>
+                      <strong>Country:</strong> <%=application.applicant.country%> <br>
+                      <strong>Mobile:</strong> <%=application.applicant.mobile%> <br>
+                      <strong>Phone:</strong> <%=application.applicant.phone%> <br>
+                      <strong>Email:</strong> <%=application.applicant.email%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Official Status</h5>
+                    <hr />
+                    <p class="card-text">
+                      <strong>Desired Designation:</strong> <%=application.applicant.desired_designation%> <br>
+                      <strong>Department:</strong> <%=application.applicant.department%> <br>
+                      <strong>Contract Type:</strong> <%=application.applicant.type_of_employee%> <br>
+                      <strong>Qualification:</strong> <%=application.applicant.qualification%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Other Informations</h5>
+                    <hr>
+                    <p class="card-text"><strong>CV:</strong><a href="/homeadmin/download/<%=application.curriculum_vitae%>"> <%=application.curriculum_vitae%></a><br>
+                        <strong>Application Date:</strong> <%=application.date.toDateString()%> <br>
+                        <strong>Company:</strong> <%= application.company.name %> <br>
+                      <strong>Status:</strong> <%=application.status%> <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <%- include("../../partials/hr_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

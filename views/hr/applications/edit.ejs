@@ -8,27 +8,22 @@
 
 			<!-- Header -->
 			<header id="header">
-				<a href="#" class="logo"><strong>Login as:</strong> <%=emp.first_name %> <%= emp.last_name %> -
-                    <%= currentUser.user_role%></a>
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
 			</header>
 
 			<!-- Content -->
 			<section>
 				<header class="main">
-					<h1>Update Informations</h1>
+					<h1>Employee Creation</h1>
 				</header>
 
-				<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-					venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor
-					sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu
-					massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris.
-					Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis,
-					hendrerit.</p>
+				<p>Please fill out all the remaining employee informations</p>
 
 				<hr class="major" />
 
 				<!-- Form -->
-				<form action="/homehr/employees/<%=emp._id%>?_method=PUT" method="POST">
+				<form action="/homehr/applications/<%=application._id%>/approve" method="POST">
 					<!-- Personal Details Card -->
 					<div class="card">
 						<h5 class="card-header">Personal Details</h5>
@@ -37,12 +32,12 @@
 								<div class="form-group col-md-6">
 									<label for="inputFname">First Name</label>
 									<input type="text" class="form-control" id="inputFname" name="employee[first_name]"
-										value="<%=emp.first_name%>" required>
+										required value="<%=application.applicant.first_name%>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputLname">Last Name</label>
 									<input type="text" class="form-control" id="inputLname" name="employee[last_name]"
-										value="<%=emp.last_name%>" required>
+										required value="<%=application.applicant.last_name%>">
 								</div>
 							</div>
 
@@ -50,21 +45,23 @@
 								<div class="form-group col-md-4">
 									<label for="inputDob">Date Of Birth</label>
 									<input type="date" class="form-control" id="inputDob" name="employee[date_of_birth]"
-										value="<%=emp.date_of_birth%>" required>
+										required value="<%=application.applicant.date_of_birth%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputGender">Gender</label>
-									<select id="inputGender" class="form-control" name="employee[gender]"
-										value="<%=emp.gender%>" required>
-										<option selected>- Choose -</option>
-										<option>Male</option>
-										<option>Female</option>
+									<select id="inputGender" class="form-control" name="employee[gender]" required>
+										<option selected><%= application.applicant.gender%></option>
+                                        <% if(application.applicant.gender === 'Male'){ %>
+                                            <option>Female</option>
+                                        <% }else { %>
+                                            <option>Male</option>
+                                        <% } %>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputMarital">Marital Status</label>
 									<select id="inputMarital" class="form-control" name="employee[marital_status]"
-										value="<%=emp.marital_status%>" required>
+										required>
 										<option selected>- Choose -</option>
 										<option>Married</option>
 										<option>Single</option>
@@ -76,17 +73,17 @@
 								<div class="form-group col-md-6">
 									<label for="inputNationality">Nationality</label>
 									<input type="text" class="form-control" id="inputNationality"
-										name="employee[nationality]" value="<%=emp.nationality%>" required>
+										name="employee[nationality]" required value="<%=application.applicant.nationality%>">
 								</div>
 								<div class="form-group col-md-3">
-									<label for="inputGender">Passport NO</label>
-									<input type="text" class="form-control" id="inputGender"
-										name="employee[passport_no]" value="<%=emp.passport_no%>" required>
+									<label for="inputPassportNo">Passport NO</label>
+									<input type="text" class="form-control" id="inputPassportNo"
+										name="employee[passport_no]" required>
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputPhoto">Photo(URL)</label>
 									<input type="text" class="form-control" id="inputPhoto" name="employee[photo]"
-										value="<%=emp.photo%>" required>
+										required value="<%= application.applicant.photo%>">
 								</div>
 							</div>
 						</div>
@@ -100,17 +97,17 @@
 								<div class="form-group col-md-4">
 									<label for="inputAddr">Address</label>
 									<input type="text" class="form-control" id="inputAddr" name="employee[address]"
-										value="<%=emp.address%>" required>
+										required value="<%= application.applicant.address%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputCity">City</label>
 									<input type="text" class="form-control" id="inputCity" name="employee[city]"
-										value="<%=emp.city%>" required>
+										required value="<%= application.applicant.city%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputEmail">Email</label>
 									<input type="email" class="form-control" id="inputEmail" name="employee[email]"
-										value="<%=emp.email%>" required>
+										required value="<%= application.applicant.email%>">
 								</div>
 							</div>
 
@@ -118,19 +115,18 @@
 								<div class="form-group col-md-4">
 									<label for="inputCountry">Country</label>
 									<input type="text" class="form-control" id="inputCountry" name="employee[country]"
-										value="<%=emp.country%>" required>
+										required value="<%= application.applicant.country%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputMobile">Mobile</label>
 									<input type="text" class="form-control" id="inputMobile" name="employee[mobile]"
-										value="<%=emp.mobile%>" required>
+										required value="<%= application.applicant.mobile%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputPhone">Phone</label>
-									<input type="text" class="form-control" id="inputPhone" name="employee[phone]"
-										value="<%=emp.phone%>">
+									<input type="text" class="form-control" id="inputPhone" name="employee[phone]" required value="<%= application.applicant.phone%>">
 								</div>
-							</div>
+                            </div>
 						</div>
 					</div>
 
@@ -142,17 +138,17 @@
 								<div class="form-group col-md-4">
 									<label for="inputBankN">Bank Name</label>
 									<input type="text" class="form-control" id="inputBankN" name="employee[bank_name]"
-										value="<%=emp.bank_name%>" required>
+										required>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputAccountName">Account Name</label>
 									<input type="text" class="form-control" id="inputAccountName"
-										name="employee[account_name]" value="<%=emp.account_name%>" required>
+										name="employee[account_name]" required>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputAccountNumber">Account NO</label>
 									<input type="text" class="form-control" id="inputAccountNumber"
-										name="employee[account_no]" value="<%=emp.account_no%>" required>
+										name="employee[account_no]" required>
 								</div>
 							</div>
 						</div>
@@ -166,17 +162,17 @@
 								<div class="form-group col-md-4">
 									<label for="inputEmployeeID">Employee ID</label>
 									<input type="text" class="form-control" id="inputEmployeeID"
-										name="employee[employee_id]" value="<%=emp.employee_id%>" required>
+										name="employee[employee_id]" required>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputDesignation">Designation</label>
 									<input type="text" class="form-control" id="inputDesignation"
-										name="employee[designation]" value="<%=emp.designation%>" required>
+										name="employee[designation]" required value="<%= application.applicant.desired_designation%>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputJoining">Joining Date</label>
 									<input type="date" class="form-control" id="inputJoining"
-										name="employee[joining_date]" value="<%=emp.joining_date%>" required>
+										name="employee[joining_date]" required>
 								</div>
 							</div>
 
@@ -184,7 +180,7 @@
 								<div class="form-group col-md-4">
 									<label for="inputDept">Department</label>
 									<select id="inputDept" class="form-control" name="employee[department]">
-										<option selected><%=emp.department%></option>
+										<option selected><%=application.applicant.department%></option>
 										<% departments.forEach(function(dept){ %>
 										<% if(dept.company === currentUser.company_name){ %>
 										<option><%= dept.department_name%></option>
@@ -195,8 +191,7 @@
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputSalary">Salary</label>
-									<input type="text" class="form-control" id="inputSalary" name="employee[salary]"
-										value="<%=emp.salary%>">
+									<input type="text" class="form-control" id="inputSalary" name="employee[salary]">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputCompany">Company</label>
@@ -207,33 +202,42 @@
 
 							<div class="form-row">
 								<div class="form-group col-md-4">
-									<label for="inputEmployeeType">Employee Type</label>
+									<label for="inputEmployeeType">Contract Type</label>
 									<select id="inputEmployeeType" class="form-control"
 										name="employee[type_of_employee]" required>
-										<option selected><%=emp.type_of_employee%></option>
-										<option>Full-Time</option>
-										<option>Part-Time</option>
+										<option selected><%=application.applicant.type_of_employee%></option>
+										<% if(application.applicant.type_of_employee === 'Full-Time'){ %>
+                                            <option>Part-Time</option>
+                                        <% }else { %>
+                                            <option>Full-Time</option>
+                                        <% } %>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputQualification">Qualification</label>
 									<input type="text" class="form-control" id="inputQualification"
-										name="employee[qualification]" value="<%=emp.qualification%>" required>
+										name="employee[qualification]" required value="<%=application.applicant.qualification%>">
 
+                                </div>
+                                <div class="form-group col-md-4">
+									<label for="inputResume">Resume</label>
+									<input type="text" class="form-control" id="inputResume" name="employee[curriculum_vitae]" required value="<%=application.curriculum_vitae%>">
 								</div>
-								<div class="form-group col-md-2">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
 									<label for="inputStarthour">Start Hour</label>
-									<input type="time" name="employee[hour_start]" id="inputStarthour" style="width: 100%;" value="<%=emp.hour_start%>">
+									<input type="time" name="employee[hour_start]" id="inputStarthour" style="width: 100%;">
 								</div>
 								<div class="form-group col-md-2">
 									<label for="inputEndhour">End Hour</label>
-									<input type="time" name="employee[hour_end]" id="inputEndhour" style="width: 100%;" value="<%=emp.hour_end%>">
+									<input type="time" name="employee[hour_end]" id="inputEndhour" style="width: 100%;">
 								</div>
-							</div>
+                            </div>
 						</div>
 					</div>
 
-					<button type="submit" class="button primary mt-3">Update</button>
+					<button type="submit" class="button primary mt-3">Create</button>
 				</form>
 
 			</section>

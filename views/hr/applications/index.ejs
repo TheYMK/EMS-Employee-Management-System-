@@ -1,0 +1,79 @@
+<%- include("../../partials/header") %>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="#" class="logo"><strong>Login as:</strong> <%=employee.first_name %> <%= employee.last_name %> -
+					<%= currentUser.user_role%></a>
+			</header>
+
+			<!-- Content -->
+			<section>
+                
+				<header class="major">
+					<h2>Application List</h2>
+				</header>
+
+				<!-- Table -->
+				<div class="table-wrapper" style="margin-top: 30px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Designation</th>
+                                <th>Qualification</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<% applications.forEach(function(application){ %>
+									<tr>
+										<td><%=application.applicant.first_name%> <%= application.applicant.last_name%></td>
+										<td><%=application.applicant.type_of_employee%></td>
+										<td><%=application.applicant.desired_designation%></td>
+										<td> <%=application.applicant.qualification%> </td>
+										<td><%=application.status%></td>
+										<% if(application.status === 'Pending') { %>
+											<td><a href="/homehr/applications/<%=application._id%>" class="button primary small">View</a></td>
+										<% }else { %>
+											<td>
+												<form action="/homehr/applications/<%=application._id%>?_method=DELETE" method="POST" class="delete-form">
+													<button class="button small">Remove</button>
+												</form>
+											</td>
+										<% } %>
+									</tr>
+							<% }) %>
+							
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<%- include("../../partials/hr_sidebar") %>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

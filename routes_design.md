@@ -301,14 +301,15 @@ DESTROY         /homehr/leaves/:id       DELETE      delete a particular leave  
 ================================================================================================================
                                     ****          APPLICATIONS ROUTES          ****
 ================================================================================================================
-Name            Path                            Verb        Purpose                               Mongoose Method
+Name            Path                             Verb        Purpose                               Mongoose Method
 ----------------------------------------------------------------------------------------------------------------
                                                 <!-- Hr -->
-INDEX           /homehr/applications            GET         display all applications              Application.find()
-SHOW            /homehr/applications/:id        GET         show infos a particular application   Application.findById()
-EDIT            /homehr/applications/:id/edit   GET         display edit form of a application    Application.findById()
-UPDATE          /homehr/applications/:id        PUT         update a particular application       Application.findByIdAndUpdate()
-DESTROY         /homehr/applications/:id        DELETE      delete a particular application       Application.findByIdAndRemove()
+INDEX           /homehr/applications             GET         display all applications              Application.find()
+SHOW            /homehr/applications/:id         GET         show infos a particular application   Application.findById()
+EDIT            /homehr/applications/:id/edit    GET         display edit form of a application    Application.findById()
+UPDATE          /homehr/applications/:id/approve PUT         update a particular application       Application.findByIdAndUpdate()
+UPDATE          /homehr/applications/:id/reject  PUT         update a particular application       Application.findByIdAndUpdate()
+DESTROY         /homehr/applications/:id         DELETE      delete a particular application       Application.findByIdAndRemove()
 
 
 
