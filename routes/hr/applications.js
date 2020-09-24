@@ -186,6 +186,12 @@ router.put('/homehr/applications/:id/reject', middleware.isLoggedInAsHR, async (
 
 		const updatedApplication = await Application.findByIdAndUpdate(req.params.id, application);
 
+		gfs.remove({ filename: updatedApplication.curriculum_vitae, root: 'uploads' }, (err, gridStore) => {
+			if (err) {
+				return res.status(404).json({ err: err });
+			}
+		});
+
 		return res.redirect('/homehr/applications');
 	} catch (err) {
 		console.log(err);
@@ -200,14 +206,7 @@ router.put('/homehr/applications/:id/reject', middleware.isLoggedInAsHR, async (
 router.delete('/homehr/applications/:id', middleware.isLoggedInAsHR, async (req, res) => {
 	try {
 		const deletedApplication = await Application.findByIdAndRemove(req.params.id);
-
-		gfs.remove({ filename: deletedApplication.curriculum_vitae, root: 'uploads' }, (err, gridStore) => {
-			if (err) {
-				return res.status(404).json({ err: err });
-			}
-
-			res.redirect('/homehr/applications');
-		});
+		return res.redirect('/homehr/applications');
 	} catch (err) {
 		console.log(err);
 		req.flash('error', err.message);

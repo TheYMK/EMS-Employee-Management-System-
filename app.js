@@ -32,7 +32,8 @@ const path = require('path'),
 	Task = require('./models/task'),
 	Application = require('./models/application'),
 	session = require('express-session'),
-	chartjs = require('chart.js');
+	chartjs = require('chart.js'),
+	dotenv = require('dotenv');
 
 //routes importations
 const indexRoutes = require('./routes/index');
@@ -65,8 +66,14 @@ const hod_departmentsRoutes = require('./routes/hod/departments');
 const hod_projectsRoutes = require('./routes/hod/projects');
 const hod_tasksRoutes = require('./routes/hod/tasks');
 
+// Load config file
+dotenv.config({ path: './config/config.env' });
+
 //database connection
-const mongoURI = 'mongodb://localhost:27017/ems_db';
+const mongoURI =
+	'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@localhost:27018/ems_db?authSource=admin';
+
+// mongodb+srv://kaymkassai:<password>@cluster0.mpumu.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
@@ -201,7 +208,7 @@ app.use(hod_tasksRoutes);
 //===========================================================
 //                SERVER CONFIGURATIONS
 //===========================================================
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, function() {
 	console.log('EMS server is listening for requests...');
 });

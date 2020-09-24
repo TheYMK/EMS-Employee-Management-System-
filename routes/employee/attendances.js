@@ -57,11 +57,11 @@ router.put('/homeemployee/employees/:id/attendances', middleware.isLoggedAsEmplo
 			let hour = today.getHours();
 			let minute = today.getMinutes();
 
-			today = dd + '/' + mm + '/' + yyyy;
-
 			if (minute.toString().length === 1) {
 				minute = '0' + today.getMinutes();
 			}
+
+			today = dd + '/' + mm + '/' + yyyy;
 
 			let currentTime = hour + ':' + minute;
 
