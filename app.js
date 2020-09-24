@@ -70,11 +70,10 @@ const hod_tasksRoutes = require('./routes/hod/tasks');
 dotenv.config({ path: './config/config.env' });
 
 //database connection
-const mongoURI =
-	'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@localhost:27018/ems_db?authSource=admin';
+const mongoURI = 'mongodb+srv://kaymkassai:Kaymkassai7075@cluster0.mpumu.mongodb.net/ems?retryWrites=true&w=majority';
 
-// mongodb+srv://kaymkassai:<password>@cluster0.mpumu.mongodb.net/<dbname>?retryWrites=true&w=majority
-
+// mongodb+srv://kaymkassai:Kaymkassai7075@cluster0.mpumu.mongodb.net/ems?retryWrites=true&w=majority
+// 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@localhost:27018/ems_db?authSource=admin';
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
